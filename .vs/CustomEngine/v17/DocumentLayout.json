@@ -3,16 +3,20 @@
   "WorkspaceRootPath": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{9EAFE17A-8BE3-457D-8B6B-7373E77AED40}|EditorWindow\\EditorWindow.vcxproj|D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\EditorWindow\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{9EAFE17A-8BE3-457D-8B6B-7373E77AED40}|EditorWindow\\EditorWindow.vcxproj|solutionrelative:EditorWindow\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\KApplication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|solutionrelative:SOURCE\\KApplication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\KApplication.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|solutionrelative:SOURCE\\KApplication.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\KApplication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|solutionrelative:SOURCE\\KApplication.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{9EAFE17A-8BE3-457D-8B6B-7373E77AED40}|EditorWindow\\EditorWindow.vcxproj|D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\EditorWindow\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{9EAFE17A-8BE3-457D-8B6B-7373E77AED40}|EditorWindow\\EditorWindow.vcxproj|solutionrelative:EditorWindow\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\CommonInclude.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{1DE836CF-165C-4F31-871D-CADDB51DE9BE}|SOURCE\\SOURCE.vcxitems|solutionrelative:SOURCE\\CommonInclude.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -34,26 +38,25 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "main.cpp",
               "DocumentMoniker": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\EditorWindow\\main.cpp",
               "RelativeDocumentMoniker": "EditorWindow\\main.cpp",
               "ToolTip": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\EditorWindow\\main.cpp",
               "RelativeToolTip": "EditorWindow\\main.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAF8AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2026-01-25T07:13:01.998Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-01-25T07:13:01.998Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "KApplication.cpp",
               "DocumentMoniker": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\KApplication.cpp",
               "RelativeDocumentMoniker": "SOURCE\\KApplication.cpp",
               "ToolTip": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\KApplication.cpp",
               "RelativeToolTip": "SOURCE\\KApplication.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACIAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2026-01-25T07:12:29.315Z",
               "EditorCaption": ""
@@ -62,11 +65,23 @@
         },
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CommonInclude.h",
+              "DocumentMoniker": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\CommonInclude.h",
+              "RelativeDocumentMoniker": "SOURCE\\CommonInclude.h",
+              "ToolTip": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\CommonInclude.h",
+              "RelativeToolTip": "SOURCE\\CommonInclude.h",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2026-01-25T11:37:48.401Z"
             },
             {
               "$type": "Document",
@@ -76,7 +91,7 @@
               "RelativeDocumentMoniker": "SOURCE\\KApplication.h",
               "ToolTip": "D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\SOURCE\\KApplication.h",
               "RelativeToolTip": "SOURCE\\KApplication.h",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2026-01-25T07:07:28.303Z",
               "EditorCaption": ""
