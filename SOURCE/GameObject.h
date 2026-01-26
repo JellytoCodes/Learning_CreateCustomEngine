@@ -25,5 +25,5 @@ namespace KEngine
 
 	private :
 		Position mPos;
-	};	
+	};
 }

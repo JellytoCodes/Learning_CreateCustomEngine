@@ -1,4 +1,5 @@
 #include "KApplication.h"
+#include "KInput.h"
 
 namespace KEngine
 {
@@ -17,6 +18,8 @@ namespace KEngine
 	{
 		mHwnd = hwnd;
 		mHdc = GetDC(hwnd);
+
+		Input::Initialize();
 	}
 
 	void Application::Run()
@@ -28,6 +31,8 @@ namespace KEngine
 
 	void Application::Update()
 	{
+		Input::Update();
+
 		mPlayer.Update();
 	}
 

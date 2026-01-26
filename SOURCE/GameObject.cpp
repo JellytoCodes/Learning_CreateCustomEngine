@@ -1,10 +1,11 @@
 #include "GameObject.h"
+#include "KInput.h"
 
 namespace KEngine
 {
 	GameObject::GameObject()
 	{
-
+		
 	}
 
 	GameObject::~GameObject()
@@ -14,19 +15,19 @@ namespace KEngine
 
 	void GameObject::Update()
 	{
-		if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+		if (Input::GetKeyPressed(eKeyCode::A))
 		{
 			mPos.x -= 0.01f;
 		}
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+		if (Input::GetKeyPressed(eKeyCode::D))
 		{
 			mPos.x += 0.01f;
 		}
-		if (GetAsyncKeyState(VK_UP) & 0x8000)
+		if (Input::GetKeyPressed(eKeyCode::W))
 		{
 			mPos.y -= 0.01f;
 		}
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+		if (Input::GetKeyPressed(eKeyCode::S))
 		{
 			mPos.y += 0.01f;
 		}
