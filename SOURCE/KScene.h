@@ -1,5 +1,6 @@
 #pragma once
 #include "KEntity.h"
+#include "KLayer.h"
 
 namespace KEngine
 {
@@ -16,10 +17,14 @@ namespace KEngine
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 		virtual void Release();
-		void AddGameObject(const std::shared_ptr<GameObject> gameObject);
+
+		virtual void OnEnter();
+		virtual void OnExit();
+
+		void AddGameObject(const std::shared_ptr<GameObject> gameObject, const eLayerType type);
 
 	private :
-		std::vector<std::shared_ptr<GameObject>> mGameObjects;
+		std::vector<std::shared_ptr<Layer>> mLayers;
 	};	
 }
 

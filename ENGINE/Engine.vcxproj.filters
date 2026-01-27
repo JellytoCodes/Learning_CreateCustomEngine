@@ -11,9 +11,11 @@
     </ClInclude>
     <ClInclude Include="KPlayScene.h" />
     <ClInclude Include="KPlayer.h" />
+    <ClInclude Include="KTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayScene.cpp" />
     <ClCompile Include="KPlayer.cpp" />
+    <ClCompile Include="KTitleScene.cpp" />
   </ItemGroup>
 </Project>

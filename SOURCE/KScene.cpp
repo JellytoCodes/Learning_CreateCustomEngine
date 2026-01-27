@@ -1,11 +1,19 @@
 #include "KScene.h"
+
+#include <memory>
+
 #include "GameObject.h"
+#include "algorithm"
 
 namespace KEngine
 {
 	Scene::Scene()
 	{
-
+		mLayers.resize((UINT)eLayerType::Max);
+		for (auto& layer : mLayers)
+		{
+			layer = std::make_shared<Layer>();
+		}
 	}
 
 	Scene::~Scene()
@@ -15,44 +23,62 @@ namespace KEngine
 
 	void Scene::Initialize()
 	{
-
+		for (auto& layer : mLayers)
+		{
+			if (layer == nullptr) continue;
+			layer->Initialize();
+		}
 	}
 
 	void Scene::Update()
 	{
-		for (auto& gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->Update();
+			if (layer == nullptr) continue;
+			layer->Update();
 		}
 	}
 
 	void Scene::LateUpdate()
 	{
-		for (auto& gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->LateUpdate();
+			if (layer == nullptr) continue;
+			layer->LateUpdate();
 		}
 	}
 
 	void Scene::Render(HDC hdc)
 	{
-		for (auto& gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->Render(hdc);
+			if (layer == nullptr) continue;
+			layer->Render(hdc);
 		}
 	}
 
 	void Scene::Release()
 	{
-		for (auto& gameObject : mGameObjects)
+		for (auto& layer : mLayers)
 		{
-			gameObject->Release();
+			if (layer == nullptr) continue;
+			layer->Release();
 		}
 	}
 
-	void Scene::AddGameObject(const std::shared_ptr<GameObject> gameObject)
+	void Scene::OnEnter()
 	{
-		mGameObjects.push_back(gameObject);
+
+	}
+
+	void Scene::OnExit()
+	{
+
+	}
+
+	void Scene::AddGameObject(const std::shared_ptr<GameObject> gameObject, const eLayerType type)
+	{
+		mLayers[(UINT)type]->AddGameObject(gameObject);
 	}
 }
 

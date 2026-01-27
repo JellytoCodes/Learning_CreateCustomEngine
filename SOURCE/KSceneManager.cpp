@@ -7,11 +7,14 @@ namespace KEngine
 
 	std::shared_ptr<Scene> SceneManager::LoadScene(const std::wstring& name)
 	{
+		if (mActiveScene) mActiveScene->OnExit();
+		
 		std::map<std::wstring, std::shared_ptr<Scene>>::iterator It = mScene.find(name);
 
 		if (It == mScene.end()) return nullptr;
 
 		mActiveScene = It->second;
+		mActiveScene->OnEnter();
 
 		return It->second;
 	}
@@ -38,6 +41,9 @@ namespace KEngine
 
 	void SceneManager::Release()
 	{
-		mActiveScene->Release();
+		for (auto& pair : mScene)
+		{
+			pair.second->Release();
+		}
 	}
 }

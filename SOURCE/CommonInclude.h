@@ -16,3 +16,4 @@
 #pragma comment(lib, "gdiplus.lib")
 
 #include "KMath.h"
+#include "KEnums.h"

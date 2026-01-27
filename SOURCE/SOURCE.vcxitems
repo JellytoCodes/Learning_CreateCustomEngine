@@ -19,7 +19,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h" />
@@ -35,6 +37,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KResources.cpp" />
