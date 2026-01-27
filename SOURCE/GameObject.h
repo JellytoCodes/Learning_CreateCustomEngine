@@ -3,27 +3,50 @@
 
 namespace KEngine
 {
-	struct Position
-	{
-		float x;
-		float y;
-	};
+	class Component;
 
 	// 언리얼에서는 Actor
-	class GameObject
+	class GameObject : public std::enable_shared_from_this<GameObject>
 	{
 	public :
 		GameObject();
 		~GameObject();
 
-		void Update();
-		void LateUpdate();
-		void Render(HDC hdc);
+		virtual void Initialize();
+		virtual void Update();
+		virtual void LateUpdate();
+		virtual void Render(HDC hdc);
+		virtual void Release();
 
-		void SetPosition(float x, float y);
-		Position GetPosition() const		{ return mPos; }
+		template<typename T>
+		std::shared_ptr<T> AddComponent();
+
+		template<typename T>
+		std::shared_ptr<T> GetComponent();
 
 	private :
-		Position mPos;
+		std::vector<std::shared_ptr<Component>> mComponents;
 	};
+
+	template <typename T>
+	std::shared_ptr<T> GameObject::AddComponent()
+	{
+		std::shared_ptr<T> comp = std::make_shared<T>();
+		comp->SetOwner(shared_from_this());
+		mComponents.push_back(comp);
+
+		return comp;
+	}
+
+	template <typename T>
+	std::shared_ptr<T> GameObject::GetComponent()
+	{
+		std::shared_ptr<T> component = nullptr;
+		for (auto& comp : mComponents)
+		{
+			component = std::dynamic_pointer_cast<T>(comp);
+			if (component) break;
+		}
+		return component;
+	}
 }

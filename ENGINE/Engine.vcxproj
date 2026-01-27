@@ -18,6 +18,15 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KLoadScenes.h" />
+    <ClInclude Include="KPlayer.h" />
+    <ClInclude Include="KPlayScene.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KPlayer.cpp" />
+    <ClCompile Include="KPlayScene.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

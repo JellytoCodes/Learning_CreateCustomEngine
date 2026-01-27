@@ -3,15 +3,19 @@
 #include "EditorWindow.h"
 
 #include "../SOURCE/KApplication.h"
+#include "../ENGINE/KLoadScenes.h"
 
 #pragma comment (lib, "../Libraries/Lib/Engine/ENGINE.lib")
 
 KEngine::Application application;
 
+ULONG_PTR gpToken;
+Gdiplus::GdiplusStartupInput gpsi;
+
 #define MAX_LOADSTRING 100
 
 HINSTANCE           hInst;                    
-WCHAR               szTitle[MAX_LOADSTRING];      
+WCHAR               szTitle[MAX_LOADSTRING];
 WCHAR               szWindowClass[MAX_LOADSTRING];
 
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -61,6 +65,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 			application.Run();
         }
     }
+    application.Release();
+
+    Gdiplus::GdiplusShutdown(gpToken);
 
     return (int) msg.wParam;
 }
@@ -90,15 +97,23 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
 	hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
+    const LONG width = 800;
+    const LONG height = 600;
+
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
 	if (!hWnd)   return FALSE;
 
-    application.Initialize(hWnd);
+    application.Initialize(hWnd, width, height);
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
+
+    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
+
+    // load Scenes
+    KEngine::LoadScenes();
 
 	return TRUE;
 }

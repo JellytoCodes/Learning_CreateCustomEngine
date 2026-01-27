@@ -1,2 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" />
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{6e6854a7-6b94-408a-8bd5-a0753ae76b8d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="KLoadScenes.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayScene.h" />
+    <ClInclude Include="KPlayer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="KPlayScene.cpp" />
+    <ClCompile Include="KPlayer.cpp" />
+  </ItemGroup>
+</Project>

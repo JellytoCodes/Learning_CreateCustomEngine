@@ -1,28 +1,43 @@
 #pragma once
 #include "CommonInclude.h"
-#include "GameObject.h"
+
+struct ViewSize
+{
+	LONG width;
+	LONG height;
+};
 
 namespace KEngine
 {
+	class Scene;
+
 	class Application
 	{
 	public :
 		Application();
 		~Application();
 
-		void Initialize(HWND hwnd);
+		void Initialize(HWND hwnd, LONG width, LONG height);
 		void Run();
 
 		void Update();
 		void LateUpdate();
 		void Render();
+		void Release();
 
 	private :
+		void ClearRenderTarget();
+		void CopyRenderTarget();
 		HWND mHwnd;
 		HDC mHdc;
 
-		GameObject mPlayer;
+		HDC mBackHdc;
+		HBITMAP mBackBuffer;
 
+		ViewSize mViewSize;
+
+		std::vector<std::shared_ptr<Scene>> mScenes;
+		
 	};	
 }
 
