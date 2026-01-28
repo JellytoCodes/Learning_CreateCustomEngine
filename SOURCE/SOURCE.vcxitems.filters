@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KResources.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KResource.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTime.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTransform.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KSpriteRenderer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTexture.cpp">
+      <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp">
+      <Filter>Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KComponent.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)GameObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KObject.cpp">
+      <Filter>Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KSceneManager.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KResource.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTime.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KSpriteRenderer.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h">
+      <Filter>Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KComponent.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)GameObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KObject.h">
+      <Filter>Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KSceneManager.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{8bfada3d-534a-499e-82ca-5a39d7bf67ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{549b0f84-6de2-4c98-b5fe-c7eb9060b46d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Texture">
+      <UniqueIdentifier>{5ed746eb-bb70-4e34-a7eb-2ac6aa3b5576}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components">
+      <UniqueIdentifier>{2e436a0f-6912-41a3-b236-88764eff652a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Entity">
+      <UniqueIdentifier>{7b0b9447-7127-4cd0-8364-b77ae7bb99de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{e0412acf-2eec-4e58-b279-92b57afa094f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Objects">
+      <UniqueIdentifier>{f70673e7-a3fe-499f-9f6a-2d8d749a8761}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

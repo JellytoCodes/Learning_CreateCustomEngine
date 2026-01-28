@@ -25,6 +25,8 @@ namespace KEngine
 		void Render();
 		void Release();
 
+		HDC GetHdc() { return mHdc; }
+
 	private :
 		void ClearRenderTarget();
 		void CopyRenderTarget();

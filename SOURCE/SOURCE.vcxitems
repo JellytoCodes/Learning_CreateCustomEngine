@@ -23,11 +23,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KResource.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KSpriteRenderer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h" />
   </ItemGroup>
@@ -39,11 +41,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KResource.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KResources.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KSpriteRenderer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTransform.cpp" />
   </ItemGroup>

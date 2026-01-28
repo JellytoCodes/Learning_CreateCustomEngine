@@ -11,6 +11,7 @@ namespace KEngine
 		static void CreateScene(const std::wstring& name);
 
 		static std::shared_ptr<Scene> LoadScene(const std::wstring& name);
+		static std::shared_ptr<Scene> GetActiveScene() { return mActiveScene; }
 
 		static void Initialize();
 		static void Update();
@@ -28,6 +29,7 @@ namespace KEngine
 	{
 		std::shared_ptr<T> scene = std::make_shared<T>();
 		scene->SetName(name);
+		mActiveScene = scene;
 		scene->Initialize();
 
 		mScene.insert(std::make_pair(name, scene));

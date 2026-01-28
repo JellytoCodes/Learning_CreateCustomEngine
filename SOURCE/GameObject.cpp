@@ -1,5 +1,6 @@
 #include "GameObject.h"
 #include "KComponent.h"
+#include "KTransform.h"
 
 namespace KEngine
 {

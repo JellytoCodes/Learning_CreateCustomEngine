@@ -5,7 +5,6 @@
 #include "KPlayScene.h"
 #include "KTitleScene.h"
 
-
 namespace KEngine
 {
 	void LoadScenes()

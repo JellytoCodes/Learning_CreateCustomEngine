@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KLoadResources.h" />
     <ClInclude Include="KLoadScenes.h" />
     <ClInclude Include="KPlayer.h" />
     <ClInclude Include="KPlayScene.h" />

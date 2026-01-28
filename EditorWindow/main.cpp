@@ -3,6 +3,7 @@
 #include "EditorWindow.h"
 
 #include "../SOURCE/KApplication.h"
+#include "../Engine/KLoadResources.h"
 #include "../ENGINE/KLoadScenes.h"
 
 #pragma comment (lib, "../Libraries/Lib/Engine/ENGINE.lib")
@@ -113,6 +114,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
     // load Scenes
+    KEngine::LoadResources();
     KEngine::LoadScenes();
 
 	return TRUE;
@@ -142,6 +144,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
+
+    		// DC(Device Context)란 화면에 출력에 필요한 모든 정보(폰트, 선의 굵기, 색상 등을 어떻게 그려줄 것인지)를 
+			// 가지는 데이터 구조체이며 GDI모듈에 의해 관리된다.
+			// 화면 출력에 필요한 모든 경우는 WINAPI에서는 DC를 통해서 작업을 진행할 수 있다.
             HDC hdc = BeginPaint(hWnd, &ps);
             
             EndPaint(hWnd, &ps);

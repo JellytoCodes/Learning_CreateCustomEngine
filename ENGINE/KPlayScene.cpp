@@ -1,10 +1,13 @@
 #include "KPlayScene.h"
 #include "GameObject.h"
 #include "KInput.h"
+#include "KObject.h"
 #include "KPlayer.h"
 #include "KSceneManager.h"
 #include "KSpriteRenderer.h"
+#include "KTexture.h"
 #include "KTransform.h"
+#include "KResources.h"
 #include "KTitleScene.h"
 
 namespace KEngine
@@ -21,18 +24,19 @@ namespace KEngine
 
 	void PlayScene::Initialize()
 	{
+		// 게임오브젝트 만들기전에 리소스들 전부 Load
+		
+
 		{
-			player = std::make_shared<Player>();
-			std::shared_ptr<Transform> tr = player->AddComponent<Transform>();
-			tr->SetPosition(KMath::Vector2(0, 0));
-			tr->SetName(L"TR");
+			bg = KObject::Instantiate<Player>(KEngine::eLayerType::BackGround, KMath::Vector2(100.f, 100.f));
+			std::shared_ptr<SpriteRenderer> sr = bg->AddComponent<SpriteRenderer>();
+			sr->SetTexture(Resources::Find<KEngine::Texture>(L"BG"));
 
-			std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
-			sr->SetName(L"SR");
-			sr->LoadImage(L"D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\KakaoTalk_20251211_004616658_01.png");
-
-			AddGameObject(player, eLayerType::BackGround);	
+			//std::shared_ptr<KEngine::Texture> texture = std::make_shared<KEngine::Texture>();
+			//texture->Load(L"D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\KakaoTalk_20251211_004616658_01.png");
 		}
+
+		Scene::Initialize();
 	}
 
 	void PlayScene::Update()
@@ -68,7 +72,7 @@ namespace KEngine
 	{
 		Scene::OnExit();
 		{
-			std::shared_ptr<Transform> tr = player->GetComponent<Transform>();
+			std::shared_ptr<Transform> tr = bg->GetComponent<Transform>();
 			tr->SetPosition(KMath::Vector2(0, 0));
 		}
 	}

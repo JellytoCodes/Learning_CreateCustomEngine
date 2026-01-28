@@ -9,13 +9,26 @@
     <ClInclude Include="KLoadScenes.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="KPlayScene.h" />
-    <ClInclude Include="KPlayer.h" />
-    <ClInclude Include="KTitleScene.h" />
+    <ClInclude Include="KTitleScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayer.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="KLoadResources.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KPlayScene.cpp" />
-    <ClCompile Include="KPlayer.cpp" />
-    <ClCompile Include="KTitleScene.cpp" />
+    <ClCompile Include="KPlayer.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="KPlayScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="KTitleScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

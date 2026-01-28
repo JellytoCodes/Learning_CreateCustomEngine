@@ -3,7 +3,7 @@
 namespace KEngine
 {
 	std::map<const std::wstring, std::shared_ptr<KEngine::Scene>> SceneManager::mScene = { };
-	std::shared_ptr<KEngine::Scene> KEngine::SceneManager::mActiveScene = nullptr;
+	std::shared_ptr<KEngine::Scene> KEngine::SceneManager::mActiveScene = std::make_shared<Scene>();
 
 	std::shared_ptr<Scene> SceneManager::LoadScene(const std::wstring& name)
 	{
@@ -21,7 +21,7 @@ namespace KEngine
 
 	void SceneManager::Initialize()
 	{
-		
+		mActiveScene->Initialize();
 	}
 
 	void SceneManager::Update()

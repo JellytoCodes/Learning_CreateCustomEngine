@@ -2,17 +2,15 @@
 
 namespace KMath
 {
-	struct Vector2
-	{
-		float x;
-		float y;
+    struct Vector2
+    {
+        static Vector2 One;
+        static Vector2 Zero;
 
-		Vector2()
-			: x(0.f), y(0.f)
-		{}
+        float x;
+        float y;
 
-		Vector2(float inX, float inY)
-			: x(inX), y(inY)
-		{}
-	};
+        Vector2() : x(0.f), y(0.f) {}
+        Vector2(float inX, float inY) : x(inX), y(inY) {}
+    };
 }

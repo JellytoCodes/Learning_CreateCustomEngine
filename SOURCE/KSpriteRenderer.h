@@ -1,5 +1,6 @@
 #pragma once
 #include "KComponent.h"
+#include "KTexture.h"
 
 namespace KEngine
 {
@@ -15,11 +16,12 @@ namespace KEngine
 		void Render(HDC hdc)  override;
 		void Release() override;
 
-		void LoadImage(const std::wstring& path);
+		void SetTexture(std::shared_ptr<Texture> texture) { mTexture = texture; }
+		void SetSize(KMath::Vector2 size) { mSize = size; }
+
 	private:
-		std::shared_ptr<Gdiplus::Image> mImage;
-		UINT mWidth;
-		UINT mHeight;
+		std::shared_ptr<Texture> mTexture;
+		KMath::Vector2 mSize;
 	};
 }
 
