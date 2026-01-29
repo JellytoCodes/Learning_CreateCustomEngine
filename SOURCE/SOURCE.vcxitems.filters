@@ -49,6 +49,13 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KSceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KScript.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KCamera.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -105,6 +112,13 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KScript.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KCamera.h">
+      <Filter>Components</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">

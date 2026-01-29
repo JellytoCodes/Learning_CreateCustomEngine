@@ -5,6 +5,8 @@ namespace KEngine
 {
 	class Transform : public Component
 	{
+		using Super = Component;
+
 	public:
 		Transform();
 		virtual ~Transform();

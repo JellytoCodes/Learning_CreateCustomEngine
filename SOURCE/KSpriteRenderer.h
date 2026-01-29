@@ -6,6 +6,8 @@ namespace KEngine
 {
 	class SpriteRenderer : public Component
 	{
+		using Super = Component;
+
 	public:
 		SpriteRenderer();
 		virtual ~SpriteRenderer();

@@ -34,7 +34,8 @@ namespace KEngine
 		std::shared_ptr<T> comp = std::make_shared<T>();
 		comp->Initialize();
 		comp->SetOwner(shared_from_this());
-		mComponents.push_back(comp);
+
+		mComponents[(UINT)comp->GetType()] = comp;
 
 		return comp;
 	}

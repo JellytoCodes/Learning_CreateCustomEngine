@@ -1,13 +1,14 @@
 #include "KSpriteRenderer.h"
 
 #include "GameObject.h"
+#include "KRenderer.h"
 #include "KTransform.h"
 #include "KTexture.h"
 
 namespace KEngine
 {
 	SpriteRenderer::SpriteRenderer()
-		: mSize(KMath::Vector2::One)
+		: Super(eComponentType::SpriteRenderer), mSize(KMath::Vector2::One)
 	{
 
 	}
@@ -38,9 +39,11 @@ namespace KEngine
 
 		std::shared_ptr<Transform> tr = GetOwner().lock()->GetComponent<Transform>();
 		KMath::Vector2 pos = tr->GetPosition();
+		pos = KRenderer::mainCamera->CalculatePosition(pos);
 
 		if (mTexture->GetTextureType() == KEngine::Texture::eTextureType::BMP)
 		{
+			
 			TransparentBlt(
 			hdc, pos.x, pos.y, mTexture->GetWidth(), mTexture->GetHeight(), 
 			mTexture->GetHdc(), 0, 0 , mTexture->GetWidth(), mTexture->GetHeight(),

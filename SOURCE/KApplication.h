@@ -26,6 +26,7 @@ namespace KEngine
 		void Release();
 
 		HDC GetHdc() { return mHdc; }
+		ViewSize GetViewSize() { return mViewSize; }
 
 	private :
 		void ClearRenderTarget();

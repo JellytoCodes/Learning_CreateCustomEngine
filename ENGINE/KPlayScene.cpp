@@ -1,14 +1,16 @@
 #include "KPlayScene.h"
 #include "GameObject.h"
+#include "KCamera.h"
 #include "KInput.h"
 #include "KObject.h"
 #include "KPlayer.h"
+#include "KPlayerScript.h"
 #include "KSceneManager.h"
 #include "KSpriteRenderer.h"
 #include "KTexture.h"
 #include "KTransform.h"
 #include "KResources.h"
-#include "KTitleScene.h"
+#include "KRenderer.h"
 
 namespace KEngine
 {
@@ -24,16 +26,34 @@ namespace KEngine
 
 	void PlayScene::Initialize()
 	{
-		// 게임오브젝트 만들기전에 리소스들 전부 Load
-		
-
+		// Main Camera
 		{
-			bg = KObject::Instantiate<Player>(KEngine::eLayerType::BackGround, KMath::Vector2(100.f, 100.f));
-			std::shared_ptr<SpriteRenderer> sr = bg->AddComponent<SpriteRenderer>();
-			sr->SetTexture(Resources::Find<KEngine::Texture>(L"BG"));
+			std::shared_ptr<GameObject> camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
+			auto cameraComp = camera->AddComponent<Camera>();
+			KRenderer::mainCamera = cameraComp;
 
-			//std::shared_ptr<KEngine::Texture> texture = std::make_shared<KEngine::Texture>();
-			//texture->Load(L"D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\KakaoTalk_20251211_004616658_01.png");
+			// camera->AddComponent<PlayerScript>();
+		}
+
+		// Player
+		{
+			player = KObject::Instantiate<GameObject>(KEngine::eLayerType::Player, KMath::Vector2(800.f, 270.f));
+			std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
+			
+			sr->SetSize(KMath::Vector2(0.5f, 0.5f));
+			sr->SetTexture(Resources::Find<KEngine::Texture>(L"Ori"));
+			
+			player->AddComponent<PlayerScript>();
+		}
+		
+		// Background
+		{
+			auto background = KObject::Instantiate<GameObject>(KEngine::eLayerType::BackGround);
+			std::shared_ptr<SpriteRenderer> sr = background->AddComponent<SpriteRenderer>();
+
+			sr->SetTexture(Resources::Find<KEngine::Texture>(L"Map"));
+			
+			// player->AddComponent<PlayerScript>();
 		}
 
 		Scene::Initialize();
@@ -71,9 +91,5 @@ namespace KEngine
 	void PlayScene::OnExit()
 	{
 		Scene::OnExit();
-		{
-			std::shared_ptr<Transform> tr = bg->GetComponent<Transform>();
-			tr->SetPosition(KMath::Vector2(0, 0));
-		}
 	}
 }

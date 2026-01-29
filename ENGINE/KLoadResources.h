@@ -8,6 +8,7 @@ namespace KEngine
 {
 	void LoadResources()
 	{
-		Resources::Load<KEngine::Texture>(L"BG", L"D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\KakaoTalk_20251211_004616658_01.png");
+		Resources::Load<KEngine::Texture>(L"Map", L"D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\Resources\\Map.png");
+		Resources::Load<KEngine::Texture>(L"Ori", L"D:\\Dev\\Programming_Study\\Learning_CreateCustomEngine\\Resources\\Ori.png");
 	}
 }

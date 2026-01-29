@@ -10,7 +10,7 @@ namespace KEngine
 	class Component : public Entity
 	{
 	public:
-		Component();
+		Component(KEngine::eComponentType type);
 		virtual ~Component();
 
 		virtual void Initialize();
@@ -21,7 +21,10 @@ namespace KEngine
 
 		void SetOwner(std::weak_ptr<GameObject> owner) { mOwner = owner; };
 		std::weak_ptr<GameObject> GetOwner() { return mOwner; }
+		KEngine::eComponentType GetType() { return mComponentType; }
+
 	private:
 		std::weak_ptr<GameObject> mOwner;
+		KEngine::eComponentType mComponentType;
 	};
 }

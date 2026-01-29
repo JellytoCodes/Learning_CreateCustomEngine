@@ -2,6 +2,16 @@
 
 namespace KEngine
 {
+	enum class eComponentType
+	{
+		Transform,
+		SpriteRenderer,
+		Script,
+		Camera,
+
+		End,
+	};
+
 	enum class eLayerType
 	{
 		None,
@@ -16,7 +26,6 @@ namespace KEngine
 		Texture,
 		AudioClip,
 		Prefab,
-
 
 		End,
 	};

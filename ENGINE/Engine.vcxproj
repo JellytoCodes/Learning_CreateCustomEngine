@@ -22,11 +22,13 @@
     <ClInclude Include="KLoadResources.h" />
     <ClInclude Include="KLoadScenes.h" />
     <ClInclude Include="KPlayer.h" />
+    <ClInclude Include="KPlayerScript.h" />
     <ClInclude Include="KPlayScene.h" />
     <ClInclude Include="KTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayer.cpp" />
+    <ClCompile Include="KPlayerScript.cpp" />
     <ClCompile Include="KPlayScene.cpp" />
     <ClCompile Include="KTitleScene.cpp" />
   </ItemGroup>
@@ -129,6 +131,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
     </ClCompile>
     <Link>
       <SubSystem>

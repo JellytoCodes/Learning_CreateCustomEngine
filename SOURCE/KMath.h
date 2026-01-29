@@ -12,5 +12,24 @@ namespace KMath
 
         Vector2() : x(0.f), y(0.f) {}
         Vector2(float inX, float inY) : x(inX), y(inY) {}
+
+    	Vector2 operator+(Vector2 other)
+        {
+	        return Vector2(x + other.x, y + other.y);
+        }
+
+        Vector2 operator-(Vector2 other)
+        {
+	        return Vector2(x - other.x, y - other.y);
+        }
+        Vector2 operator*(float value)
+        {
+	        return Vector2(x * value, y * value);
+        }
+
+		Vector2 operator/(float value)
+        {
+	        return Vector2(x / value, y / value);
+        }
     };
 }

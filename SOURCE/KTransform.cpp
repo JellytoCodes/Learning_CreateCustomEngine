@@ -3,7 +3,7 @@
 namespace KEngine
 {
 	Transform::Transform()
-		: mPos(0, 0)
+		: Super(eComponentType::Transform), mPos(0, 0)
 	{
 
 	}

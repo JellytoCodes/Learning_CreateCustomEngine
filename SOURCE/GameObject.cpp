@@ -6,7 +6,7 @@ namespace KEngine
 {
 	GameObject::GameObject()
 	{
-		
+		mComponents.resize((UINT)KEngine::eComponentType::End);
 	}
 
 	GameObject::~GameObject()
@@ -18,6 +18,7 @@ namespace KEngine
 	{
 		for (auto& comp : mComponents)
 		{
+			if (comp == nullptr) continue;
 			comp->Initialize();
 		}
 	}
@@ -26,6 +27,7 @@ namespace KEngine
 	{
 		for (auto& comp : mComponents)
 		{
+			if (comp == nullptr) continue;
 			comp->Update();
 		}
 	}
@@ -34,6 +36,7 @@ namespace KEngine
 	{
 		for (auto& comp : mComponents)
 		{
+			if (comp == nullptr) continue;
 			comp->LateUpdate();
 		}
 	}
@@ -42,6 +45,7 @@ namespace KEngine
 	{
 		for (auto& comp : mComponents)
 		{
+			if (comp == nullptr) continue;
 			comp->Render(hdc);
 		}
 	}
@@ -50,6 +54,7 @@ namespace KEngine
 	{
 		for (auto& comp : mComponents)
 		{
+			if (comp == nullptr) continue;
 			comp->Release();
 		}
 	}

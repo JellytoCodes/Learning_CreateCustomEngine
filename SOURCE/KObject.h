@@ -16,6 +16,9 @@ namespace KObject
 		std::shared_ptr<T> gameObject = std::make_shared<T>();
 		std::weak_ptr<KEngine::Scene> activeScene = KEngine::SceneManager::GetActiveScene();
 		std::weak_ptr<KEngine::Layer> layer = activeScene.lock()->GetLayer(type);
+
+		std::weak_ptr<KEngine::Transform> tr = gameObject->AddComponent<KEngine::Transform>();
+
 		layer.lock()->AddGameObject(gameObject);
 
 		return gameObject;

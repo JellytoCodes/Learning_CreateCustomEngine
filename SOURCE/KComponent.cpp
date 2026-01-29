@@ -2,7 +2,8 @@
 
 namespace KEngine
 {
-	Component::Component()
+	Component::Component(KEngine::eComponentType type)
+		: mComponentType(type)
 	{
 
 	}
