@@ -13,6 +13,7 @@ namespace KEngine
 			SitDown,
 			Walk,
 			Sleep,
+			GiveWater,
 			Attack,
 		};
 

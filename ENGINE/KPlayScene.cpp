@@ -41,28 +41,14 @@ namespace KEngine
 			//std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
 			player->AddComponent<PlayerScript>();
 
-			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
+			auto texture = Resources::Find<KEngine::Texture>(L"Player");
 			auto animator = player->AddComponent<Animator>();
-			animator->CreateAnimation(L"DownWalk", texture, 
-			KMath::Vector2(0.f, 0.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"RightWalk", texture, 
-			KMath::Vector2(0.f, 32.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"UpWalk", texture, 
-			KMath::Vector2(0.f, 64.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"LeftWalk", texture, 
-			KMath::Vector2(0.f, 96.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"SitDown", texture, 
-			KMath::Vector2(0.f, 128.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"Grooming", texture, 
-			KMath::Vector2(0.f, 160.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
+			animator->CreateAnimation(L"Idle", texture, 
+			KMath::Vector2(2000.f, 250.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 1, 0.2f);
 
-			//animator->CreateAnimation(L"Effect", texture, 
-			//KMath::Vector2(0.f, 0.f), KMath::Vector2(385.f, 246.f), KMath::Vector2::Zero, 8, 0.1f);
-
-			animator->PlayAnimation(L"SitDown", false);
+			animator->PlayAnimation(L"Idle", false);
 
 			player->GetComponent<Transform>()->SetPosition(KMath::Vector2(100.f, 100.f));
-			player->GetComponent<Transform>()->SetRotation(45.f);
 		}
 
 		// Cat
@@ -94,15 +80,6 @@ namespace KEngine
 			animator->PlayAnimation(L"SitDown", false);
 
 			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
-			cat->GetComponent<Transform>()->SetRotation(45.f);
-		}
-		
-		// Background
-		{
-			auto background = KObject::Instantiate<GameObject>(KEngine::eLayerType::Particle);
-			std::shared_ptr<SpriteRenderer> sr = background->AddComponent<SpriteRenderer>();
-
-			sr->SetTexture(Resources::Find<KEngine::Texture>(L"Bubble"));
 		}
 
 		Scene::Initialize();

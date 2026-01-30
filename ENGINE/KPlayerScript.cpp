@@ -37,6 +37,8 @@ namespace KEngine
 			break;
 		case eState::Sleep :
 			break;
+		case eState::GiveWater :
+			break;
 		case eState::Attack :
 			break;
 		}
