@@ -1,14 +1,13 @@
 #include "KPlayScene.h"
 #include "GameObject.h"
+#include "KAnimator.h"
 #include "KCamera.h"
 #include "KInput.h"
 #include "KObject.h"
-#include "KPlayer.h"
 #include "KPlayerScript.h"
 #include "KSceneManager.h"
 #include "KSpriteRenderer.h"
 #include "KTexture.h"
-#include "KTransform.h"
 #include "KResources.h"
 #include "KRenderer.h"
 
@@ -31,19 +30,22 @@ namespace KEngine
 			std::shared_ptr<GameObject> camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
 			auto cameraComp = camera->AddComponent<Camera>();
 			KRenderer::mainCamera = cameraComp;
-
-			// camera->AddComponent<PlayerScript>();
 		}
 
 		// Player
 		{
 			player = KObject::Instantiate<GameObject>(KEngine::eLayerType::Player, KMath::Vector2(800.f, 270.f));
-			std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
-			
-			sr->SetSize(KMath::Vector2(0.5f, 0.5f));
-			sr->SetTexture(Resources::Find<KEngine::Texture>(L"Ori"));
-			
+			//std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
 			player->AddComponent<PlayerScript>();
+
+			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
+			auto animator = player->AddComponent<Animator>();
+
+			//32 * 32
+			animator->CreateAnimation(L"CatFrontMove", texture, 
+			KMath::Vector2(0.f, 0.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.5f);
+
+			animator->PlayAnimation(L"CatFrontMove");
 		}
 		
 		// Background
@@ -52,8 +54,6 @@ namespace KEngine
 			std::shared_ptr<SpriteRenderer> sr = background->AddComponent<SpriteRenderer>();
 
 			sr->SetTexture(Resources::Find<KEngine::Texture>(L"Map"));
-			
-			// player->AddComponent<PlayerScript>();
 		}
 
 		Scene::Initialize();

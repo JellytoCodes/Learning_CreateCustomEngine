@@ -6,6 +6,7 @@ namespace KEngine
 	{
 		Transform,
 		SpriteRenderer,
+		Animator,
 		Script,
 		Camera,
 
@@ -25,6 +26,7 @@ namespace KEngine
 	{
 		Texture,
 		AudioClip,
+		Animation,
 		Prefab,
 
 		End,

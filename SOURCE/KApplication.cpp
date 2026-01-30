@@ -1,5 +1,6 @@
 #include "KApplication.h"
 #include "KInput.h"
+#include "KResources.h"
 #include "KTime.h"
 #include "KSceneManager.h"
 
@@ -79,6 +80,7 @@ namespace KEngine
 
 	void Application::Release()
 	{
+		Resources::Release();
 		SceneManager::Release();
 	}
 

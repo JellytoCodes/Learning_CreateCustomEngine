@@ -56,5 +56,6 @@ namespace KEngine
 	void Texture::Release()
 	{
 		mImage = nullptr;
+		mBitmap = nullptr;
 	}
 }

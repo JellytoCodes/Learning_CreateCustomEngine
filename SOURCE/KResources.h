@@ -12,6 +12,14 @@ namespace KEngine
 		template<typename T>
 		static std::shared_ptr<T> Load(const std::wstring& key, const std::wstring& path);
 
+		static void Release()
+		{
+			for (auto& pair : mResources)
+			{
+				pair.second = nullptr;
+			}
+		}
+
 	private :
 		static std::map<std::wstring, std::shared_ptr<Resource>> mResources;
 	};
