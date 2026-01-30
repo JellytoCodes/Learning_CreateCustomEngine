@@ -48,9 +48,8 @@ namespace KEngine
 		KMath::Vector2 pos = transform->GetPosition();
 		KMath::Vector2 scale = transform->GetScale();
 		float rot = transform->GetRotation();
-		
 
-		if (KRenderer::mainCamera)	KRenderer::mainCamera->CalculatePosition(pos);
+		if (KRenderer::mainCamera)	pos = KRenderer::mainCamera->CalculatePosition(pos);
 
 		Texture::eTextureType type = mTexture->GetTextureType();
 

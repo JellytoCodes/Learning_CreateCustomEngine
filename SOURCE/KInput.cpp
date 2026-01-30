@@ -1,9 +1,13 @@
 #include "KInput.h"
 #include "algorithm"
+#include "KApplication.h"
+
+extern KEngine::Application application;
 
 namespace KEngine
 {
 	std::vector<Key> Input::mKeys = { };
+	KMath::Vector2 Input::mMousePosition = KMath::Vector2::Zero;
 
 	int ASCII[(UINT)eKeyCode::End] =
 	{
@@ -11,6 +15,7 @@ namespace KEngine
 		'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
 		'Z', 'X', 'C', 'V', 'B', 'N', 'M',
 		VK_LEFT, VK_RIGHT, VK_DOWN, VK_UP,
+		VK_LBUTTON, VK_RBUTTON, VK_MBUTTON
 	};
 
 	void Input::Initialize()
@@ -47,8 +52,18 @@ namespace KEngine
 
 	void Input::UpdateKey(Key& key)
 	{
-		if (IsKeyDown(key.keyCode))		UpdateKeyDown(key);
-		else							UpdateKeyUp(key);
+		// 현재 윈도우를 포커싱중인지 체크
+		if (GetFocus())
+		{
+			if (IsKeyDown(key.keyCode))		UpdateKeyDown(key);
+			else							UpdateKeyUp(key);
+
+			GetMousePositionByWindow();
+		}
+		else
+		{
+			ClearKeys();
+		}
 	}
 
 	bool Input::IsKeyDown(eKeyCode code)
@@ -70,5 +85,28 @@ namespace KEngine
 		else							key.state = eKeyState::None;
 
 		key.bPressed = false;
+	}
+
+	void Input::GetMousePositionByWindow()
+	{
+		POINT mousePos;
+
+		// LP = 해당 자료형의 포인터
+		GetCursorPos(&mousePos);
+		ScreenToClient(application.GetHwnd(), &mousePos);
+
+		mMousePosition.x = mousePos.x;
+		mMousePosition.y = mousePos.y;
+	}
+
+	void Input::ClearKeys()
+	{
+		for (Key& key : mKeys)
+		{
+			if (key.state == eKeyState::Down || key.state == eKeyState::Pressed)	key.state = eKeyState::Up;
+			else if (key.state == eKeyState::Up)									key.state = eKeyState::None;
+
+			key.bPressed = false;
+		}
 	}
 }

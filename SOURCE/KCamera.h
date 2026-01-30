@@ -19,6 +19,8 @@ namespace KEngine
 		void Render(HDC hdc) override;
 		void Release() override;
 
+		void SetTarget(std::weak_ptr<GameObject> target) { mTarget = target; }
+
 	private :
 		// std::vector<std::weak_ptr<GameObject>> mGameObjects;
 
@@ -28,5 +30,3 @@ namespace KEngine
 		std::weak_ptr<GameObject> mTarget;
 	};	
 }
-
-

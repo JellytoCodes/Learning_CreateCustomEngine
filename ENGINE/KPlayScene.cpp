@@ -8,7 +8,6 @@
 #include "KObject.h"
 #include "KPlayerScript.h"
 #include "KSceneManager.h"
-#include "KSpriteRenderer.h"
 #include "KTexture.h"
 #include "KPlayer.h"
 #include "KResources.h"
@@ -29,36 +28,41 @@ namespace KEngine
 	void PlayScene::Initialize()
 	{
 		// Main Camera
-		{
-			std::shared_ptr<GameObject> camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
-			auto cameraComp = camera->AddComponent<Camera>();
-			KRenderer::mainCamera = cameraComp;
-		}
+		std::shared_ptr<GameObject> camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
+		auto cameraComp = camera->AddComponent<Camera>();
+		KRenderer::mainCamera = cameraComp;
 
 		// Player
 		{
 			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player, KMath::Vector2(0.f, 0.f));
-			//std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
-			player->AddComponent<PlayerScript>();
+			auto playerScript = player->AddComponent<PlayerScript>();
 
 			auto texture = Resources::Find<KEngine::Texture>(L"Player");
 			auto animator = player->AddComponent<Animator>();
+
+			// Create Animation By Player
 			animator->CreateAnimation(L"Idle", texture, 
 			KMath::Vector2(2000.f, 250.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 1, 0.2f);
+			animator->CreateAnimation(L"GiveWater", texture, 
+			KMath::Vector2(0.f, 2000.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 12, 0.2f);
 
 			animator->PlayAnimation(L"Idle", false);
+
+			animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript.get());
 
 			player->GetComponent<Transform>()->SetPosition(KMath::Vector2(100.f, 100.f));
 		}
 
 		// Cat
 		{
-			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Player, KMath::Vector2(0.f, 0.f));
-			//std::shared_ptr<SpriteRenderer> sr = player->AddComponent<SpriteRenderer>();
+			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
 			cat->AddComponent<CatScript>();
+			cameraComp->SetTarget(cat);
 
 			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
 			auto animator = cat->AddComponent<Animator>();
+
+			// Create Animation By Cat
 			animator->CreateAnimation(L"DownWalk", texture, 
 			KMath::Vector2(0.f, 0.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
 			animator->CreateAnimation(L"RightWalk", texture, 
@@ -74,13 +78,12 @@ namespace KEngine
 			animator->CreateAnimation(L"LayDown", texture, 
 			KMath::Vector2(0.f, 192.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
 
-			//animator->CreateAnimation(L"Effect", texture, 
-			//KMath::Vector2(0.f, 0.f), KMath::Vector2(385.f, 246.f), KMath::Vector2::Zero, 8, 0.1f);
-
 			animator->PlayAnimation(L"SitDown", false);
 
 			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
+			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
 		}
+
 
 		Scene::Initialize();
 	}

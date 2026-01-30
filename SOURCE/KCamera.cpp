@@ -28,14 +28,16 @@ namespace KEngine
 
 	void Camera::Update()
 	{
-		if (auto target = mTarget.lock())
+		if (mTarget.lock())
 		{
-			auto transform = target->GetComponent<Transform>();
+			auto transform = mTarget.lock()->GetComponent<Transform>();
 			mLookPosition = transform->GetPosition();
 		}
-
-		auto cameraTransform = GetOwner().lock()->GetComponent<Transform>();
-		mLookPosition = cameraTransform->GetPosition();
+		else
+		{
+			auto cameraTransform = GetOwner().lock()->GetComponent<Transform>();
+			mLookPosition = cameraTransform->GetPosition();
+		}
 
 		mDistance = mLookPosition - (mResolution / 2.f); 
 	}

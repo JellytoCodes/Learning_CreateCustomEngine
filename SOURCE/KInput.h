@@ -17,6 +17,7 @@ namespace KEngine
 		A, S, D, F, G, H, J, K, L,
 		Z, X, C, V, B, N, M,
 		Left, Right, Down, Up,
+		LButton, RButton, MButton,		// Mouse
 		End,
 	};
 
@@ -37,6 +38,8 @@ namespace KEngine
 		static bool GetKeyPressed(eKeyCode code)	{ return mKeys[(UINT)code].state == eKeyState::Pressed; }
 		static bool GetKeyUp(eKeyCode code)			{ return mKeys[(UINT)code].state == eKeyState::Up; }
 
+		static KMath::Vector2 GetMousePosition() { return mMousePosition; }
+
 	private :
 		static void CreateKeys();
 		static void UpdateKeys();
@@ -45,8 +48,11 @@ namespace KEngine
 		static bool IsKeyDown(eKeyCode code);
 		static void UpdateKeyDown(Key& key);
 		static void UpdateKeyUp(Key& key);
+		static void GetMousePositionByWindow();
+		static void ClearKeys();
 
 		static std::vector<Key> mKeys;
+		static KMath::Vector2 mMousePosition;
 	};	
 }
 

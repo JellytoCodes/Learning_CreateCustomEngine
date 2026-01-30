@@ -10,7 +10,7 @@ namespace KEngine
 	public :
 		enum class eState
 		{
-			SitDown,
+			Idle,
 			Walk,
 			Sleep,
 			GiveWater,
@@ -26,9 +26,12 @@ namespace KEngine
 		void Render(HDC hdc) override;
 		void Release() override;
 
+		void AttackEffect();
+
 	private:
-		void SitDown();
+		void Idle();
 		void Move();
+		void GiveWater();
 
 		eState mState;
 		std::shared_ptr<Animator> mAnimator;
