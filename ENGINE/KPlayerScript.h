@@ -3,9 +3,19 @@
 
 namespace KEngine
 {
+	class Animator;
+
 	class PlayerScript : public Script
 	{
 	public :
+		enum class eState
+		{
+			SitDown,
+			Walk,
+			Sleep,
+			Attack,
+		};
+
 		PlayerScript();
 		~PlayerScript();
 
@@ -16,6 +26,11 @@ namespace KEngine
 		void Release() override;
 
 	private:
+		void SitDown();
+		void Move();
+
+		eState mState;
+		std::shared_ptr<Animator> mAnimator;
 	};	
 }
 

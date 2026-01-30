@@ -12,4 +12,8 @@ namespace KEngine
 	{
 
 	}
+
+	void Resource::Release()
+	{
+	}
 }

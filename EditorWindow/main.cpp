@@ -117,6 +117,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     KEngine::LoadResources();
     KEngine::LoadScenes();
 
+    int a = 0;
+    srand((UINT)&a);
+
 	return TRUE;
 }
 

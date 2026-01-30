@@ -6,6 +6,7 @@ namespace KEngine
 	class Texture : public KEngine::Resource
 	{
 		using Super = Resource;
+
 	public :
 		enum class eTextureType
 		{
@@ -25,7 +26,7 @@ namespace KEngine
 		eTextureType GetTextureType()					{ return mTextureType; }
 		std::shared_ptr<Gdiplus::Image> GetImage()		{ return mImage; }
 
-		void Release();
+		void Release() override;
 
 	private :
 		eTextureType mTextureType;

@@ -16,8 +16,9 @@ namespace KEngine
 		{
 			for (auto& pair : mResources)
 			{
-				pair.second = nullptr;
+				pair.second->Release();
 			}
+			mResources.clear();
 		}
 
 	private :

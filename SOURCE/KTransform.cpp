@@ -3,7 +3,8 @@
 namespace KEngine
 {
 	Transform::Transform()
-		: Super(eComponentType::Transform), mPos(0, 0)
+		: Super(eComponentType::Transform),
+	mPos(KMath::Vector2::Zero), mScale(KMath::Vector2::One), mRotation(0.f)
 	{
 
 	}

@@ -19,7 +19,15 @@ namespace KEngine
 		void SetPosition(KMath::Vector2 pos) { mPos.x = pos.x; mPos.y = pos.y; }
 		KMath::Vector2 GetPosition() { return mPos; }
 
+		void SetScale(KMath::Vector2 scale) { mScale.x = scale.x; mScale.y = scale.y; }
+		KMath::Vector2 GetScale() { return mScale; }
+
+		void SetRotation(float rotation) { mRotation = rotation; }
+		float GetRotation() { return mRotation; }
+
 	private:
 		KMath::Vector2 mPos;
+		KMath::Vector2 mScale;
+		float mRotation;
 	};
 }

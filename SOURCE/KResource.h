@@ -12,8 +12,11 @@ namespace KEngine
 
 		virtual HRESULT Load(const std::wstring& path) = 0;
 
+		virtual void Release();
+
 		const std::wstring& GetPath() { return mPath; }
 		void SetPath(const std::wstring& path) { mPath = path; }
+
 	private :
 		KEngine::eResourceType mType;
 		std::wstring mPath;
