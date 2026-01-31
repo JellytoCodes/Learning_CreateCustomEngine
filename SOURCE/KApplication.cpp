@@ -52,6 +52,8 @@ namespace KEngine
 		Update();
 		LateUpdate();
 		Render();
+
+		Destroy();
 	}
 
 	void Application::Update()
@@ -82,6 +84,11 @@ namespace KEngine
 	{
 		Resources::Release();
 		SceneManager::Release();
+	}
+
+	void Application::Destroy()
+	{
+		SceneManager::Destroy();
 	}
 
 	void Application::ClearRenderTarget()

@@ -21,6 +21,14 @@ namespace KEngine
 			mResources.clear();
 		}
 
+		static void Insert(const std::wstring& key, std::shared_ptr<Resource> resource)
+		{
+			if (key == L"") return;
+			if (resource == nullptr) return;
+
+			mResources.insert(std::make_pair(key, resource));
+		}
+
 	private :
 		static std::map<std::wstring, std::shared_ptr<Resource>> mResources;
 	};
@@ -49,6 +57,8 @@ namespace KEngine
 
 		return resource;
 	}
+
+
 }
 
 

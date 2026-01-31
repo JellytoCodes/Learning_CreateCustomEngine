@@ -46,4 +46,9 @@ namespace KEngine
 			pair.second->Release();
 		}
 	}
+
+	void SceneManager::Destroy()
+	{
+		mActiveScene->Destroy();
+	}
 }

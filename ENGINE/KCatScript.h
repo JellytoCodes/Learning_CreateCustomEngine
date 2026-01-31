@@ -47,6 +47,7 @@ namespace KEngine
 
 		std::shared_ptr<Animator> mAnimator;
 		float mTime;
+		float mDeathTime;
 	};	
 }
 

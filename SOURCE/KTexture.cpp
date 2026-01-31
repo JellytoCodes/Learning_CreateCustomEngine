@@ -1,20 +1,52 @@
 #include "KTexture.h"
 #include "KApplication.h"
+#include "KResources.h"
 
 // 해당 전역변수가 존재함을 알리는 키워드
 extern KEngine::Application application;
 
 namespace KEngine
 {
+	std::shared_ptr<Texture> Texture::Create(const std::wstring& name, UINT width, UINT height)
+	{
+		std::shared_ptr<Texture> image = Resources::Find<Texture>(name);
+		if (image)	return image;
+
+		image = std::make_shared<Texture>();
+
+		// 가비지 쓰레기 값 때문에 명시적으로 BMP 사용 표기
+		image->mTextureType = eTextureType::BMP;
+
+		image->SetName(name);
+		image->SetWidth(width);
+		image->SetHeight(height);
+
+		HDC hdc = application.GetHdc();
+		HWND hwnd = application.GetHwnd();
+
+		image->mHdc = CreateCompatibleDC(hdc);
+		image->mBitmap = CreateCompatibleBitmap(hdc, width, height);
+
+		SelectObject(image->mHdc, image->mBitmap);
+
+		Resources::Insert(name, image);
+
+		return image;
+	}
+
 	Texture::Texture()
-		:Super(KEngine::eResourceType::Texture), mImage(nullptr), mWidth(0), mHeight(0)
+    : Super(KEngine::eResourceType::Texture),
+    mTextureType(eTextureType::None),
+    mImage(nullptr), mBitmap(nullptr), mHdc(nullptr),                   
+    mbAlpha(false), mWidth(0), mHeight(0)
 	{
 
 	}
 
 	Texture::~Texture()
 	{
-		
+		if (mHdc)		DeleteDC(mHdc);
+		if (mBitmap)	DeleteObject(mBitmap);
 	}
 
 	HRESULT Texture::Load(const std::wstring& path)

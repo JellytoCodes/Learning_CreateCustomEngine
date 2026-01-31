@@ -24,6 +24,7 @@ namespace KEngine
 		void LateUpdate();
 		void Render();
 		void Release();
+		void Destroy();
 
 		HWND GetHwnd() { return mHwnd; }
 		HDC GetHdc() { return mHdc; }

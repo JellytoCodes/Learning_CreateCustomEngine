@@ -26,6 +26,10 @@ namespace KEngine
 		for (auto& gameObject : mGameObjects)
 		{
 			if (gameObject == nullptr) continue;
+
+			GameObject::eState state = gameObject->GetActive();
+			if (state == GameObject::eState::Paused || state == GameObject::eState::Dead) continue;
+
 			gameObject->Update();
 		}
 	}
@@ -35,6 +39,10 @@ namespace KEngine
 		for (auto& gameObject : mGameObjects)
 		{
 			if (gameObject == nullptr) continue;
+
+			GameObject::eState state = gameObject->GetActive();
+			if (state == GameObject::eState::Paused || state == GameObject::eState::Dead) continue;
+
 			gameObject->LateUpdate();
 		}
 	}
@@ -44,6 +52,10 @@ namespace KEngine
 		for (auto& gameObject : mGameObjects)
 		{
 			if (gameObject == nullptr) continue;
+
+			GameObject::eState state = gameObject->GetActive();
+			if (state == GameObject::eState::Paused || state == GameObject::eState::Dead) continue;
+
 			gameObject->Render(hdc);
 		}
 	}
@@ -54,6 +66,20 @@ namespace KEngine
 		{
 			if (gameObject == nullptr) continue;
 			gameObject->Release();
+		}
+	}
+
+	void Layer::Destroy()
+	{
+		for (auto iter = mGameObjects.begin() ; iter != mGameObjects.end() ; )
+		{
+			GameObject::eState active = (*iter)->GetActive();
+			if (active == GameObject::eState::Dead)
+			{
+				iter = mGameObjects.erase(iter);
+				continue;
+			}
+			iter++;
 		}
 	}
 

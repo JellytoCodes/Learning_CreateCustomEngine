@@ -4,11 +4,12 @@
 #include "KTransform.h"
 #include "GameObject.h"
 #include "KAnimator.h"
+#include "KObject.h"
 
 namespace KEngine
 {
 	CatScript::CatScript()
-		: mState(eState::SitDown), mTime(0.f)
+		: mState(eState::SitDown), mTime(0.f), mDeathTime(0.f)
 	{
 
 	}
@@ -25,6 +26,12 @@ namespace KEngine
 
 	void CatScript::Update()
 	{
+		mDeathTime += Time::DeltaTime();
+		if (mDeathTime > 6.0f)
+		{
+			KObject::Destroy(GetOwner().lock());
+		}
+
 		if (mAnimator == nullptr) mAnimator = GetOwner().lock()->GetComponent<Animator>();
 		switch (mState)
 		{

@@ -23,7 +23,8 @@ namespace KObject
 
 		return gameObject;
 	}
-		template<typename T>
+
+	template<typename T>
 	static std::shared_ptr<T> Instantiate(KEngine::eLayerType type, KMath::Vector2 position)
 	{
 		std::shared_ptr<T> gameObject = std::make_shared<T>();
@@ -36,5 +37,10 @@ namespace KObject
 		layer.lock()->AddGameObject(gameObject);
 
 		return gameObject;
+	}
+
+	static void Destroy(std::shared_ptr<KEngine::GameObject> obj)
+	{
+		obj->Death();
 	}
 }

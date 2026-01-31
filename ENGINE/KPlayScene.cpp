@@ -12,6 +12,7 @@
 #include "KPlayer.h"
 #include "KResources.h"
 #include "KRenderer.h"
+#include "KSpriteRenderer.h"
 
 namespace KEngine
 {
@@ -54,7 +55,7 @@ namespace KEngine
 		}
 
 		// Cat
-		{
+		{/*
 			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
 			cat->AddComponent<CatScript>();
 			cameraComp->SetTarget(cat);
@@ -82,9 +83,21 @@ namespace KEngine
 
 			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
 			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
+		*/}
+
+		// Mushroom
+		{
+			auto mushroom = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
+			mushroom->AddComponent<CatScript>();
+
+			auto animator = mushroom->AddComponent<Animator>();
+
+			animator->CreateAnimationByFolder(L"MushroomIdle", L"..\\Resources\\Mushroom", KMath::Vector2::Zero, 0.1f);
+			animator->PlayAnimation(L"MushroomIdle");
+
+			mushroom->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
+			mushroom->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
 		}
-
-
 		Scene::Initialize();
 	}
 

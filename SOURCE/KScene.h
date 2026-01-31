@@ -17,6 +17,7 @@ namespace KEngine
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 		virtual void Release();
+		virtual void Destroy();
 
 		virtual void OnEnter();
 		virtual void OnExit();

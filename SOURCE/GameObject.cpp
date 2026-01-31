@@ -1,10 +1,10 @@
 #include "GameObject.h"
 #include "KComponent.h"
-#include "KTransform.h"
 
 namespace KEngine
 {
 	GameObject::GameObject()
+		: mState(eState::Active)
 	{
 		mComponents.resize((UINT)KEngine::eComponentType::End);
 	}

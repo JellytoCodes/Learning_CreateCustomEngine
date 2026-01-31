@@ -16,6 +16,7 @@ namespace KEngine
 		virtual void LateUpdate();
 		virtual void Render(HDC hdc);
 		virtual void Release();
+		virtual void Destroy();
 
 		void AddGameObject(const std::shared_ptr<GameObject> gameObject);
 

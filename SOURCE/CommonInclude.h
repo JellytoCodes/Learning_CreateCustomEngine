@@ -8,6 +8,7 @@
 #include <map>
 #include <memory>
 #include <functional>
+#include <filesystem>
 
 #include <mmsystem.h>
 #include <dinput.h>

@@ -55,6 +55,12 @@ namespace KEngine
 			float duration								// 프레임 전환 시간 (재생 속도)
 			);
 
+		void CreateAnimationByFolder(
+			const std::wstring& name,
+			const std::wstring& path,
+			KMath::Vector2 offset,
+			float duration);
+
 		std::shared_ptr<Animation> FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = true);
 

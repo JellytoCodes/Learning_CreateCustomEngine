@@ -57,14 +57,15 @@ namespace KEngine
 
 		if (type == Texture::eTextureType::BMP)
 		{
+			HDC imgHdc = mTexture->GetHdc();
+
+			/*
 			// 사용하는 이미지에 알파 채널이 있어야 아래 함수를 사용할 수 있다.
 			BLENDFUNCTION blendFunc;
 			blendFunc.BlendOp = AC_SRC_OVER;
 			blendFunc.BlendFlags = 0;
 			blendFunc.AlphaFormat = AC_SRC_ALPHA;
 			blendFunc.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
-			
-			HDC imgHdc = mTexture->GetHdc();
 
 			AlphaBlend(hdc, 
 			pos.x - (sprite.size.x / 2.f), 
@@ -76,7 +77,19 @@ namespace KEngine
 			sprite.leftTop.y, 
 			sprite.size.x, 
 			sprite.size.y, 
-			blendFunc);
+			blendFunc);*/
+
+	          TransparentBlt(hdc
+            , pos.x - (sprite.size.x / 2.0f)
+            , pos.y - (sprite.size.y / 2.0f)
+            , sprite.size.x * scale.x
+            , sprite.size.y * scale.y
+            , imgHdc
+            , sprite.leftTop.x
+            , sprite.leftTop.y
+            , sprite.size.x
+            , sprite.size.y
+            , RGB(255, 0, 255));
 		}
 		else if (type == Texture::eTextureType::PNG)
 		{
