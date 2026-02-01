@@ -20,6 +20,8 @@ namespace KEngine
 
 		void AddGameObject(const std::shared_ptr<GameObject> gameObject);
 
+		const std::vector<std::shared_ptr<GameObject>> GetGameObjects() { return mGameObjects; }
+
 	private :
 		eLayerType mType;
 		std::vector<std::shared_ptr<GameObject>> mGameObjects;

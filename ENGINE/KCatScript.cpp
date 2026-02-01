@@ -31,8 +31,10 @@ namespace KEngine
 		{
 			//KObject::Destroy(GetOwner().lock());
 		}
+		auto owner = GetOwner().lock();
+		if (!owner) return;
 
-		if (mAnimator == nullptr) mAnimator = GetOwner().lock()->GetComponent<Animator>();
+		if (mAnimator == nullptr) mAnimator = owner->GetComponent<Animator>();
 		switch (mState)
 		{
 		case eState::SitDown :
@@ -85,14 +87,14 @@ namespace KEngine
 			//pos += KMath::Vector2(1.f, 2.f * cosf(mRadian)) * (50.f * Time::DeltaTime());
 
 			// 마우스 위치 뱡향으로 회전 후 마우스 위치 이동 (벡터의 내적 활용)
-			std::shared_ptr<Transform> playerTr = mPlayer->GetComponent<Transform>();
-			KMath::Vector2 dest = mDest - playerTr->GetPosition();
-			dest.Normalize();
-
-			float rotDegree = KMath::Vector2::Dot(dest, KMath::Vector2::Right); // cosTheta
-			rotDegree = KMath::ConvertToDegree(acosf(rotDegree));
-
-			pos += dest * (50.f * Time::DeltaTime());
+			//std::shared_ptr<Transform> playerTr = mPlayer->GetComponent<Transform>();
+			//KMath::Vector2 dest = mDest - playerTr->GetPosition();
+			//dest.Normalize();
+			//
+			//float rotDegree = KMath::Vector2::Dot(dest, KMath::Vector2::Right); // cosTheta
+			//rotDegree = KMath::ConvertToDegree(acosf(rotDegree));
+			//
+			//pos += dest * (50.f * Time::DeltaTime());
 		}
 
 		tr->SetPosition(pos);

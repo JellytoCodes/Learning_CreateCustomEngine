@@ -7,6 +7,7 @@
 #include "KAnimator.h"
 #include "KCat.h"
 #include "KCatScript.h"
+#include "KCollider.h"
 #include "KObject.h"
 #include "KResources.h"
 
@@ -62,6 +63,24 @@ namespace KEngine
 	void PlayerScript::Release()
 	{
 		
+	}
+
+	void PlayerScript::OnCollisionEnter(Collider* other)
+	{
+		GameObject* obj = other->GetOwner().lock().get();
+		obj->GetComponent<Transform>()->SetPosition(KMath::Vector2(0,0));
+	}
+
+	void PlayerScript::OnCollisionStay(Collider* other)
+	{
+		
+
+	}
+
+	void PlayerScript::OnCollisionExit(Collider* other)
+	{
+		
+
 	}
 
 	void PlayerScript::AttackEffect()

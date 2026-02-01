@@ -3,6 +3,8 @@
 
 namespace KEngine
 {
+	class Collider;
+
 	class Script : public Component
 	{
 		using Super = Component;
@@ -17,6 +19,9 @@ namespace KEngine
 		void Render(HDC hdc) override;
 		void Release() override;
 
+		virtual void OnCollisionEnter(Collider* other);
+		virtual void OnCollisionStay(Collider* other);
+		virtual void OnCollisionExit(Collider* other);
 	private :
 
 	};

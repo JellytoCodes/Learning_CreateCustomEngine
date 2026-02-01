@@ -14,12 +14,16 @@
     <ProjectCapability Include="SourceItemsFromImports" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KCircleCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)CommonInclude.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)GameObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KAnimation.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KBoxCollider2D.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KCamera.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KCollider.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
@@ -39,11 +43,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KCircleCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)GameObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KAnimation.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KBoxCollider2D.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KCamera.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KCollider.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />

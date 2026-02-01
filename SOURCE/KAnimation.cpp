@@ -93,8 +93,6 @@ namespace KEngine
 				static_cast<int>(sprite.size.x),
 				static_cast<int>(sprite.size.y),
 				RGB(255, 0, 255));
-
-				Rectangle(hdc, pos.x, pos.y, pos.x + 10, pos.y + 10);
 			}
 		}
 		else if (type == Texture::eTextureType::PNG)
@@ -123,8 +121,6 @@ namespace KEngine
 				Gdiplus::UnitPixel,
 				&imgAttribute);
 		}
-
-
 	}
 
 	void Animation::CreateAnimation(const std::wstring& name, std::shared_ptr<Texture> spriteSheet,

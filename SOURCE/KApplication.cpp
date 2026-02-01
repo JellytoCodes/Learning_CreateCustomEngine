@@ -3,7 +3,7 @@
 #include "KResources.h"
 #include "KTime.h"
 #include "KSceneManager.h"
-
+#include "KCollisionManager.h"
 namespace KEngine
 {
 	Application::Application()
@@ -41,6 +41,7 @@ namespace KEngine
 		HBITMAP oldBitmap = (HBITMAP)SelectObject(mBackHdc, mBackBuffer);
 		DeleteObject(oldBitmap);
 
+		CollisionManager::Initialize();
 		SceneManager::Initialize();
 
 		Input::Initialize();
@@ -60,12 +61,13 @@ namespace KEngine
 	{
 		Input::Update();
 		Time::Update();
-
+		CollisionManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
+		CollisionManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -74,7 +76,7 @@ namespace KEngine
 		ClearRenderTarget();
 
 		Time::Render(mBackHdc);
-
+		CollisionManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 
 		CopyRenderTarget();
@@ -93,7 +95,13 @@ namespace KEngine
 
 	void Application::ClearRenderTarget()
 	{
+		HBRUSH grayBrush = CreateSolidBrush(RGB(128, 128, 128));
+		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
+
 		Rectangle(mBackHdc, -1, -1, mViewSize.width + 1, mViewSize.height + 1);
+
+		SelectObject(mBackHdc, oldBrush);
+		DeleteObject(grayBrush);
 	}
 
 	void Application::CopyRenderTarget()

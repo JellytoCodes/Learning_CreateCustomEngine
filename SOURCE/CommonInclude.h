@@ -10,6 +10,7 @@
 #include <functional>
 #include <filesystem>
 #include <cmath>
+#include <bitset>
 
 #include <mmsystem.h>
 #include <dinput.h>

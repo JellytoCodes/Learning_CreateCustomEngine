@@ -24,8 +24,17 @@ namespace KEngine
 		HDC hdc = application.GetHdc();
 		HWND hwnd = application.GetHwnd();
 
-		image->mHdc = CreateCompatibleDC(hdc);
 		image->mBitmap = CreateCompatibleBitmap(hdc, width, height);
+		image->mHdc = CreateCompatibleDC(hdc);
+
+		{
+			HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
+			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
+
+			Rectangle(image->mHdc, -1, -1, image->GetWidth() + 1, image->GetHeight() + 1);
+
+			SelectObject(hdc, oldBrush);
+		}
 
 		SelectObject(image->mHdc, image->mBitmap);
 

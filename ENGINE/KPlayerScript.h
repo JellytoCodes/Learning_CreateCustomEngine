@@ -3,6 +3,7 @@
 
 namespace KEngine
 {
+	class Collider;
 	class Animator;
 
 	class PlayerScript : public Script
@@ -25,6 +26,10 @@ namespace KEngine
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 		void Release() override;
+
+		void OnCollisionEnter(Collider* other) override;
+		void OnCollisionStay(Collider* other) override;
+		void OnCollisionExit(Collider* other) override;
 
 		void AttackEffect();
 

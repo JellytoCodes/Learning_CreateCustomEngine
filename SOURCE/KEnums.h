@@ -5,6 +5,7 @@ namespace KEngine
 	enum class eComponentType
 	{
 		Transform,
+		Collider,
 		SpriteRenderer,
 		Animator,
 		Script,
@@ -32,5 +33,13 @@ namespace KEngine
 		Prefab,
 
 		End,
+	};
+
+	enum class eColliderType
+	{
+		Circle2D,
+		Rect2D,
+
+		End
 	};
 }

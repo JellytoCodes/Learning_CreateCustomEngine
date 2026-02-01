@@ -31,6 +31,11 @@ namespace KEngine
 		template<typename T>
 		std::shared_ptr<T> GetComponent();
 
+		bool IsActive() const { return mState == eState::Active; }
+		//bool IsDead() const { return mState == eState::Destroyed; }
+		//eLayerType GetLayerType() const { return mLayerType; }
+		//void SetLayerType(const eLayerType layerType) { mLayerType = layerType; }
+
 		eState GetActive() { return mState; }
 		void SetActive(bool power)
 		{

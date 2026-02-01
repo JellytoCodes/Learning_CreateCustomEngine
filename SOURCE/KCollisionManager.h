@@ -1,0 +1,38 @@
+#pragma once
+#include "CommonInclude.h"
+
+namespace KEngine
+{
+	class Scene;
+	class Collider;
+
+	class CollisionManager
+	{
+
+		union CollisionID
+		{
+			struct
+			{
+				UINT32 left;
+				UINT32 right;
+			};
+
+			UINT64 id;
+		};
+	public :
+		static void Initialize();
+		static void Update();
+		static void LateUpdate();
+		static void Render(HDC hdc);
+
+		static void CollisionLayerCheck(eLayerType left, eLayerType right, bool enable);
+		static void LayerCollision(std::shared_ptr<Scene> scene, eLayerType left, eLayerType right);
+		static void ColliderCollision(std::shared_ptr<Collider> left, std::shared_ptr<Collider> right);
+
+		static bool Intersect(std::shared_ptr<Collider> left, std::shared_ptr<Collider> right);
+
+	private :
+		static std::bitset<(UINT)eLayerType::Max> mCollisionLayerMatrix[(UINT)eLayerType::Max];
+		static std::unordered_map<UINT64, bool> mCollisionMap;
+	};
+}

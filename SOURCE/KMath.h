@@ -17,7 +17,7 @@ namespace KMath
 	    
 	    static float Cross(Vector2& lhs, Vector2& rhs)
 	    {
-		    return (lhs.x * rhs.x) - (lhs.y * rhs.y);
+		    return (lhs.x * rhs.y) - (lhs.y * rhs.x);
 	    }
 
         static Vector2 One;

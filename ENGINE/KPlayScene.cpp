@@ -1,9 +1,11 @@
 #include "KPlayScene.h"
 #include "GameObject.h"
 #include "KAnimator.h"
+#include "KBoxCollider2D.h"
 #include "KCamera.h"
 #include "KCat.h"
 #include "KCatScript.h"
+#include "KCircleCollider2D.h"
 #include "KInput.h"
 #include "KObject.h"
 #include "KPlayerScript.h"
@@ -12,7 +14,7 @@
 #include "KPlayer.h"
 #include "KResources.h"
 #include "KRenderer.h"
-#include "KSpriteRenderer.h"
+#include "KCollisionManager.h"
 
 namespace KEngine
 {
@@ -28,6 +30,8 @@ namespace KEngine
 
 	void PlayScene::Initialize()
 	{
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
+
 		// Main Camera
 		std::shared_ptr<GameObject> camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
 		auto cameraComp = camera->AddComponent<Camera>();
@@ -37,6 +41,11 @@ namespace KEngine
 		{
 			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player, KMath::Vector2(0.f, 0.f));
 			auto playerScript = player->AddComponent<PlayerScript>();
+			//auto boxCollider = player->AddComponent<BoxCollider2D>();
+			//boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));
+			//boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
+			auto circleCollider = player->AddComponent<CircleCollider2D>();
+			circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
 			auto texture = Resources::Find<KEngine::Texture>(L"Player");
 			auto animator = player->AddComponent<Animator>();
@@ -51,14 +60,13 @@ namespace KEngine
 
 			animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript.get());
 
-			player->GetComponent<Transform>()->SetPosition(KMath::Vector2(100.f, 100.f));
+			player->GetComponent<Transform>()->SetPosition(KMath::Vector2(400.f, 200.f));
 		}
 
 		// Cat
-		{/*
+		/*{
 			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
-			cat->AddComponent<CatScript>();
-			cameraComp->SetTarget(cat);
+			auto catSrc = cat->AddComponent<CatScript>();
 
 			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
 			auto animator = cat->AddComponent<Animator>();
@@ -81,14 +89,23 @@ namespace KEngine
 
 			animator->PlayAnimation(L"SitDown", false);
 
-			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
+			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(100.f, 100.f));
 			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
-		*/}
+
+			KMath::Vector2 mousePosition = Input::GetMousePosition();
+			catSrc->SetDest(mousePosition);
+		}*/
 
 		// Mushroom
 		{
 			auto mushroom = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
 			mushroom->AddComponent<CatScript>();
+			auto boxCollider = mushroom->AddComponent<BoxCollider2D>();
+			boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));
+			boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
+
+			//auto circleCollider = mushroom->AddComponent<CircleCollider2D>();
+			//circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
 			auto animator = mushroom->AddComponent<Animator>();
 
@@ -96,8 +113,9 @@ namespace KEngine
 			animator->PlayAnimation(L"MushroomIdle");
 
 			mushroom->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
-			mushroom->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
+			mushroom->GetComponent<Transform>()->SetScale(KMath::Vector2(1.f, 1.f));
 		}
+
 		Scene::Initialize();
 	}
 
