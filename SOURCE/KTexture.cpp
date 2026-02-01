@@ -66,6 +66,9 @@ namespace KEngine
 			mWidth = info.bmWidth;
 			mHeight = info.bmHeight;
 
+			if (info.bmBitsPixel == 32)			mbAlpha = true;
+			else if (info.bmBitsPixel == 24)	mbAlpha = false;
+
 			HDC mainDC = application.GetHdc();
 			mHdc = CreateCompatibleDC(mainDC);
 

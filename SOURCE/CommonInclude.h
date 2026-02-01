@@ -9,6 +9,7 @@
 #include <memory>
 #include <functional>
 #include <filesystem>
+#include <cmath>
 
 #include <mmsystem.h>
 #include <dinput.h>

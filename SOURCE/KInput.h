@@ -34,9 +34,9 @@ namespace KEngine
 		static void Initialize();
 		static void Update();
 
-		static bool GetKeyDown(eKeyCode code)		{ return mKeys[(UINT)code].state == eKeyState::Down; }
-		static bool GetKeyPressed(eKeyCode code)	{ return mKeys[(UINT)code].state == eKeyState::Pressed; }
-		static bool GetKeyUp(eKeyCode code)			{ return mKeys[(UINT)code].state == eKeyState::Up; }
+		__forceinline static bool GetKeyDown(eKeyCode code)		{ return mKeys[(UINT)code].state == eKeyState::Down; }
+		__forceinline static bool GetKeyPressed(eKeyCode code)	{ return mKeys[(UINT)code].state == eKeyState::Pressed; }
+		__forceinline static bool GetKeyUp(eKeyCode code)		{ return mKeys[(UINT)code].state == eKeyState::Up; }
 
 		static KMath::Vector2 GetMousePosition() { return mMousePosition; }
 

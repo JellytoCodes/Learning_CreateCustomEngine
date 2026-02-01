@@ -59,37 +59,43 @@ namespace KEngine
 		{
 			HDC imgHdc = mTexture->GetHdc();
 
-			/*
-			// 사용하는 이미지에 알파 채널이 있어야 아래 함수를 사용할 수 있다.
-			BLENDFUNCTION blendFunc;
-			blendFunc.BlendOp = AC_SRC_OVER;
-			blendFunc.BlendFlags = 0;
-			blendFunc.AlphaFormat = AC_SRC_ALPHA;
-			blendFunc.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
+			if (mTexture->IsAlpha())
+			{
+				// 사용하는 이미지에 알파 채널이 있어야 아래 함수를 사용할 수 있다.
+				BLENDFUNCTION blendFunc;
+				blendFunc.BlendOp = AC_SRC_OVER;
+				blendFunc.BlendFlags = 0;
+				blendFunc.AlphaFormat = AC_SRC_ALPHA;
+				blendFunc.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
 
-			AlphaBlend(hdc, 
-			pos.x - (sprite.size.x / 2.f), 
-			pos.y - (sprite.size.y / 2.f), 
-			sprite.size.x * scale.x, 
-			sprite.size.y * scale.y,
-			imgHdc, 
-			sprite.leftTop.x, 
-			sprite.leftTop.y, 
-			sprite.size.x, 
-			sprite.size.y, 
-			blendFunc);*/
+				AlphaBlend(hdc, 
+				static_cast<int>(pos.x - (sprite.size.x / 2.f) + sprite.offset.x), 
+				static_cast<int>(pos.y - (sprite.size.y / 2.f) + sprite.offset.y), 
+				static_cast<int>(sprite.size.x * scale.x), 
+				static_cast<int>(sprite.size.y * scale.y),
+				imgHdc,
+				static_cast<int>(sprite.leftTop.x), 
+				static_cast<int>(sprite.leftTop.y), 
+				static_cast<int>(sprite.size.x), 
+				static_cast<int>(sprite.size.y), 
+				blendFunc);	
+			}
+			else
+			{
+				TransparentBlt(hdc,
+				static_cast<int>(pos.x - (sprite.size.x / 2.0f)),
+				static_cast<int>(pos.y - (sprite.size.y / 2.0f)),
+				static_cast<int>(sprite.size.x * scale.x),
+				static_cast<int>(sprite.size.y * scale.y),
+				imgHdc,
+				static_cast<int>(sprite.leftTop.x),
+				static_cast<int>(sprite.leftTop.y),
+				static_cast<int>(sprite.size.x),
+				static_cast<int>(sprite.size.y),
+				RGB(255, 0, 255));
 
-	          TransparentBlt(hdc
-            , pos.x - (sprite.size.x / 2.0f)
-            , pos.y - (sprite.size.y / 2.0f)
-            , sprite.size.x * scale.x
-            , sprite.size.y * scale.y
-            , imgHdc
-            , sprite.leftTop.x
-            , sprite.leftTop.y
-            , sprite.size.x
-            , sprite.size.y
-            , RGB(255, 0, 255));
+				Rectangle(hdc, pos.x, pos.y, pos.x + 10, pos.y + 10);
+			}
 		}
 		else if (type == Texture::eTextureType::PNG)
 		{

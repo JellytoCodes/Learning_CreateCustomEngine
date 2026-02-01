@@ -21,6 +21,9 @@
     <ClInclude Include="KLoadResources.h" />
     <ClInclude Include="KPlayerScript.h" />
     <ClInclude Include="KCatScript.h" />
+    <ClInclude Include="KCat.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayer.cpp">
@@ -34,5 +37,8 @@
     </ClCompile>
     <ClCompile Include="KPlayerScript.cpp" />
     <ClCompile Include="KCatScript.cpp" />
+    <ClCompile Include="KCat.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

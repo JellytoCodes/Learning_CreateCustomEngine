@@ -69,7 +69,9 @@ namespace KEngine
 		// Cat
 		{
 			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
-			cat->AddComponent<CatScript>();
+			auto catSrc = cat->AddComponent<CatScript>();
+
+			catSrc->SetPlayer(GetOwner().lock());
 
 			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
 			auto animator = cat->AddComponent<Animator>();
@@ -92,8 +94,13 @@ namespace KEngine
 
 			animator->PlayAnimation(L"SitDown", false);
 
-			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
+			auto tr = GetOwner().lock()->GetComponent<Transform>();
+
+			cat->GetComponent<Transform>()->SetPosition(tr->GetPosition());
 			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
+
+			KMath::Vector2 mousePosition = Input::GetMousePosition();
+			catSrc->SetDest(mousePosition);
 		}
 	}
 

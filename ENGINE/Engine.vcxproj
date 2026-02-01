@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KCat.h" />
     <ClInclude Include="KCatScript.h" />
     <ClInclude Include="KLoadResources.h" />
     <ClInclude Include="KLoadScenes.h" />
@@ -28,6 +29,7 @@
     <ClInclude Include="KTitleScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KCat.cpp" />
     <ClCompile Include="KCatScript.cpp" />
     <ClCompile Include="KPlayer.cpp" />
     <ClCompile Include="KPlayerScript.cpp" />

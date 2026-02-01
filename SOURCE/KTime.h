@@ -10,12 +10,13 @@ namespace KEngine
 		static void Update();
 		static void Render(HDC hdc);
 
-		static float DeltaTime() { return deltaTime; }
+		__forceinline static float DeltaTime() { return deltaTime; }
 
 	private :
 		static LARGE_INTEGER mCpuFrequency;
 		static LARGE_INTEGER mPrevFrequency;
 		static LARGE_INTEGER mCurrentFrequency;
+
 		static float deltaTime;
 	};
 }

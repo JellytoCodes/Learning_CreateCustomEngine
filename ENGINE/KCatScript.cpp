@@ -9,7 +9,7 @@
 namespace KEngine
 {
 	CatScript::CatScript()
-		: mState(eState::SitDown), mTime(0.f), mDeathTime(0.f)
+		: mState(eState::SitDown), mTime(0.f), mDeathTime(0.f), mDest(KMath::Vector2::Zero), mRadian(0.f)
 	{
 
 	}
@@ -29,7 +29,7 @@ namespace KEngine
 		mDeathTime += Time::DeltaTime();
 		if (mDeathTime > 6.0f)
 		{
-			KObject::Destroy(GetOwner().lock());
+			//KObject::Destroy(GetOwner().lock());
 		}
 
 		if (mAnimator == nullptr) mAnimator = GetOwner().lock()->GetComponent<Animator>();
@@ -69,7 +69,35 @@ namespace KEngine
 	void CatScript::SitDown()
 	{
 		mTime += Time::DeltaTime();
-		if (mTime > 3.f)
+
+		std::shared_ptr<Transform> tr = GetOwner().lock()->GetComponent<Transform>();
+		KMath::Vector2 pos = tr->GetPosition();
+
+		if (mPlayer)
+		{
+			// 마우스 위치 이동 (벡터의 뺄셈 활용)
+			//std::shared_ptr<Transform> playerTr = mPlayer->GetComponent<Transform>();
+			//KMath::Vector2 dest = mDest - playerTr->GetPosition();
+			//pos += dest.Normalize() * (50.f * Time::DeltaTime());
+
+			// 삼각함수를 통한 이동
+			//mRadian += 5.f * Time::DeltaTime();
+			//pos += KMath::Vector2(1.f, 2.f * cosf(mRadian)) * (50.f * Time::DeltaTime());
+
+			// 마우스 위치 뱡향으로 회전 후 마우스 위치 이동 (벡터의 내적 활용)
+			std::shared_ptr<Transform> playerTr = mPlayer->GetComponent<Transform>();
+			KMath::Vector2 dest = mDest - playerTr->GetPosition();
+			dest.Normalize();
+
+			float rotDegree = KMath::Vector2::Dot(dest, KMath::Vector2::Right); // cosTheta
+			rotDegree = KMath::ConvertToDegree(acosf(rotDegree));
+
+			pos += dest * (50.f * Time::DeltaTime());
+		}
+
+		tr->SetPosition(pos);
+
+		/*if (mTime > 3.f)
 		{
 			mState = eState::Walk;
 			int direction = rand() % 4;
@@ -77,7 +105,7 @@ namespace KEngine
 
 			PlayAnimByDirection(mDirection);
 			mTime = 0.f;
-		}
+		}*/
 	}
 
 	void CatScript::Move()

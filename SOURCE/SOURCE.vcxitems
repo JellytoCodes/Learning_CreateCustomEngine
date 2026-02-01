@@ -20,7 +20,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KAnimator.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KCamera.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)KCat.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KComponent.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
@@ -45,7 +44,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KAnimator.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KCamera.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)KCat.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KComponent.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />

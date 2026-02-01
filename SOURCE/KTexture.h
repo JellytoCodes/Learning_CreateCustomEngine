@@ -32,6 +32,8 @@ namespace KEngine
 		eTextureType GetTextureType()					{ return mTextureType; }
 		std::shared_ptr<Gdiplus::Image> GetImage()		{ return mImage; }
 
+		bool IsAlpha() { return mbAlpha; }
+
 		void Release() override;
 
 	private :

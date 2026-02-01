@@ -3,6 +3,7 @@
 
 namespace KEngine
 {
+	class Player;
 	class Animator;
 
 	class CatScript : public Script
@@ -35,6 +36,9 @@ namespace KEngine
 		void Render(HDC hdc) override;
 		void Release() override;
 
+		void SetPlayer(std::shared_ptr<GameObject> player) { mPlayer = player; }
+		void SetDest(KMath::Vector2 dest) { mDest = dest; }
+
 	private:
 		void SitDown();
 		void Move();
@@ -48,6 +52,10 @@ namespace KEngine
 		std::shared_ptr<Animator> mAnimator;
 		float mTime;
 		float mDeathTime;
+
+		std::shared_ptr<GameObject> mPlayer;
+		KMath::Vector2 mDest;
+		float mRadian;
 	};	
 }
 

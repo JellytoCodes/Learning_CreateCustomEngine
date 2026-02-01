@@ -64,7 +64,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KAnimator.cpp">
       <Filter>Components</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KCat.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -136,7 +135,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KAnimator.h">
       <Filter>Components</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KCat.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">

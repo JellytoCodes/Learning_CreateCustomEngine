@@ -45,18 +45,41 @@ namespace KEngine
 
 		if (mTexture->GetTextureType() == KEngine::Texture::eTextureType::BMP)
 		{
-			TransparentBlt(
-			hdc, 
-			pos.x, 
-			pos.y, 
-			mTexture->GetWidth() * mSize.x * scale.x, 
-			mTexture->GetHeight() * mSize.y * scale.y, 
-			mTexture->GetHdc(), 
-			0, 
-			0 , 
-			mTexture->GetWidth(), 
-			mTexture->GetHeight(),
-			RGB(255, 0, 255));
+			if (mTexture->IsAlpha())
+			{
+				// 사용하는 이미지에 알파 채널이 있어야 아래 함수를 사용할 수 있다.
+				BLENDFUNCTION blendFunc;
+				blendFunc.BlendOp = AC_SRC_OVER;
+				blendFunc.BlendFlags = 0;
+				blendFunc.AlphaFormat = AC_SRC_ALPHA;
+				blendFunc.SourceConstantAlpha = 255; // 0(transparent) ~ 255(Opaque)
+
+				AlphaBlend(hdc, 
+				static_cast<int>(pos.x), 
+				static_cast<int>(pos.y), 
+				static_cast<int>(mTexture->GetWidth() * mSize.x * scale.x), 
+				static_cast<int>(mTexture->GetHeight() * mSize.y * scale.y),
+				mTexture->GetHdc(),
+				0, 
+				0, 
+				static_cast<int>(mTexture->GetWidth()), 
+				static_cast<int>(mTexture->GetHeight()), 
+				blendFunc);	
+			}
+			else
+			{
+				TransparentBlt(hdc,
+				static_cast<int>(pos.x),
+				static_cast<int>(pos.y),
+				static_cast<int>(mTexture->GetWidth() * mSize.x * scale.x),
+				static_cast<int>(mTexture->GetHeight() * mSize.y * scale.y),
+				mTexture->GetHdc(),
+				0, 
+				0, 
+				static_cast<int>(mTexture->GetWidth()), 
+				static_cast<int>(mTexture->GetHeight()), 
+				RGB(255, 0, 255));
+			}
 		}
 		else if (mTexture->GetTextureType() == KEngine::Texture::eTextureType::PNG)
 		{
