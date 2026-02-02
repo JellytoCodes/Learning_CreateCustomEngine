@@ -7,58 +7,61 @@ namespace KEngine
 	{
 	public :
 		template<typename T>
-		static std::shared_ptr<T> Find(const std::wstring& key);
+		static T* Find(const std::wstring& key);
 
 		template<typename T>
-		static std::shared_ptr<T> Load(const std::wstring& key, const std::wstring& path);
+		static T* Load(const std::wstring& key, const std::wstring& path);
 
 		static void Release()
 		{
-			for (auto& pair : mResources)
-			{
-				pair.second->Release();
-			}
 			mResources.clear();
 		}
 
-		static void Insert(const std::wstring& key, std::shared_ptr<Resource> resource)
+		static void Insert(const std::wstring& key, std::unique_ptr<Resource> resource)
 		{
-			if (key == L"") return;
-			if (resource == nullptr) return;
+			if (key == L"" || resource == nullptr) return;
 
-			mResources.insert(std::make_pair(key, resource));
+			mResources.insert(std::make_pair(key, std::move(resource)));
 		}
 
 	private :
-		static std::map<std::wstring, std::shared_ptr<Resource>> mResources;
+		// 현재는 LoadResources에서 자원을 미리 생성하기 때문에 unique_ptr을 사용한다.
+		// 만약 특정 객체에서 Texture를 Load하는 방식이라면 weak_ptr로 사용하고
+		// 특정 객체에선 shared_ptr을 통해서 레퍼런스 카운팅이 올라가 메모리에서 해제되지 않도록 한다.
+		static std::map<std::wstring, std::unique_ptr<Resource>> mResources;
 	};
 
 	template <typename T>
-	std::shared_ptr<T> Resources::Find(const std::wstring& key)
-	{
-		auto iter = mResources.find(key);
-		return iter == mResources.end() ? nullptr : std::dynamic_pointer_cast<T>(iter->second);
-	}
+    T* Resources::Find(const std::wstring& key)
+    {
+        auto iter = mResources.find(key);
+        if (iter == mResources.end()) return nullptr;
 
-	template <typename T>
-	std::shared_ptr<T> Resources::Load(const std::wstring& key, const std::wstring& path)
-	{
-		std::shared_ptr<T> resource = Resources::Find<T>(key);
+        return dynamic_cast<T*>(iter->second.get());
+    }
 
-		if (resource == nullptr)
-		{
-			resource = std::make_shared<T>();
-			assert(SUCCEEDED(resource->Load(path)));
-		}
+    template <typename T>
+    T* Resources::Load(const std::wstring& key, const std::wstring& path)
+    {
+        T* resource = Resources::Find<T>(key);
+        if (resource != nullptr) return resource;
 
-		resource->SetName(key);
-		resource->SetPath(path);
-		mResources.insert(std::make_pair(key, resource));
+        std::unique_ptr<T> newRes = std::make_unique<T>();
+		if (FAILED(newRes->Load(path))) 
+        {
+            assert(false);
+            return nullptr;
+        }
+		
+        newRes->SetName(key);
+        newRes->SetPath(path);
+        
+        T* rawPtr = newRes.get();
 
-		return resource;
-	}
+        mResources.insert(std::make_pair(key, std::move(newRes)));
 
-
+        return rawPtr;
+    }
 }
 
 

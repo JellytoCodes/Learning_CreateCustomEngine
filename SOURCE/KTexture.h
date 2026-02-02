@@ -15,36 +15,35 @@ namespace KEngine
 			None,
 		};
 
-		static std::shared_ptr<Texture> Create(const std::wstring& name, UINT width, UINT height);
+		static Texture*		Create(const std::wstring& name, UINT width, UINT height);
 
 		Texture();
 		virtual ~Texture();
 
-		HRESULT Load(const std::wstring& path) override;
+		HRESULT				Load(const std::wstring& path) override;
+		void				Release() override;
 
-		UINT GetWidth()									{ return mWidth; }
-		void SetWidth(UINT width)						{ mWidth = width; }
+		UINT				GetWidth()							{ return mWidth; }
+		void				SetWidth(UINT width)				{ mWidth = width; }
 
-		UINT GetHeight()								{ return mHeight; }
-		void SetHeight(UINT height)						{ mHeight = height; }
+		UINT				GetHeight()							{ return mHeight; }
+		void				SetHeight(UINT height)				{ mHeight = height; }
 
-		HDC GetHdc()									{ return mHdc; }
-		eTextureType GetTextureType()					{ return mTextureType; }
-		std::shared_ptr<Gdiplus::Image> GetImage()		{ return mImage; }
+		HDC					GetHdc()							{ return mHdc; }
+		eTextureType		GetTextureType()					{ return mTextureType; }
+		Gdiplus::Image*		GetImage()							{ return mImage.get(); }
 
-		bool IsAlpha() { return mbAlpha; }
-
-		void Release() override;
+		bool				IsAlpha()							{ return mbAlpha; }
 
 	private :
-		eTextureType mTextureType;
-		std::shared_ptr<Gdiplus::Image> mImage;
-		HBITMAP mBitmap;
-		HDC mHdc;
+		eTextureType						mTextureType;
+		std::unique_ptr<Gdiplus::Image>		mImage;
+		HBITMAP								mBitmap;
+		HDC									mHdc;
 
-		bool mbAlpha;
-		UINT mWidth;
-		UINT mHeight;
+		bool								mbAlpha;
+		UINT								mWidth;
+		UINT								mHeight;
 	};	
 }
 

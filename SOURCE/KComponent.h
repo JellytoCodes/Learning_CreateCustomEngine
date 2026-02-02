@@ -19,12 +19,12 @@ namespace KEngine
 		virtual void Render(HDC hdc);
 		virtual void Release();
 
-		void SetOwner(std::weak_ptr<GameObject> owner) { mOwner = owner; };
-		std::weak_ptr<GameObject> GetOwner() { return mOwner; }
+		void SetOwner(GameObject* owner) { mOwner = owner; };
+		GameObject* GetOwner() { return mOwner; }
 		KEngine::eComponentType GetType() { return mComponentType; }
 
 	private:
-		std::weak_ptr<GameObject> mOwner;
+		GameObject* mOwner;
 		KEngine::eComponentType mComponentType;
 	};
 }

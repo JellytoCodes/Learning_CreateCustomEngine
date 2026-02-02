@@ -20,7 +20,7 @@ namespace KEngine
 		void OnExit() override;
 
 	private :
-		std::shared_ptr<Player> player;
+		Player* player;
 	};	
 }
 

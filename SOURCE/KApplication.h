@@ -17,7 +17,8 @@ namespace KEngine
 		Application();
 		~Application();
 
-		void Initialize(HWND hwnd, LONG width, LONG height);
+		void CreateApplication(HWND hwnd, LONG width, LONG height);
+		void Initialize();
 		void Run();
 
 		void Update();

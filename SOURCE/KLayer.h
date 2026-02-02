@@ -18,13 +18,12 @@ namespace KEngine
 		virtual void Release();
 		virtual void Destroy();
 
-		void AddGameObject(const std::shared_ptr<GameObject> gameObject);
+		void AddGameObject(std::unique_ptr<GameObject> gameObject);
 
-		const std::vector<std::shared_ptr<GameObject>> GetGameObjects() { return mGameObjects; }
+		const std::vector<std::unique_ptr<GameObject>>& GetGameObjects() { return mGameObjects; }
 
 	private :
 		eLayerType mType;
-		std::vector<std::shared_ptr<GameObject>> mGameObjects;
+		std::vector<std::unique_ptr<GameObject>> mGameObjects;
 	};
 }
-

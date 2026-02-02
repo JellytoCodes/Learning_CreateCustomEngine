@@ -1,4 +1,7 @@
 #include "KTexture.h"
+
+#include <memory>
+
 #include "KApplication.h"
 #include "KResources.h"
 
@@ -7,12 +10,11 @@ extern KEngine::Application application;
 
 namespace KEngine
 {
-	std::shared_ptr<Texture> Texture::Create(const std::wstring& name, UINT width, UINT height)
+	Texture* Texture::Create(const std::wstring& name, UINT width, UINT height)
 	{
-		std::shared_ptr<Texture> image = Resources::Find<Texture>(name);
-		if (image)	return image;
+		if (Texture* findTexture = Resources::Find<Texture>(name))	return findTexture;
 
-		image = std::make_shared<Texture>();
+		auto image = std::make_unique<Texture>();
 
 		// 가비지 쓰레기 값 때문에 명시적으로 BMP 사용 표기
 		image->mTextureType = eTextureType::BMP;
@@ -29,18 +31,20 @@ namespace KEngine
 
 		{
 			HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
-			HBRUSH oldBrush = (HBRUSH)SelectObject(hdc, transparentBrush);
+			HBRUSH oldBrush = (HBRUSH)SelectObject(image->mHdc, transparentBrush);
 
 			Rectangle(image->mHdc, -1, -1, image->GetWidth() + 1, image->GetHeight() + 1);
 
-			SelectObject(hdc, oldBrush);
+			SelectObject(image->mHdc, oldBrush);
 		}
 
 		SelectObject(image->mHdc, image->mBitmap);
 
-		Resources::Insert(name, image);
+		Texture* rawTexture = image.get();
 
-		return image;
+		Resources::Insert(name, std::move(image));
+
+		return rawTexture;
 	}
 
 	Texture::Texture()
@@ -87,7 +91,7 @@ namespace KEngine
 		else if (ext == L"png")	// .png
 		{
 			mTextureType = eTextureType::PNG;
-			mImage = std::shared_ptr<Gdiplus::Image>(Gdiplus::Image::FromFile(path.c_str()));
+			mImage = std::unique_ptr<Gdiplus::Image>(Gdiplus::Image::FromFile(path.c_str()));
 			if (mImage == nullptr) return S_FALSE;
 
 			mWidth = mImage->GetWidth();
@@ -99,7 +103,7 @@ namespace KEngine
 
 	void Texture::Release()
 	{
-		mImage = nullptr;
+		mImage.reset();
 		mBitmap = nullptr;
 	}
 }

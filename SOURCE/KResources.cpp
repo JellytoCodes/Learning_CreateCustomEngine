@@ -2,5 +2,5 @@
 
 namespace KEngine
 {
-	std::map<std::wstring, std::shared_ptr<Resource>> Resources::mResources;
+	std::map<std::wstring, std::unique_ptr<Resource>> Resources::mResources = {};
 }

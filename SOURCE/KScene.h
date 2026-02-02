@@ -22,12 +22,12 @@ namespace KEngine
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		void AddGameObject(const std::shared_ptr<GameObject> gameObject, const eLayerType type);
+		void AddGameObject(std::unique_ptr<GameObject> gameObject,const eLayerType type);
 
-		std::shared_ptr<Layer> GetLayer(const eLayerType type) { return mLayers[(UINT)type]; }
+		Layer* GetLayer(const eLayerType type) { return mLayers[(UINT)type].get(); }
 
 	private :
-		std::vector<std::shared_ptr<Layer>> mLayers;
+		std::vector<std::unique_ptr<Layer>> mLayers;
 	};	
 }
 

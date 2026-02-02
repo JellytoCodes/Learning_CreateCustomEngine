@@ -42,19 +42,19 @@ namespace KEngine
 
 	void Collider::OnCollisionEnter(Collider* other)
 	{
-		auto script = GetOwner().lock()->GetComponent<Script>();
+		Script* script = GetOwner()->GetComponent<Script>();
 		script->OnCollisionEnter(other);
 	}
 
 	void Collider::OnCollisionStay(Collider* other)
 	{
-		auto script = GetOwner().lock()->GetComponent<Script>();
+		Script* script = GetOwner()->GetComponent<Script>();
 		script->OnCollisionStay(other);
 	}
 
 	void Collider::OnCollisionExit(Collider* other)
 	{
-		auto script = GetOwner().lock()->GetComponent<Script>();
+		Script* script = GetOwner()->GetComponent<Script>();
 		script->OnCollisionExit(other);
 	}
 }

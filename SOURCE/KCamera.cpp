@@ -10,7 +10,7 @@ namespace KEngine
 {
 	Camera::Camera()
 		: Super(eComponentType::Camera),
-		mDistance(KMath::Vector2::Zero), mResolution(KMath::Vector2::Zero), mLookPosition(KMath::Vector2::Zero)
+		mDistance(KMath::Vector2::Zero), mResolution(KMath::Vector2::Zero), mLookPosition(KMath::Vector2::Zero), mTarget(nullptr)
 	{
 		
 	}
@@ -28,14 +28,14 @@ namespace KEngine
 
 	void Camera::Update()
 	{
-		if (mTarget.lock())
+		if (mTarget)
 		{
-			auto transform = mTarget.lock()->GetComponent<Transform>();
+			Transform* transform = mTarget->GetComponent<Transform>();
 			mLookPosition = transform->GetPosition();
 		}
 		else
 		{
-			auto cameraTransform = GetOwner().lock()->GetComponent<Transform>();
+			Transform* cameraTransform = GetOwner()->GetComponent<Transform>();
 			mLookPosition = cameraTransform->GetPosition();
 		}
 

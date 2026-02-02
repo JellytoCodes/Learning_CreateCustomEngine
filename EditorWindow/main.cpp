@@ -5,6 +5,7 @@
 #include "../SOURCE/KApplication.h"
 #include "../Engine/KLoadResources.h"
 #include "../ENGINE/KLoadScenes.h"
+#include "../SOURCE/KCollisionManager.h"
 
 #pragma comment (lib, "../Libraries/Lib/Engine/ENGINE.lib")
 
@@ -108,7 +109,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	if (!hWnd)   return FALSE;
 
-    application.Initialize(hWnd, width, height);
+    application.CreateApplication(hWnd, width, height);
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
@@ -118,6 +119,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // load Scenes
     KEngine::LoadResources();
     KEngine::LoadScenes();
+
+    application.Initialize();
 
     int a = 0;
     srand((UINT)&a);

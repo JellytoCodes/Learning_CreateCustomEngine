@@ -2,5 +2,5 @@
 
 namespace KRenderer
 {
-    std::shared_ptr<KEngine::Camera> mainCamera; 
+    KEngine::Camera* KRenderer::mainCamera = nullptr; 
 }

@@ -10,8 +10,8 @@ namespace KEngine
 		template<typename T>
 		static void CreateScene(const std::wstring& name);
 
-		static std::shared_ptr<Scene> LoadScene(const std::wstring& name);
-		static std::shared_ptr<Scene> GetActiveScene() { return mActiveScene; }
+		static Scene* LoadScene(const std::wstring& name);
+		static Scene* GetActiveScene() { return mActiveScene; }
 
 		static void Initialize();
 		static void Update();
@@ -21,18 +21,20 @@ namespace KEngine
 		static void Destroy();
 
 	private :
-		static std::map<const std::wstring, std::shared_ptr<Scene>> mScene;
-		static std::shared_ptr<Scene> mActiveScene;
+		static std::map<const std::wstring, std::unique_ptr<Scene>> mScene;
+
+		// 관찰자(Observer) 역할만 수행하므로 소유권이 없는 Raw Pointer를 사용한다.
+		static Scene* mActiveScene;
 	};
 
 	template <typename T>
 	void SceneManager::CreateScene(const std::wstring& name)
 	{
-		std::shared_ptr<T> scene = std::make_shared<T>();
+		std::unique_ptr<T> scene = std::make_unique<T>();
 		scene->SetName(name);
-		mActiveScene = scene;
+		mActiveScene = scene.get();
 		scene->Initialize();
 
-		mScene.insert(std::make_pair(name, scene));
+		mScene.insert(std::make_pair(name, std::move(scene)));
 	}
 }

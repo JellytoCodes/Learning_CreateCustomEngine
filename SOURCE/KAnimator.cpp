@@ -6,17 +6,14 @@ namespace KEngine
 {
 	Animator::Animator()
 		: Super(eComponentType::Animator),
-		mbLoop(false)
+		mActiveAnimation(nullptr), mbLoop(false)
 	{
 
 	}
 
 	Animator::~Animator()
 	{
-		for (auto& iter : mEvents)
-		{
-			delete iter.second;
-		}
+
 	}
 
 	void Animator::Initialize()
@@ -55,22 +52,18 @@ namespace KEngine
 
 	}
 
-	void Animator::CreateAnimation(const std::wstring& name, std::shared_ptr<Texture> spriteSheet,
+	void Animator::CreateAnimation(const std::wstring& name, Texture* spriteSheet,
 		KMath::Vector2 leftTop, KMath::Vector2 size, KMath::Vector2 offset, UINT spriteLength, float duration)
 	{
-		std::shared_ptr<Animation> animation = FindAnimation(name);
-		if (animation != nullptr) return;
+		if (FindAnimation(name) != nullptr) return;
 
-		animation = std::make_shared<Animation>();
+		auto animation = std::make_unique<Animation>();
 		animation->SetName(name);
 		animation->CreateAnimation(name, spriteSheet, leftTop, size, offset, spriteLength, duration);
+		animation->SetAnimator(this);
 
-		animation->SetAnimator(shared_from_this());
-
-		Events* events = new Events();
-		mEvents.insert(std::make_pair(name, events));
-
-		mAnimations.insert(std::make_pair(name, animation));
+		mEvents.insert(std::make_pair(name, std::make_unique<Events>()));
+		mAnimations.insert(std::make_pair(name, std::move(animation)));
 	}
 
 	void Animator::CreateAnimationByFolder(const std::wstring& name, const std::wstring& path, KMath::Vector2 offset, float duration)
@@ -79,20 +72,20 @@ namespace KEngine
 
 		int fileCount = 0;
 		std::filesystem::path fs(path);
-		std::vector<std::shared_ptr<Texture>> images = {};
+		std::vector<Texture*> images = {};
 		for (auto& p : std::filesystem::recursive_directory_iterator(fs))
 		{
 			std::wstring fileName = p.path().filename();
 			std::wstring fullName = p.path();
 
-			std::shared_ptr<Texture> texture = Resources::Load<Texture>(fileName, fullName);
+			Texture* texture = Resources::Load<Texture>(fileName, fullName);
 			images.push_back(texture);
 			fileCount++;
 		}
 
 		UINT sheetWidth = images[0]->GetWidth() * fileCount;
 		UINT sheetHeight = images[0]->GetHeight();
-		std::shared_ptr<Texture> spriteSheet = Texture::Create(name, sheetWidth, sheetHeight);
+		Texture* spriteSheet = Texture::Create(name, sheetWidth, sheetHeight);
 
 		UINT imageWidth = images[0]->GetWidth();
 		UINT imageHeight = images[0]->GetHeight();
@@ -113,16 +106,15 @@ namespace KEngine
 		CreateAnimation(name, spriteSheet, KMath::Vector2(0.0f, 0.0f), KMath::Vector2(imageWidth, imageHeight), offset, fileCount, duration);
 	}
 
-	std::shared_ptr<Animation> Animator::FindAnimation(const std::wstring& name)
+	Animation* Animator::FindAnimation(const std::wstring& name)
 	{
-		auto It = mAnimations.find(name);
-
-		return It == mAnimations.end() ? nullptr : It->second;
+		auto it = mAnimations.find(name);
+		return it == mAnimations.end() ? nullptr : it->second.get();
 	}
 
 	void Animator::PlayAnimation(const std::wstring& name, bool loop)
 	{
-		std::shared_ptr<Animation> animation = FindAnimation(name);
+		Animation* animation = FindAnimation(name);
 		if (animation == nullptr) return;
 
 		if (mActiveAnimation)
@@ -143,7 +135,7 @@ namespace KEngine
 	{
 		auto It = mEvents.find(name);
 
-		return It == mEvents.end() ? nullptr : It->second;
+		return It == mEvents.end() ? nullptr : It->second.get();
 	}
 
 	std::function<void()>& Animator::GetStartEvent(const std::wstring& name)

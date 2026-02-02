@@ -10,7 +10,7 @@ namespace KEngine
 {
 	Animation::Animation()
 		: Super(eResourceType::Animation),
-		mIndex(-1), mTime(0), mbComplete(false)
+		mAnimator(nullptr), mTexture(nullptr), mIndex(-1), mTime(0), mbComplete(false)
 	{
 
 	}
@@ -43,8 +43,8 @@ namespace KEngine
 	void Animation::Render(HDC hdc)
 	{
 		if (mTexture == nullptr) return;
-		auto gameObject = mAnimator.lock()->GetOwner();
-		std::shared_ptr<Transform> transform = gameObject.lock()->GetComponent<Transform>();
+		GameObject* gameObject = mAnimator->GetOwner();
+		Transform* transform = gameObject->GetComponent<Transform>();
 		KMath::Vector2 pos = transform->GetPosition();
 		KMath::Vector2 scale = transform->GetScale();
 		float rot = transform->GetRotation();
@@ -112,7 +112,7 @@ namespace KEngine
 			graphics.TranslateTransform(-pos.x, -pos.y);
 
 			graphics.DrawImage(
-				mTexture->GetImage().get(),
+				mTexture->GetImage(),
 				Gdiplus::Rect(pos.x - (sprite.size.x / 2.f), pos.y - (sprite.size.y / 2.f), sprite.size.x, sprite.size.y),
 				sprite.leftTop.x * scale.x, 
 				sprite.leftTop.y * scale.y,
@@ -123,7 +123,7 @@ namespace KEngine
 		}
 	}
 
-	void Animation::CreateAnimation(const std::wstring& name, std::shared_ptr<Texture> spriteSheet,
+	void Animation::CreateAnimation(const std::wstring& name, Texture* spriteSheet,
 	                                KMath::Vector2 leftTop, KMath::Vector2 size, KMath::Vector2 offset, UINT spriteLength, float duration)
 	{
 		mTexture = spriteSheet;

@@ -17,7 +17,7 @@ namespace KEngine
 		
 	}
 
-	void Application::Initialize(HWND hwnd, LONG width, LONG height)
+	void Application::CreateApplication(HWND hwnd, LONG width, LONG height)
 	{
 		mHwnd = hwnd;
 		mHdc = GetDC(hwnd);
@@ -40,10 +40,12 @@ namespace KEngine
 
 		HBITMAP oldBitmap = (HBITMAP)SelectObject(mBackHdc, mBackBuffer);
 		DeleteObject(oldBitmap);
+	}
 
+	void Application::Initialize()
+	{
 		CollisionManager::Initialize();
 		SceneManager::Initialize();
-
 		Input::Initialize();
 		Time::Initialize();
 	}
@@ -61,6 +63,7 @@ namespace KEngine
 	{
 		Input::Update();
 		Time::Update();
+
 		CollisionManager::Update();
 		SceneManager::Update();
 	}

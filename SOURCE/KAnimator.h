@@ -6,11 +6,8 @@
 namespace KEngine
 {
 	class Texture;
-}
 
-namespace KEngine
-{
-	class Animator : public Component, public std::enable_shared_from_this<Animator>
+	class Animator : public Component
 	{
 		using Super = Component;
 
@@ -47,7 +44,7 @@ namespace KEngine
 
 		void CreateAnimation(
 			const std::wstring& name,					// 애니메이션 이름
-			std::shared_ptr<Texture> spriteSheet,		// 사용할 애니메이션 스프라이트
+			Texture* spriteSheet,		// 사용할 애니메이션 스프라이트
 			KMath::Vector2 leftTop,						// 시트 내 사용할 애니메이션의 좌표
 			KMath::Vector2 size,						// 애니메이션 프레임 사이즈
 			KMath::Vector2 offset,						// 프레임 사이즈가 안맞을 때 맞춰주기 위한 목적
@@ -61,7 +58,7 @@ namespace KEngine
 			KMath::Vector2 offset,
 			float duration);
 
-		std::shared_ptr<Animation> FindAnimation(const std::wstring& name);
+		Animation* FindAnimation(const std::wstring& name);
 		void PlayAnimation(const std::wstring& name, bool loop = true);
 
 		Events* FindEvents(const std::wstring& name);
@@ -73,12 +70,12 @@ namespace KEngine
 		bool IsComplete() { return mActiveAnimation->IsComplete(); }
 
 	private :
-		std::map<std::wstring, std::shared_ptr<Animation>> mAnimations;
-		std::shared_ptr<Animation> mActiveAnimation;
+		std::map<std::wstring, std::unique_ptr<Animation>> mAnimations;
+		Animation* mActiveAnimation;
 
 		bool mbLoop;
 
 		// Event
-		std::map<std::wstring, Events*> mEvents;
+		std::map<std::wstring, std::unique_ptr<Events>> mEvents;
 	};
 }

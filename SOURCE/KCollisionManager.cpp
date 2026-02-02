@@ -59,23 +59,23 @@ namespace KEngine
 		mCollisionLayerMatrix[row][col] = enable;
 	}
 
-	void CollisionManager::LayerCollision(std::shared_ptr<Scene> scene, eLayerType left, eLayerType right)
+	void CollisionManager::LayerCollision(Scene* scene, eLayerType left, eLayerType right)
 	{
-		const std::vector<std::shared_ptr<GameObject>>& lefts = scene->GetLayer(left)->GetGameObjects();
-		const std::vector<std::shared_ptr<GameObject>>& rights = scene->GetLayer(right)->GetGameObjects();
+		const std::vector<std::unique_ptr<GameObject>>& lefts = scene->GetLayer(left)->GetGameObjects();
+		const std::vector<std::unique_ptr<GameObject>>& rights = scene->GetLayer(right)->GetGameObjects();
 
 		for (auto& leftObject : lefts)
 		{
 			if (leftObject->IsActive() == false) continue;
 
-			auto leftCollider = leftObject->GetComponent<Collider>();
+			Collider* leftCollider = leftObject->GetComponent<Collider>();
 			if (leftCollider == nullptr) continue;
 
 			for (auto& rightObject : rights)
 			{
 				if (rightObject->IsActive() == false) continue;
 
-				auto rightCollider = rightObject->GetComponent<Collider>();
+				Collider* rightCollider = rightObject->GetComponent<Collider>();
 				if (rightCollider == nullptr) continue;
 				if (leftObject == rightObject) continue;
 
@@ -84,7 +84,7 @@ namespace KEngine
 		}
 	}
 
-	void CollisionManager::ColliderCollision(std::shared_ptr<Collider> left, std::shared_ptr<Collider> right)
+	void CollisionManager::ColliderCollision(Collider* left, Collider* right)
 	{
 		// 두 충돌체 번호를 가져온 ID를 확인해서 CollisionID값을 세팅
 		CollisionID id = {};
@@ -106,16 +106,16 @@ namespace KEngine
 			// 최초 충돌
 			if (iter->second == false)
 			{
-				left->OnCollisionEnter(right.get());
-				right->OnCollisionEnter(left.get());
+				left->OnCollisionEnter(right);
+				right->OnCollisionEnter(left);
 				iter->second = true;
 			}
 
 			// 충돌 중
 			else
 			{
-				left->OnCollisionStay(right.get());
-				right->OnCollisionStay(left.get());
+				left->OnCollisionStay(right);
+				right->OnCollisionStay(left);
 			}
 		}
 		else
@@ -123,16 +123,16 @@ namespace KEngine
 			// 충돌 중 충돌 영역을 벗어났을 때
 			if (iter->second == true)
 			{
-				left->OnCollisionExit(right.get());
-				right->OnCollisionExit(left.get());
+				left->OnCollisionExit(right);
+				right->OnCollisionExit(left);
 			}
 		}
 	}
 
-	bool CollisionManager::Intersect(std::shared_ptr<Collider> left, std::shared_ptr<Collider> right)
+	bool CollisionManager::Intersect(Collider* left, Collider* right)
 	{
-		std::shared_ptr<Transform> leftTransform = left->GetOwner().lock()->GetComponent<Transform>();
-		std::shared_ptr<Transform> rightTransform = right->GetOwner().lock()->GetComponent<Transform>();
+		Transform* leftTransform = left->GetOwner()->GetComponent<Transform>();
+		Transform* rightTransform = right->GetOwner()->GetComponent<Transform>();
 
 		KMath::Vector2 leftPos = leftTransform->GetPosition() + left->GetOffset();
 		KMath::Vector2 rightPos = rightTransform->GetPosition() + right->GetOffset();
@@ -165,11 +165,11 @@ namespace KEngine
 		if ((left->GetColliderType() == eColliderType::Circle2D && right->GetColliderType() == eColliderType::Rect2D)
 		||(left->GetColliderType() == eColliderType::Rect2D && right->GetColliderType() == eColliderType::Circle2D))
 		{
-		    Collider* circle = (left->GetColliderType() == eColliderType::Circle2D) ? left.get() : right.get();
-		    Collider* rect = (circle == left.get()) ? right.get() : left.get();
+		    Collider* circle = (left->GetColliderType() == eColliderType::Circle2D) ? left : right;
+		    Collider* rect = (circle == left) ? right : left;
 
-			KMath::Vector2 cPos = circle->GetOwner().lock()->GetComponent<Transform>()->GetPosition() + circle->GetOffset();
-			KMath::Vector2 rPos = rect->GetOwner().lock()->GetComponent<Transform>()->GetPosition() + rect->GetOffset();
+			KMath::Vector2 cPos = circle->GetOwner()->GetComponent<Transform>()->GetPosition() + circle->GetOffset();
+			KMath::Vector2 rPos = rect->GetOwner()->GetComponent<Transform>()->GetPosition() + rect->GetOffset();
 			KMath::Vector2 rSize = rect->GetSize() * 100.f;
 		    float radius = (circle->GetSize().x * 100.f) / 2.0f;
 

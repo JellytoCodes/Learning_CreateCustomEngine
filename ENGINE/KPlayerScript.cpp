@@ -14,7 +14,7 @@
 namespace KEngine
 {
 	PlayerScript::PlayerScript()
-		: mState(eState::Idle)
+		: mState(eState::Idle), mAnimator(nullptr)
 	{
 
 	}
@@ -31,7 +31,7 @@ namespace KEngine
 
 	void PlayerScript::Update()
 	{
-		if (mAnimator == nullptr) mAnimator = GetOwner().lock()->GetComponent<Animator>();
+		if (mAnimator == nullptr) mAnimator = GetOwner()->GetComponent<Animator>();
 		switch (mState)
 		{
 		case eState::Idle :
@@ -67,7 +67,7 @@ namespace KEngine
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
-		GameObject* obj = other->GetOwner().lock().get();
+		GameObject* obj = other->GetOwner();
 		obj->GetComponent<Transform>()->SetPosition(KMath::Vector2(0,0));
 	}
 
@@ -87,13 +87,13 @@ namespace KEngine
 	{
 		// Cat
 		{
-			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
-			auto catSrc = cat->AddComponent<CatScript>();
+			Cat* cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
+			CatScript* catSrc = cat->AddComponent<CatScript>();
 
-			catSrc->SetPlayer(GetOwner().lock());
+			catSrc->SetPlayer(GetOwner());
 
-			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
-			auto animator = cat->AddComponent<Animator>();
+			Texture* texture = Resources::Find<KEngine::Texture>(L"Cat");
+			Animator* animator = cat->AddComponent<Animator>();
 
 			// Create Animation By Cat
 			animator->CreateAnimation(L"DownWalk", texture, 
@@ -113,7 +113,7 @@ namespace KEngine
 
 			animator->PlayAnimation(L"SitDown", false);
 
-			auto tr = GetOwner().lock()->GetComponent<Transform>();
+			Transform* tr = GetOwner()->GetComponent<Transform>();
 
 			cat->GetComponent<Transform>()->SetPosition(tr->GetPosition());
 			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
@@ -150,7 +150,7 @@ namespace KEngine
 			mAnimator->PlayAnimation(L"SitDown", false);
 		}
 
-		std::shared_ptr<Transform> tr = GetOwner().lock()->GetComponent<Transform>();
+		Transform* tr = GetOwner()->GetComponent<Transform>();
 		KMath::Vector2 pos = tr->GetPosition();
 
 		if (Input::GetKeyPressed(eKeyCode::Right))

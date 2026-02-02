@@ -29,23 +29,23 @@ namespace KEngine
 		void Render(HDC hdc);
 
 		void CreateAnimation(
-			const std::wstring& name,					// 애니메이션 이름
-			std::shared_ptr<Texture> spriteSheet,		// 사용할 애니메이션 스프라이트
-			KMath::Vector2 leftTop,						// 시트 내 사용할 애니메이션의 좌표
-			KMath::Vector2 size,						// 애니메이션 프레임 사이즈
-			KMath::Vector2 offset,						// 프레임 사이즈가 안맞을 때 맞춰주기 위한 목적
-			UINT spriteLength,							// 애니메이션의 총 프레임
-			float duration								// 프레임 전환 시간 (재생 속도)
+		const std::wstring& name,			// 애니메이션 이름
+			Texture* spriteSheet,			// 사용할 애니메이션 스프라이트
+			KMath::Vector2 leftTop,			// 시트 내 사용할 애니메이션의 좌표
+			KMath::Vector2 size,			// 애니메이션 프레임 사이즈
+			KMath::Vector2 offset,			// 프레임 사이즈가 안맞을 때 맞춰주기 위한 목적
+			UINT spriteLength,				// 애니메이션의 총 프레임
+			float duration					// 프레임 전환 시간 (재생 속도)
 			);
 
 		void Reset();
 
 		bool IsComplete() { return mbComplete; }
-		void SetAnimator(std::shared_ptr<Animator> animator) { mAnimator = animator; }
+		void SetAnimator(Animator* animator) { mAnimator = animator; }
 
 	private :
-		std::weak_ptr<Animator>		mAnimator;
-		std::shared_ptr<Texture>	mTexture;
+		Animator*					mAnimator;
+		Texture*					mTexture;
 
 		std::vector<Sprite>			mAnimationSheet;
 		int							mIndex;

@@ -35,9 +35,9 @@ namespace KEngine
 
 	void BoxCollider2D::Render(HDC hdc)
 	{
-		if (auto owner = GetOwner().lock())
+		if (GameObject* owner = GetOwner())
 		{
-			std::shared_ptr<Transform> transform = owner->GetComponent<Transform>();
+			Transform* transform = owner->GetComponent<Transform>();
 			KMath::Vector2 pos = transform->GetPosition();
 
 			if (KRenderer::mainCamera) pos = KRenderer::mainCamera->CalculatePosition(pos);

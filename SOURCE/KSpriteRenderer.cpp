@@ -37,7 +37,7 @@ namespace KEngine
 	{
 		if (mTexture == nullptr) assert(false);
 
-		std::shared_ptr<Transform> transform = GetOwner().lock()->GetComponent<Transform>();
+		Transform* transform = GetOwner()->GetComponent<Transform>();
 		KMath::Vector2 pos = transform->GetPosition();
 		pos = KRenderer::mainCamera->CalculatePosition(pos);
 		KMath::Vector2 scale = transform->GetScale();
@@ -98,7 +98,7 @@ namespace KEngine
 			graphics.TranslateTransform(-pos.x, -pos.y);
 
 			graphics.DrawImage(
-				mTexture->GetImage().get(), 
+				mTexture->GetImage(), 
 				Gdiplus::Rect(pos.x, pos.y, mTexture->GetWidth() * mSize.x, mTexture->GetHeight() * mSize.y),
 				0,
 				0,

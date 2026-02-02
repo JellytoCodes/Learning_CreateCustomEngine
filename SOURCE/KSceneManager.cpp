@@ -2,21 +2,21 @@
 
 namespace KEngine
 {
-	std::map<const std::wstring, std::shared_ptr<KEngine::Scene>> SceneManager::mScene = { };
-	std::shared_ptr<KEngine::Scene> KEngine::SceneManager::mActiveScene = std::make_shared<Scene>();
+	std::map<const std::wstring, std::unique_ptr<Scene>> SceneManager::mScene = {};
+	Scene*SceneManager::mActiveScene =nullptr;
 
-	std::shared_ptr<Scene> SceneManager::LoadScene(const std::wstring& name)
+	Scene* SceneManager::LoadScene(const std::wstring& name)
 	{
 		if (mActiveScene) mActiveScene->OnExit();
 		
-		std::map<std::wstring, std::shared_ptr<Scene>>::iterator It = mScene.find(name);
+		auto It = mScene.find(name);
 
 		if (It == mScene.end()) return nullptr;
 
-		mActiveScene = It->second;
+		mActiveScene = It->second.get();
 		mActiveScene->OnEnter();
 
-		return It->second;
+		return mActiveScene;
 	}
 
 	void SceneManager::Initialize()

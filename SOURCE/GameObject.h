@@ -6,7 +6,7 @@ namespace KEngine
 	class Component;
 
 	// 언리얼에서는 Actor
-	class GameObject : public std::enable_shared_from_this<GameObject>
+	class GameObject
 	{
 	public :
 		enum class eState
@@ -26,10 +26,10 @@ namespace KEngine
 		virtual void Release();
 
 		template<typename T>
-		std::shared_ptr<T> AddComponent();
+		T* AddComponent();
 
 		template<typename T>
-		std::shared_ptr<T> GetComponent();
+		T* GetComponent();
 
 		bool IsActive() const { return mState == eState::Active; }
 		//bool IsDead() const { return mState == eState::Destroyed; }
@@ -46,30 +46,31 @@ namespace KEngine
 
 	private :
 		eState mState;
-		std::vector<std::shared_ptr<Component>> mComponents;
+		std::vector<std::unique_ptr<Component>> mComponents;
 	};
 
 	template <typename T>
-	std::shared_ptr<T> GameObject::AddComponent()
+	T* GameObject::AddComponent()
 	{
-		std::shared_ptr<T> comp = std::make_shared<T>();
+		std::unique_ptr<T> comp = std::make_unique<T>();
 		comp->Initialize();
-		comp->SetOwner(shared_from_this());
+		comp->SetOwner(this);
 
-		mComponents[(UINT)comp->GetType()] = comp;
+		T* rawComp = comp.get(); 
 
-		return comp;
+		mComponents[(UINT)comp->GetType()] = std::move(comp);
+
+		return rawComp;
 	}
 
 	template <typename T>
-	std::shared_ptr<T> GameObject::GetComponent()
+	T* GameObject::GetComponent()
 	{
-		std::shared_ptr<T> component = nullptr;
 		for (auto& comp : mComponents)
 		{
-			component = std::dynamic_pointer_cast<T>(comp);
-			if (component) break;
+			T* target = dynamic_cast<T*>(comp.get());
+			if (target != nullptr) return target;
 		}
-		return component;
+		return nullptr;
 	}
 }

@@ -3,5 +3,5 @@
 
 namespace KRenderer
 {
-	extern std::shared_ptr<KEngine::Camera> mainCamera;
+	extern KEngine::Camera* mainCamera;
 }

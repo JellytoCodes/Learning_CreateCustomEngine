@@ -12,7 +12,7 @@ namespace KEngine
 		mLayers.resize((UINT)eLayerType::Max);
 		for (auto& layer : mLayers)
 		{
-			layer = std::make_shared<Layer>();
+			layer = std::make_unique<Layer>();
 		}
 	}
 
@@ -85,9 +85,9 @@ namespace KEngine
 
 	}
 
-	void Scene::AddGameObject(const std::shared_ptr<GameObject> gameObject, const eLayerType type)
+	void Scene::AddGameObject(std::unique_ptr<GameObject> gameObject, const eLayerType type)
 	{
-		mLayers[(UINT)type]->AddGameObject(gameObject);
+		mLayers[(UINT)type]->AddGameObject(std::move(gameObject));
 	}
 }
 

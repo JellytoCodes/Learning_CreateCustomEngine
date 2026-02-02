@@ -71,20 +71,15 @@ namespace KEngine
 
 	void Layer::Destroy()
 	{
-		for (auto iter = mGameObjects.begin() ; iter != mGameObjects.end() ; )
+		// Dead 상태인 객체들을 한 번에 찾아서 메모리 해제 및 벡터 정리
+		std::erase_if(mGameObjects, [](const std::unique_ptr<GameObject>& obj) 
 		{
-			GameObject::eState active = (*iter)->GetActive();
-			if (active == GameObject::eState::Dead)
-			{
-				iter = mGameObjects.erase(iter);
-				continue;
-			}
-			iter++;
-		}
+            return obj->GetActive() == GameObject::eState::Dead;
+        });
 	}
 
-	void Layer::AddGameObject(const std::shared_ptr<GameObject> gameObject)
+	void Layer::AddGameObject(std::unique_ptr<GameObject> gameObject)
 	{
-		if (gameObject) mGameObjects.push_back(gameObject);
+		if (gameObject) mGameObjects.push_back(std::move(gameObject));
 	}
 }

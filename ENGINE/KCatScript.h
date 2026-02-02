@@ -30,32 +30,32 @@ namespace KEngine
 		CatScript();
 		~CatScript();
 
-		void Initialize() override;
-		void Update() override;
-		void LateUpdate() override;
-		void Render(HDC hdc) override;
-		void Release() override;
+		void	Initialize() override;
+		void	Update() override;
+		void	LateUpdate() override;
+		void	Render(HDC hdc) override;
+		void	Release() override;
 
-		void SetPlayer(std::shared_ptr<GameObject> player) { mPlayer = player; }
-		void SetDest(KMath::Vector2 dest) { mDest = dest; }
+		void	SetPlayer(GameObject* player)			{ mPlayer = player; }
+		void	SetDest(KMath::Vector2 dest)			{ mDest = dest; }
 
 	private:
-		void SitDown();
-		void Move();
-		void LayDown();
+		void	SitDown();
+		void	Move();
+		void	LayDown();
 
-		void PlayAnimByDirection(eDirection dir);
+		void	PlayAnimByDirection(eDirection dir);
 
-		eState mState;
-		eDirection mDirection;
+		eState				mState;
+		eDirection			mDirection;
 
-		std::shared_ptr<Animator> mAnimator;
-		float mTime;
-		float mDeathTime;
+		Animator*			mAnimator;
+		GameObject*			mPlayer;
 
-		std::shared_ptr<GameObject> mPlayer;
-		KMath::Vector2 mDest;
-		float mRadian;
+		float				mTime;
+		float				mDeathTime;
+		KMath::Vector2		mDest;
+		float				mRadian;
 	};	
 }
 

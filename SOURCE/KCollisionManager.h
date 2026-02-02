@@ -26,10 +26,10 @@ namespace KEngine
 		static void Render(HDC hdc);
 
 		static void CollisionLayerCheck(eLayerType left, eLayerType right, bool enable);
-		static void LayerCollision(std::shared_ptr<Scene> scene, eLayerType left, eLayerType right);
-		static void ColliderCollision(std::shared_ptr<Collider> left, std::shared_ptr<Collider> right);
+		static void LayerCollision(Scene* scene, eLayerType left, eLayerType right);
+		static void ColliderCollision(Collider* left, Collider* right);
 
-		static bool Intersect(std::shared_ptr<Collider> left, std::shared_ptr<Collider> right);
+		static bool Intersect(Collider* left, Collider* right);
 
 	private :
 		static std::bitset<(UINT)eLayerType::Max> mCollisionLayerMatrix[(UINT)eLayerType::Max];

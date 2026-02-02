@@ -19,6 +19,7 @@
 namespace KEngine
 {
 	PlayScene::PlayScene()
+		: player(nullptr)
 	{
 		
 	}
@@ -33,22 +34,22 @@ namespace KEngine
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
 
 		// Main Camera
-		std::shared_ptr<GameObject> camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
-		auto cameraComp = camera->AddComponent<Camera>();
+		GameObject* camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
+		Camera* cameraComp = camera->AddComponent<Camera>();
 		KRenderer::mainCamera = cameraComp;
 
 		// Player
 		{
 			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player, KMath::Vector2(0.f, 0.f));
 			auto playerScript = player->AddComponent<PlayerScript>();
-			//auto boxCollider = player->AddComponent<BoxCollider2D>();
+			//BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
 			//boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));
 			//boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
-			auto circleCollider = player->AddComponent<CircleCollider2D>();
+			CircleCollider2D* circleCollider = player->AddComponent<CircleCollider2D>();
 			circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
-			auto texture = Resources::Find<KEngine::Texture>(L"Player");
-			auto animator = player->AddComponent<Animator>();
+			Texture* texture = Resources::Find<Texture>(L"Player");
+			Animator* animator = player->AddComponent<Animator>();
 
 			// Create Animation By Player
 			animator->CreateAnimation(L"Idle", texture, 
@@ -58,18 +59,18 @@ namespace KEngine
 
 			animator->PlayAnimation(L"Idle", false);
 
-			animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript.get());
+			animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript);
 
 			player->GetComponent<Transform>()->SetPosition(KMath::Vector2(400.f, 200.f));
 		}
 
 		// Cat
 		/*{
-			auto cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
-			auto catSrc = cat->AddComponent<CatScript>();
+			Cat* cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
+			CatScript* catSrc = cat->AddComponent<CatScript>();
 
-			auto texture = Resources::Find<KEngine::Texture>(L"Cat");
-			auto animator = cat->AddComponent<Animator>();
+			Texture* texture = Resources::Find<KEngine::Texture>(L"Cat");
+			Animator* animator = cat->AddComponent<Animator>();
 
 			// Create Animation By Cat
 			animator->CreateAnimation(L"DownWalk", texture, 
@@ -98,16 +99,16 @@ namespace KEngine
 
 		// Mushroom
 		{
-			auto mushroom = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
+			Cat* mushroom = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
 			mushroom->AddComponent<CatScript>();
-			auto boxCollider = mushroom->AddComponent<BoxCollider2D>();
+			BoxCollider2D* boxCollider = mushroom->AddComponent<BoxCollider2D>();
 			boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));
 			boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
-			//auto circleCollider = mushroom->AddComponent<CircleCollider2D>();
+			//CircleCollider2D* circleCollider = mushroom->AddComponent<CircleCollider2D>();
 			//circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
-			auto animator = mushroom->AddComponent<Animator>();
+			Animator* animator = mushroom->AddComponent<Animator>();
 
 			animator->CreateAnimationByFolder(L"MushroomIdle", L"..\\Resources\\Mushroom", KMath::Vector2::Zero, 0.1f);
 			animator->PlayAnimation(L"MushroomIdle");
@@ -138,7 +139,7 @@ namespace KEngine
 	{
 		Scene::Render(hdc);
 
-		std::wstring str = L"Play Scene ";
+		std::wstring str = L"Play Scene";
 		TextOut(hdc, 0, 0, str.c_str(), (int)str.length());
 	}
 

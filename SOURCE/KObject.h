@@ -1,7 +1,6 @@
 #pragma once
 #include "CommonInclude.h"
 
-#include "KComponent.h"
 #include "GameObject.h"
 #include "KLayer.h"
 #include "KSceneManager.h"
@@ -11,35 +10,39 @@
 namespace KObject
 {
 	template<typename T>
-	static std::shared_ptr<T> Instantiate(KEngine::eLayerType type)
+	static T* Instantiate(KEngine::eLayerType type)
 	{
-		std::shared_ptr<T> gameObject = std::make_shared<T>();
-		std::weak_ptr<KEngine::Scene> activeScene = KEngine::SceneManager::GetActiveScene();
-		std::weak_ptr<KEngine::Layer> layer = activeScene.lock()->GetLayer(type);
+		std::unique_ptr<T> gameObject = std::make_unique<T>();
+		KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
+		KEngine::Layer* layer = activeScene->GetLayer(type);
 
-		std::weak_ptr<KEngine::Transform> tr = gameObject->AddComponent<KEngine::Transform>();
+		gameObject->AddComponent<KEngine::Transform>();
 
-		layer.lock()->AddGameObject(gameObject);
+		T* rawObject = gameObject.get();
 
-		return gameObject;
+		layer->AddGameObject(std::move(gameObject));
+
+		return rawObject;
 	}
 
 	template<typename T>
-	static std::shared_ptr<T> Instantiate(KEngine::eLayerType type, KMath::Vector2 position)
+	static T* Instantiate(KEngine::eLayerType type, KMath::Vector2 position)
 	{
-		std::shared_ptr<T> gameObject = std::make_shared<T>();
-		std::weak_ptr<KEngine::Scene> activeScene = KEngine::SceneManager::GetActiveScene();
-		std::weak_ptr<KEngine::Layer> layer = activeScene.lock()->GetLayer(type);
+		std::unique_ptr<T> gameObject = std::make_unique<T>();
+		KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
+		KEngine::Layer* layer = activeScene->GetLayer(type);
 
-		std::weak_ptr<KEngine::Transform> tr = gameObject->AddComponent<KEngine::Transform>();
-		tr.lock()->SetPosition(position);
+		KEngine::Transform* tr = gameObject->AddComponent<KEngine::Transform>();
+		tr->SetPosition(position);
 
-		layer.lock()->AddGameObject(gameObject);
+		T* rawObject = gameObject.get();
 
-		return gameObject;
+		layer->AddGameObject(std::move(gameObject));
+
+		return rawObject;
 	}
 
-	static void Destroy(std::shared_ptr<KEngine::GameObject> obj)
+	static void Destroy(KEngine::GameObject* obj)
 	{
 		obj->Death();
 	}

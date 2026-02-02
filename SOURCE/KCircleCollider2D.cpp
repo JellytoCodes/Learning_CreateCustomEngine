@@ -30,9 +30,9 @@ namespace KEngine
 
 	void CircleCollider2D::Render(HDC hdc)
 	{
-		if (auto owner = GetOwner().lock())
+		if (GameObject* owner = GetOwner())
 		{
-			std::shared_ptr<Transform> transform = owner->GetComponent<Transform>();
+			Transform* transform = owner->GetComponent<Transform>();
 			KMath::Vector2 pos = transform->GetPosition();
 
 			HBRUSH transparentBrush = (HBRUSH)GetStockObject(NULL_BRUSH);
