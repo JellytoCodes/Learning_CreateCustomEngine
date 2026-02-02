@@ -13,6 +13,7 @@ namespace KObject
 	static T* Instantiate(KEngine::eLayerType type)
 	{
 		std::unique_ptr<T> gameObject = std::make_unique<T>();
+		gameObject->SetLayerType(type);
 		KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
 		KEngine::Layer* layer = activeScene->GetLayer(type);
 
@@ -29,6 +30,7 @@ namespace KObject
 	static T* Instantiate(KEngine::eLayerType type, KMath::Vector2 position)
 	{
 		std::unique_ptr<T> gameObject = std::make_unique<T>();
+		gameObject->SetLayerType(type);
 		KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
 		KEngine::Layer* layer = activeScene->GetLayer(type);
 
@@ -45,5 +47,19 @@ namespace KObject
 	static void Destroy(KEngine::GameObject* obj)
 	{
 		obj->Death();
+	}
+
+	static void DontDestroyOnLoad(KEngine::GameObject* obj)
+	{
+		if (obj == nullptr) return;
+
+	    KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
+	    std::unique_ptr<KEngine::GameObject> movedObj = activeScene->RemoveGameObject(obj);
+
+	    if (movedObj != nullptr)
+	    {
+	        KEngine::Scene* dontDestroyOnLoad = KEngine::SceneManager::GetDontDestroyOnLoad();
+	        dontDestroyOnLoad->AddGameObject(std::move(movedObj), obj->GetLayerType());
+	    }
 	}
 }

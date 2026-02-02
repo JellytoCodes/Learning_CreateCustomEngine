@@ -22,7 +22,9 @@ namespace KEngine
 		virtual void OnEnter();
 		virtual void OnExit();
 
-		void AddGameObject(std::unique_ptr<GameObject> gameObject,const eLayerType type);
+		void AddGameObject(std::unique_ptr<GameObject> gameObject, const eLayerType type);
+		std::unique_ptr<GameObject> RemoveGameObject(GameObject* obj);
+		void EraseGameObject(GameObject* obj);
 
 		Layer* GetLayer(const eLayerType type) { return mLayers[(UINT)type].get(); }
 
@@ -30,5 +32,3 @@ namespace KEngine
 		std::vector<std::unique_ptr<Layer>> mLayers;
 	};	
 }
-
-

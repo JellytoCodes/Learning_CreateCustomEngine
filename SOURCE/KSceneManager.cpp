@@ -1,9 +1,12 @@
 #include "KSceneManager.h"
 
+#include "KDontDestroyOnLoad.h"
+
 namespace KEngine
 {
 	std::map<const std::wstring, std::unique_ptr<Scene>> SceneManager::mScene = {};
-	Scene*SceneManager::mActiveScene =nullptr;
+	Scene* SceneManager::mActiveScene =nullptr;
+	Scene* SceneManager::mDontDestroyOnLoad = nullptr;
 
 	Scene* SceneManager::LoadScene(const std::wstring& name)
 	{
@@ -21,22 +24,26 @@ namespace KEngine
 
 	void SceneManager::Initialize()
 	{
+		mDontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");
 		mActiveScene->Initialize();
 	}
 
 	void SceneManager::Update()
 	{
 		mActiveScene->Update();
+		mDontDestroyOnLoad->Update();
 	}
 
 	void SceneManager::LateUpdate()
 	{
 		mActiveScene->LateUpdate();
+		mDontDestroyOnLoad->LateUpdate();
 	}
 
 	void SceneManager::Render(HDC hdc)
 	{
 		mActiveScene->Render(hdc);
+		mDontDestroyOnLoad->Render(hdc);
 	}
 
 	void SceneManager::Release()
@@ -45,10 +52,12 @@ namespace KEngine
 		{
 			pair.second->Release();
 		}
+		mDontDestroyOnLoad->Release();
 	}
 
 	void SceneManager::Destroy()
 	{
 		mActiveScene->Destroy();
+		mDontDestroyOnLoad->Destroy();
 	}
 }

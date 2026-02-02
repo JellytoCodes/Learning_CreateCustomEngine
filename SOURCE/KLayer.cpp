@@ -82,4 +82,28 @@ namespace KEngine
 	{
 		if (gameObject) mGameObjects.push_back(std::move(gameObject));
 	}
+
+	std::unique_ptr<GameObject> Layer::RemoveGameObject(GameObject* obj)
+	{
+		std::unique_ptr<GameObject> movedObj = nullptr;
+
+	    for (auto it = mGameObjects.begin(); it != mGameObjects.end(); ++it)
+	    {
+	        if ((*it).get() == obj)
+	        {
+	            movedObj = std::move(*it); 
+	            mGameObjects.erase(it);
+	            break;
+	        }
+	    }
+	    return movedObj;
+	}
+
+	void Layer::EraseGameObject(GameObject* obj)
+	{
+		std::erase_if(mGameObjects, [obj](const std::unique_ptr<GameObject>& ptr) 
+	    {
+	        return ptr.get() == obj; 
+	    });
+	}
 }

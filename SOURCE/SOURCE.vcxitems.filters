@@ -76,6 +76,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollisionManager.cpp">
       <Filter>Components\Collider</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTileMapRenderer.cpp">
+      <Filter>Components</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -158,6 +164,12 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollisionManager.h">
       <Filter>Components\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTileMapRenderer.h">
+      <Filter>Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

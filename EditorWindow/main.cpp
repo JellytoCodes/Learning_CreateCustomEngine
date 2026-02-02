@@ -20,9 +20,10 @@ HINSTANCE           hInst;
 WCHAR               szTitle[MAX_LOADSTRING];
 WCHAR               szWindowClass[MAX_LOADSTRING];
 
-ATOM                MyRegisterClass(HINSTANCE hInstance);
+ATOM                MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
+LRESULT CALLBACK    WndTileProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR    lpCmdLine, _In_ int       nCmdShow)
@@ -35,7 +36,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_EDITORWINDOW, szWindowClass, MAX_LOADSTRING);
-    MyRegisterClass(hInstance);
+    MyRegisterClass(hInstance, szWindowClass, WndProc);
+    MyRegisterClass(hInstance, L"TILEWINDOW", WndTileProc);
 
     if (!InitInstance (hInstance, nCmdShow))
     {
@@ -76,14 +78,14 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     return (int) msg.wParam;
 }
 
-ATOM MyRegisterClass(HINSTANCE hInstance)
+ATOM MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc)
 {
     WNDCLASSEXW wcex;
 
     wcex.cbSize = sizeof(WNDCLASSEX);
 
     wcex.style          = CS_HREDRAW | CS_VREDRAW;
-    wcex.lpfnWndProc    = WndProc;
+    wcex.lpfnWndProc    = proc;
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
@@ -91,7 +93,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_EDITORWINDOW);
-    wcex.lpszClassName  = szWindowClass;
+    wcex.lpszClassName  = name;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
     return RegisterClassExW(&wcex);
@@ -107,6 +109,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
+	HWND toolhWnd = CreateWindowW(szWindowClass, L"TileWindow", WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
+
 	if (!hWnd)   return FALSE;
 
     application.CreateApplication(hWnd, width, height);
@@ -114,13 +119,16 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
+	ShowWindow(toolhWnd, nCmdShow);
+	UpdateWindow(toolhWnd);
+
     Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
-    // load Scenes
+	application.Initialize();
+
+	// load Scenes
     KEngine::LoadResources();
     KEngine::LoadScenes();
-
-    application.Initialize();
 
     int a = 0;
     srand((UINT)&a);
@@ -129,6 +137,48 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    switch (message)
+    {
+    case WM_COMMAND:
+        {
+            int wmId = LOWORD(wParam);
+            // 메뉴 선택을 구문 분석합니다:
+            switch (wmId)
+            {
+            case IDM_ABOUT:
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
+                break;
+            case IDM_EXIT:
+                DestroyWindow(hWnd);
+                break;
+            default:
+                return DefWindowProc(hWnd, message, wParam, lParam);
+            }
+        }
+        break;
+    case WM_PAINT:
+        {
+            PAINTSTRUCT ps;
+
+    		// DC(Device Context)란 화면에 출력에 필요한 모든 정보(폰트, 선의 굵기, 색상 등을 어떻게 그려줄 것인지)를 
+			// 가지는 데이터 구조체이며 GDI모듈에 의해 관리된다.
+			// 화면 출력에 필요한 모든 경우는 WINAPI에서는 DC를 통해서 작업을 진행할 수 있다.
+            HDC hdc = BeginPaint(hWnd, &ps);
+            
+            EndPaint(hWnd, &ps);
+        }
+        break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
+}
+
+LRESULT CALLBACK WndTileProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
     {

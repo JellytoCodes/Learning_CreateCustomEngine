@@ -40,7 +40,10 @@ namespace KEngine
 
 		// Player
 		{
-			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player, KMath::Vector2(0.f, 0.f));
+			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player);
+
+			KObject::DontDestroyOnLoad(player);
+
 			auto playerScript = player->AddComponent<PlayerScript>();
 			//BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
 			//boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));

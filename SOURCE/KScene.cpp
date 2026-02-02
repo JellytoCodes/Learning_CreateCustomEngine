@@ -89,6 +89,18 @@ namespace KEngine
 	{
 		mLayers[(UINT)type]->AddGameObject(std::move(gameObject));
 	}
+
+	std::unique_ptr<GameObject> Scene::RemoveGameObject(GameObject* obj)
+	{
+		eLayerType layerType = obj->GetLayerType();
+	    return mLayers[(UINT)layerType]->RemoveGameObject(obj);	
+	}
+
+	void Scene::EraseGameObject(GameObject* obj)
+	{
+		eLayerType layerType = obj->GetLayerType();
+		mLayers[(UINT)layerType].get()->EraseGameObject(obj);
+	}
 }
 
 

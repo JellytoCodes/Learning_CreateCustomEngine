@@ -4,7 +4,7 @@
 namespace KEngine
 {
 	GameObject::GameObject()
-		: mState(eState::Active)
+		: mState(eState::Active), mLayerType(eLayerType::None)
 	{
 		mComponents.resize((UINT)KEngine::eComponentType::End);
 	}

@@ -32,9 +32,10 @@ namespace KEngine
 		T* GetComponent();
 
 		bool IsActive() const { return mState == eState::Active; }
-		//bool IsDead() const { return mState == eState::Destroyed; }
-		//eLayerType GetLayerType() const { return mLayerType; }
-		//void SetLayerType(const eLayerType layerType) { mLayerType = layerType; }
+		bool IsDead() const { return mState == eState::Dead; }
+
+		eLayerType GetLayerType() const { return mLayerType; }
+		void SetLayerType(eLayerType layerType) { mLayerType = layerType; }
 
 		eState GetActive() { return mState; }
 		void SetActive(bool power)
@@ -47,6 +48,7 @@ namespace KEngine
 	private :
 		eState mState;
 		std::vector<std::unique_ptr<Component>> mComponents;
+		eLayerType mLayerType;
 	};
 
 	template <typename T>

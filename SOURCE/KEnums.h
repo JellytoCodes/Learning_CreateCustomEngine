@@ -18,6 +18,7 @@ namespace KEngine
 	{
 		None,
 		BackGround,
+		Tile,
 		Animal,
 		Player,
 		Particle,

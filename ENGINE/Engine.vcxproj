@@ -26,7 +26,9 @@
     <ClInclude Include="KPlayer.h" />
     <ClInclude Include="KPlayerScript.h" />
     <ClInclude Include="KPlayScene.h" />
+    <ClInclude Include="KTile.h" />
     <ClInclude Include="KTitleScene.h" />
+    <ClInclude Include="KToolScene.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KCat.cpp" />
@@ -34,7 +36,9 @@
     <ClCompile Include="KPlayer.cpp" />
     <ClCompile Include="KPlayerScript.cpp" />
     <ClCompile Include="KPlayScene.cpp" />
+    <ClCompile Include="KTile.cpp" />
     <ClCompile Include="KTitleScene.cpp" />
+    <ClCompile Include="KToolScene.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

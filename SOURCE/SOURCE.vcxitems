@@ -25,6 +25,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
@@ -39,6 +40,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KScript.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTexture.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTileMapRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h" />
   </ItemGroup>
@@ -53,6 +55,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
@@ -66,6 +69,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KScript.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTexture.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTileMapRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTransform.cpp" />
   </ItemGroup>

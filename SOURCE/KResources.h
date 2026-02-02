@@ -1,5 +1,6 @@
 #pragma once
 #include "KResource.h"
+#include "KTexture.h"
 
 namespace KEngine
 {

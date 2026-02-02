@@ -4,6 +4,9 @@
     <Filter Include="Scenes">
       <UniqueIdentifier>{6e6854a7-6b94-408a-8bd5-a0753ae76b8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{3f7a4f56-c2b0-4ec3-b26d-1e34cf687b87}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KLoadScenes.h">
@@ -12,33 +15,55 @@
     <ClInclude Include="KTitleScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="KPlayer.h">
-      <Filter>Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="KPlayScene.h">
       <Filter>Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="KLoadResources.h" />
-    <ClInclude Include="KPlayerScript.h" />
-    <ClInclude Include="KCatScript.h" />
-    <ClInclude Include="KCat.h">
+    <ClInclude Include="KToolScene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="KCat.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayer.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="KTile.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayerScript.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="KCatScript.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="KLoadResources.h">
+      <Filter>Contents</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="KPlayer.cpp">
-      <Filter>Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="KPlayScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
     <ClCompile Include="KTitleScene.cpp">
       <Filter>Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="KPlayerScript.cpp" />
-    <ClCompile Include="KCatScript.cpp" />
-    <ClCompile Include="KCat.cpp">
+    <ClCompile Include="KToolScene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="KCat.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="KPlayer.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="KTile.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="KCatScript.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="KPlayerScript.cpp">
+      <Filter>Contents</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
