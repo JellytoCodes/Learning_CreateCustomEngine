@@ -108,9 +108,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-	HWND toolhWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
-
 	if (!hWnd)   return FALSE;
 
     application.CreateApplication(hWnd, width, height);
@@ -126,22 +123,31 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     KEngine::LoadResources();
     KEngine::LoadScenes();
 
-    int a = 0;
+	int a = 0;
     srand((UINT)&a);
 
-    // Tile 윈도우 크기 조정
-	KEngine::Texture* texture = KEngine::Resources::Find<KEngine::Texture>(L"SpringFloor");
+    KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
+    std::wstring name = activeScene->GetName();
 
-	RECT rect = {0, 0, (LONG)texture->GetWidth(), (LONG)texture->GetHeight()};
+	if (name == L"ToolScene")
+	{
+		HWND toolhWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
+		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-	UINT toolWidth = rect.right - rect.left;
-	UINT toolHeight = rect.bottom - rect.top;
+		KEngine::Texture* texture = KEngine::Resources::Find<KEngine::Texture>(L"SpringFloor");
 
-	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+		RECT rect = {0, 0, (LONG)texture->GetWidth(), (LONG)texture->GetHeight()};
 
-	SetWindowPos(toolhWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
-	ShowWindow(toolhWnd, true);
-    UpdateWindow(toolhWnd);
+		UINT toolWidth = rect.right - rect.left;
+		UINT toolHeight = rect.bottom - rect.top;
+
+		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+
+		SetWindowPos(toolhWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
+		ShowWindow(toolhWnd, true);
+	    UpdateWindow(toolhWnd);	
+	}
+
 
 	return TRUE;
 }

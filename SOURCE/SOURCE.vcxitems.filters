@@ -10,12 +10,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KTime.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KTransform.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KSpriteRenderer.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp">
       <Filter>Utils</Filter>
     </ClCompile>
@@ -49,20 +43,11 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KSceneManager.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KScript.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KCamera.cpp">
-      <Filter>Components</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KAnimation.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
       <Filter>Utils</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KAnimator.cpp">
-      <Filter>Components</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollider.cpp">
       <Filter>Components\Collider</Filter>
@@ -79,8 +64,26 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KCamera.cpp">
+      <Filter>Components\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KSpriteRenderer.cpp">
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KTileMapRenderer.cpp">
-      <Filter>Components</Filter>
+      <Filter>Components\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KTransform.cpp">
+      <Filter>Components\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KScript.cpp">
+      <Filter>Components\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KAnimator.cpp">
+      <Filter>Components\Animator</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KRigidBody.cpp">
+      <Filter>Components\RigidBody</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,12 +95,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KTime.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KSpriteRenderer.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h">
       <Filter>Utils</Filter>
@@ -138,20 +135,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KScript.h">
-      <Filter>Components</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KCamera.h">
-      <Filter>Components</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KAnimation.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
       <Filter>Utils</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KAnimator.h">
-      <Filter>Components</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollider.h">
       <Filter>Components\Collider</Filter>
@@ -168,8 +156,26 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KCamera.h">
+      <Filter>Components\Camera</Filter>
+    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KTileMapRenderer.h">
-      <Filter>Components</Filter>
+      <Filter>Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KSpriteRenderer.h">
+      <Filter>Components\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h">
+      <Filter>Components\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KScript.h">
+      <Filter>Components\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KAnimator.h">
+      <Filter>Components\Animator</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KRigidBody.h">
+      <Filter>Components\RigidBody</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -196,6 +202,24 @@
     </Filter>
     <Filter Include="Components\Collider">
       <UniqueIdentifier>{ef4f0894-7398-4043-a947-d6ce132c945b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Camera">
+      <UniqueIdentifier>{cf8577d3-987e-4fd6-b4bc-c72f51c770fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Renderer">
+      <UniqueIdentifier>{fe313710-1ef2-4508-b4a6-56d4b7c7b47c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Transform">
+      <UniqueIdentifier>{fbc3e67d-6047-4147-8413-345d0dce5baf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Script">
+      <UniqueIdentifier>{55a3f48f-e5f0-42fd-87ac-5710427e1ebf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\Animator">
+      <UniqueIdentifier>{49c85d81-b07c-4002-9691-d5c546aef793}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Components\RigidBody">
+      <UniqueIdentifier>{de901f78-86d5-4b02-b739-91fdba86951a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

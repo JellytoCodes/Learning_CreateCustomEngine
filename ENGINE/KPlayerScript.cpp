@@ -10,6 +10,7 @@
 #include "KCollider.h"
 #include "KObject.h"
 #include "KResources.h"
+#include "KRigidBody.h"
 
 namespace KEngine
 {
@@ -73,13 +74,11 @@ namespace KEngine
 
 	void PlayerScript::OnCollisionStay(Collider* other)
 	{
-		
 
 	}
 
 	void PlayerScript::OnCollisionExit(Collider* other)
 	{
-		
 
 	}
 
@@ -152,29 +151,37 @@ namespace KEngine
 
 		Transform* tr = GetOwner()->GetComponent<Transform>();
 		KMath::Vector2 pos = tr->GetPosition();
+		RigidBody* rb = GetOwner()->GetComponent<RigidBody>();
 
 		if (Input::GetKeyPressed(eKeyCode::Right))
 		{
-			pos.x += 100.f * Time::DeltaTime();
+			//pos.x += 100.f * Time::DeltaTime();
+			rb->AddForce(KMath::Vector2(20.f, 0.f));
 			mAnimator->PlayAnimation(L"RightWalk");
 		}
+
 		if (Input::GetKeyPressed(eKeyCode::Left))	
 		{
-			pos.x -= 100.f * Time::DeltaTime();
+			//pos.x -= 100.f * Time::DeltaTime();
+			rb->AddForce(KMath::Vector2(-20.f, 0.f));
 			mAnimator->PlayAnimation(L"LeftWalk");
 		}
+
 		if (Input::GetKeyPressed(eKeyCode::Up))
 		{
-			pos.y -= 100.f * Time::DeltaTime();
+			//pos.y -= 100.f * Time::DeltaTime();
+			rb->AddForce(KMath::Vector2(0.f, -20.f));
 			mAnimator->PlayAnimation(L"UpWalk");
 		}
+
 		if (Input::GetKeyPressed(eKeyCode::Down))	
 		{
-			pos.y += 100.f * Time::DeltaTime();
+			//pos.y += 100.f * Time::DeltaTime();
+			rb->AddForce(KMath::Vector2(0.f, 20.f));
 			mAnimator->PlayAnimation(L"DownWalk");
 		}
 
-		tr->SetPosition(pos);
+		//tr->SetPosition(pos);
 	}
 
 	void PlayerScript::GiveWater()

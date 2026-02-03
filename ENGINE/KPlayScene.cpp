@@ -15,6 +15,7 @@
 #include "KResources.h"
 #include "KRenderer.h"
 #include "KCollisionManager.h"
+#include "KRigidBody.h"
 #include "KTile.h"
 #include "KTileMapRenderer.h"
 
@@ -74,7 +75,7 @@ namespace KEngine
 
 		// Player
 		{
-			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player);
+			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player, KMath::Vector2(400.f, 200.f));
 
 			KObject::DontDestroyOnLoad(player);
 
@@ -97,8 +98,7 @@ namespace KEngine
 			animator->PlayAnimation(L"Idle", false);
 
 			animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript);
-
-			player->GetComponent<Transform>()->SetPosition(KMath::Vector2(400.f, 200.f));
+			player->AddComponent<RigidBody>();
 		}
 
 		// Cat

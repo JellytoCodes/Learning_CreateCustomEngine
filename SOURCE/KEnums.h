@@ -6,9 +6,10 @@ namespace KEngine
 	{
 		Transform,
 		Collider,
+		RigidBody,
+		Script,
 		SpriteRenderer,
 		Animator,
-		Script,
 		Camera,
 
 		End,

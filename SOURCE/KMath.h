@@ -38,6 +38,11 @@ namespace KMath
 	        return Vector2(x + other.x, y + other.y);
         }
 
+    	Vector2 operator-()
+        {
+	        return Vector2(-x, -y);
+        }
+
         Vector2 operator-(Vector2 other)
         {
 	        return Vector2(x - other.x, y - other.y);
@@ -64,6 +69,10 @@ namespace KMath
 	        return Vector2(x / value, y / value);
         }
 
+        bool operator==(Vector2 other)
+        {
+	        return (x == other.x) && (y == other.y); 
+        }
 
 
         void Clear()
