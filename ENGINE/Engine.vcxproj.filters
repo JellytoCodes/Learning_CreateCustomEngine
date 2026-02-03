@@ -7,6 +7,9 @@
     <Filter Include="Contents">
       <UniqueIdentifier>{3f7a4f56-c2b0-4ec3-b26d-1e34cf687b87}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script">
+      <UniqueIdentifier>{f1cdc821-ff6e-47b5-a5f3-8aaaf5c00608}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KLoadScenes.h">
@@ -30,18 +33,22 @@
     <ClInclude Include="KTile.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="KPlayerScript.h">
-      <Filter>Contents</Filter>
-    </ClInclude>
-    <ClInclude Include="KCatScript.h">
-      <Filter>Contents</Filter>
-    </ClInclude>
     <ClInclude Include="KLoadResources.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="KCameraScript.h">
+    <ClInclude Include="KFloor.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="KCatScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="KCameraScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="KPlayerScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
+    <ClInclude Include="KFloorScript.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayScene.cpp">
@@ -62,14 +69,18 @@
     <ClCompile Include="KTile.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
-    <ClCompile Include="KCatScript.cpp">
+    <ClCompile Include="KFloor.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
-    <ClCompile Include="KPlayerScript.cpp">
-      <Filter>Contents</Filter>
+    <ClCompile Include="KCatScript.cpp">
+      <Filter>Script</Filter>
     </ClCompile>
     <ClCompile Include="KCameraScript.cpp">
-      <Filter>Contents</Filter>
+      <Filter>Script</Filter>
     </ClCompile>
+    <ClCompile Include="KPlayerScript.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="KFloorScript.cpp" />
   </ItemGroup>
 </Project>

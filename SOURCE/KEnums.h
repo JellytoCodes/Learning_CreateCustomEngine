@@ -22,6 +22,7 @@ namespace KEngine
 		Tile,
 		Animal,
 		Player,
+		Floor,
 		Particle,
 
 		Max = 16,

@@ -1,12 +1,13 @@
 #pragma once
 #include "CommonInclude.h"
+#include "KEntity.h"
 
 namespace KEngine
 {
 	class Component;
 
 	// 언리얼에서는 Actor
-	class GameObject
+	class GameObject : public Entity
 	{
 	public :
 		enum class eState

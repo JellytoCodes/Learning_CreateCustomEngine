@@ -55,8 +55,26 @@ namespace KMath
 
     	void operator+=(Vector2 other)
         {
-	        x+= other.x;
-            y+= other.y;
+	        x += other.x;
+            y += other.y;
+        }
+
+    	void operator-=(Vector2 other)
+        {
+	        x -= other.x;
+            y -= other.y;
+        }
+
+    	void operator*=(Vector2 other)
+        {
+	        x *= other.x;
+            y *= other.y;
+        }
+
+    	void operator*=(float other)
+        {
+	        x *= other;
+            y *= other;
         }
 
     	Vector2 operator*(float value)

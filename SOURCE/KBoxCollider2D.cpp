@@ -8,7 +8,7 @@
 namespace KEngine
 {
 	BoxCollider2D::BoxCollider2D()
-		: mBoxSize(KMath::Vector2::Zero), Collider(eColliderType::Rect2D)
+		: Collider(eColliderType::Rect2D)
 	{
 
 	}
@@ -48,7 +48,12 @@ namespace KEngine
 			HPEN greenPen = CreatePen(PS_SOLID, 2, RGB(0, 255, 0));
 			HPEN oldPen = (HPEN)SelectObject(hdc, greenPen);
 
-			Rectangle(hdc, pos.x + mOffset.x, pos.y + mOffset.y, pos.x + mBoxSize.x, pos.y + mBoxSize.y);
+			
+			KMath::Vector2 size = GetSize() * 100.f; // 충돌 로직과 동일한 크기 사용
+			KMath::Vector2 finalPos = pos + mOffset;
+
+			
+			Rectangle(hdc, (int)finalPos.x, (int)finalPos.y, (int)(finalPos.x + size.x), (int)(finalPos.y + size.y));
 
 			SelectObject(hdc, oldBrush);
 			SelectObject(hdc, oldPen);

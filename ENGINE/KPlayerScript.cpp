@@ -68,8 +68,8 @@ namespace KEngine
 
 	void PlayerScript::OnCollisionEnter(Collider* other)
 	{
-		GameObject* obj = other->GetOwner();
-		obj->GetComponent<Transform>()->SetPosition(KMath::Vector2(0,0));
+		//GameObject* obj = other->GetOwner();
+		//obj->GetComponent<Transform>()->SetPosition(KMath::Vector2(0,0));
 	}
 
 	void PlayerScript::OnCollisionStay(Collider* other)
@@ -170,8 +170,14 @@ namespace KEngine
 		if (Input::GetKeyPressed(eKeyCode::Up))
 		{
 			//pos.y -= 100.f * Time::DeltaTime();
-			rb->AddForce(KMath::Vector2(0.f, -20.f));
+			//rb->AddForce(KMath::Vector2(0.f, -20.f));
 			mAnimator->PlayAnimation(L"UpWalk");
+
+			KMath::Vector2 velocity = rb->GetVelocity();
+			velocity.y = -500.f;
+			rb->SetVelocity(velocity);
+
+			rb->SetGround(false);
 		}
 
 		if (Input::GetKeyPressed(eKeyCode::Down))	

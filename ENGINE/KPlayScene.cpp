@@ -15,6 +15,8 @@
 #include "KResources.h"
 #include "KRenderer.h"
 #include "KCollisionManager.h"
+#include "KFloor.h"
+#include "KFloorScript.h"
 #include "KRigidBody.h"
 #include "KTile.h"
 #include "KTileMapRenderer.h"
@@ -40,7 +42,7 @@ namespace KEngine
 		KRenderer::mainCamera = cameraComp;
 
 		// Tile Map
-		{
+		/*{
 			FILE* pFile = nullptr;
 			_wfopen_s(&pFile, L"..\\Resources\\Home", L"rb");
 			
@@ -69,22 +71,23 @@ namespace KEngine
 
 				//mTiles.push_back(tile);
 			}
-
 			fclose(pFile);
-		}
+		}*/
 
 		// Player
 		{
-			player = KObject::Instantiate<Player>(KEngine::eLayerType::Player, KMath::Vector2(400.f, 200.f));
+			player = KObject::Instantiate<Player>(eLayerType::Player, KMath::Vector2(400.f, 200.f));
 
 			KObject::DontDestroyOnLoad(player);
 
-			auto playerScript = player->AddComponent<PlayerScript>();
-			//BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
-			//boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));
-			//boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
-			CircleCollider2D* circleCollider = player->AddComponent<CircleCollider2D>();
-			circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
+			PlayerScript* playerScript = player->AddComponent<PlayerScript>();
+
+			BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
+			boxCollider->SetSize(KMath::Vector2(1.f, 1.f));
+			boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
+
+			//CircleCollider2D* circleCollider = player->AddComponent<CircleCollider2D>();
+			//circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
 			Texture* texture = Resources::Find<Texture>(L"Player");
 			Animator* animator = player->AddComponent<Animator>();
@@ -101,12 +104,21 @@ namespace KEngine
 			player->AddComponent<RigidBody>();
 		}
 
+		// Floor
+		{
+			Floor* floor = KObject::Instantiate<Floor>(eLayerType::Floor, KMath::Vector2(0.f, 400.f));
+			floor->SetName(L"Floor");
+			BoxCollider2D* boxCollider = floor->AddComponent<BoxCollider2D>();
+			boxCollider->SetSize(KMath::Vector2(10.f, 0.5f));
+			FloorScript* floorScript = floor->AddComponent<FloorScript>();
+		}
+
 		// Cat
 		/*{
-			Cat* cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
+			Cat* cat = KObject::Instantiate<Cat>(eLayerType::Animal);
 			CatScript* catSrc = cat->AddComponent<CatScript>();
 
-			Texture* texture = Resources::Find<KEngine::Texture>(L"Cat");
+			Texture* texture = Resources::Find<Texture>(L"Cat");
 			Animator* animator = cat->AddComponent<Animator>();
 
 			// Create Animation By Cat
@@ -139,7 +151,7 @@ namespace KEngine
 			Cat* mushroom = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
 			mushroom->AddComponent<CatScript>();
 			BoxCollider2D* boxCollider = mushroom->AddComponent<BoxCollider2D>();
-			boxCollider->SetBoxSize(KMath::Vector2(50.f, 50.f));
+			boxCollider->SetSize(KMath::Vector2(1.f, 1.f));
 			boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
 			//CircleCollider2D* circleCollider = mushroom->AddComponent<CircleCollider2D>();
@@ -185,6 +197,7 @@ namespace KEngine
 		Scene::OnEnter();
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
+		CollisionManager::CollisionLayerCheck(eLayerType::Floor, eLayerType::Player, true);
 	}
 
 	void PlayScene::OnExit()

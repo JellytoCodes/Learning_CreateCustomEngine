@@ -15,9 +15,6 @@ namespace KEngine
 		void Render(HDC hdc) override;
 		void Release() override;
 
-		void SetBoxSize(KMath::Vector2 size) { mBoxSize = size; };
-
 	private :
-		KMath::Vector2 mBoxSize;
 	};
 }

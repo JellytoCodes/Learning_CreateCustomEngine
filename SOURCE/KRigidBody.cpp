@@ -8,7 +8,9 @@ namespace KEngine
 {
 	RigidBody::RigidBody()
 		: Super(eComponentType::RigidBody),
-		mMass(1.f), mFriction(10.f), mForce(KMath::Vector2::Zero), mAcceleration(KMath::Vector2::Zero), mVelocity(KMath::Vector2::Zero), mGravity(KMath::Vector2::Zero)
+		mbGround(false), mMass(1.f), mFriction(10.f),
+		mForce(KMath::Vector2::Zero), mAcceleration(KMath::Vector2::Zero),
+		mLimitVelocity(KMath::Vector2(200.f, 1000.f)), mVelocity(KMath::Vector2::Zero), mGravity(KMath::Vector2(0.f, 800.f))
 	{
 
 	}
@@ -32,6 +34,41 @@ namespace KEngine
 
 		// 속도에 가속도를 더한다.
 		mVelocity += mAcceleration * Time::DeltaTime();
+
+		if (mbGround)
+		{
+			// 땅 위에 있을 때
+			KMath::Vector2 gravity = mGravity;
+			gravity.Normalize();
+
+			float dot = KMath::Vector2::Dot(mVelocity, gravity);
+			mVelocity -= gravity * dot;
+		}
+		else
+		{
+			// 공중에 있을 때
+			mVelocity += mGravity * Time::DeltaTime();
+		}
+
+		// 최대 속도 제한
+		KMath::Vector2 gravity = mGravity;
+		gravity.Normalize();
+		float dot = KMath::Vector2::Dot(mVelocity, gravity);
+		gravity = gravity * dot;
+
+		KMath::Vector2 sideVelocity = mVelocity - gravity;
+		if (mLimitVelocity.y < gravity.Length())
+		{
+			gravity.Normalize();
+			gravity *= mLimitVelocity.y;
+		}
+
+		if (mLimitVelocity.x < sideVelocity.Length())
+		{
+			sideVelocity.Normalize();
+			sideVelocity *= mLimitVelocity.x;
+		}
+		mVelocity = gravity + sideVelocity;
 
 		if (!(mVelocity == KMath::Vector2::Zero))
 		{

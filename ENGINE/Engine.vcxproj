@@ -22,6 +22,8 @@
     <ClInclude Include="KCameraScript.h" />
     <ClInclude Include="KCat.h" />
     <ClInclude Include="KCatScript.h" />
+    <ClInclude Include="KFloor.h" />
+    <ClInclude Include="KFloorScript.h" />
     <ClInclude Include="KLoadResources.h" />
     <ClInclude Include="KLoadScenes.h" />
     <ClInclude Include="KPlayer.h" />
@@ -35,6 +37,8 @@
     <ClCompile Include="KCameraScript.cpp" />
     <ClCompile Include="KCat.cpp" />
     <ClCompile Include="KCatScript.cpp" />
+    <ClCompile Include="KFloor.cpp" />
+    <ClCompile Include="KFloorScript.cpp" />
     <ClCompile Include="KPlayer.cpp" />
     <ClCompile Include="KPlayerScript.cpp" />
     <ClCompile Include="KPlayScene.cpp" />

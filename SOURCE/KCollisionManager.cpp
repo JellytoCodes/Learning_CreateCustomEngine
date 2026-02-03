@@ -132,6 +132,7 @@ namespace KEngine
 				left->OnCollisionExit(right);
 				right->OnCollisionExit(left);
 			}
+			iter->second = false;
 		}
 	}
 
@@ -152,10 +153,14 @@ namespace KEngine
 		// Rect - Rect
 		if (left->GetColliderType() == eColliderType::Rect2D && right->GetColliderType() == eColliderType::Rect2D)
 		{
-			return
-			fabs(leftPos.x - rightPos.x) < fabs((leftSize.x / 2.f) + (rightSize.x / 2.f)) &&
-			fabs(leftPos.y - rightPos.y) < fabs((leftSize.y / 2.f) + (rightSize.y / 2.f));
+			KMath::Vector2 leftCenter = leftPos + (leftSize / 2.f); 
+			KMath::Vector2 rightCenter = rightPos + (rightSize / 2.f);
+
+		    return
+		    fabs(leftCenter.x - rightCenter.x) < (leftSize.x / 2.f + rightSize.x / 2.f) &&
+		    fabs(leftCenter.y - rightCenter.y) < (leftSize.y / 2.f + rightSize.y / 2.f);
 		}
+		
 
 		// Circle - Circle
 		if (left->GetColliderType() == eColliderType::Circle2D && right->GetColliderType() == eColliderType::Circle2D)
