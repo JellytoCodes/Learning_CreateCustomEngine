@@ -1,4 +1,5 @@
 #pragma once
+#include "KTile.h"
 #include "../SOURCE/KScene.h"
 
 namespace KEngine
@@ -18,5 +19,13 @@ namespace KEngine
 
 		void OnEnter() override;
 		void OnExit() override;
+
+		void Save();
+		void Load();
+
+	private:
+		std::vector<Tile*> mTiles;
 	};	
 }
+
+LRESULT CALLBACK WndTileProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);

@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "../SOURCE/GameObject.h"
 
 namespace KEngine
 {
@@ -11,6 +11,7 @@ namespace KEngine
 		void LateUpdate() override;
 		void Render(HDC hdc) override;
 
+		void SetIndexPosition(int x, int y);
 	private :
 	};
 }

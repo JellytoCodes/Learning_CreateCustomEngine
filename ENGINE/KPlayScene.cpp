@@ -15,6 +15,8 @@
 #include "KResources.h"
 #include "KRenderer.h"
 #include "KCollisionManager.h"
+#include "KTile.h"
+#include "KTileMapRenderer.h"
 
 namespace KEngine
 {
@@ -31,12 +33,44 @@ namespace KEngine
 
 	void PlayScene::Initialize()
 	{
-		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
-
 		// Main Camera
 		GameObject* camera = KObject::Instantiate<GameObject>(KEngine::eLayerType::None, KMath::Vector2(512.f, 256.f));
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		KRenderer::mainCamera = cameraComp;
+
+		// Tile Map
+		{
+			FILE* pFile = nullptr;
+			_wfopen_s(&pFile, L"..\\Resources\\Home", L"rb");
+			
+			while (true)
+			{
+				int idxX = 0;
+				int idxY = 0;
+
+				int posX = 0;
+				int posY = 0;
+
+
+				if (fread(&idxX, sizeof(int), 1, pFile) == NULL)
+					break;
+				if (fread(&idxY, sizeof(int), 1, pFile) == NULL)
+					break;
+				if (fread(&posX, sizeof(int), 1, pFile) == NULL)
+					break;
+				if (fread(&posY, sizeof(int), 1, pFile) == NULL)
+					break;
+
+				Tile* tile = KObject::Instantiate<Tile>(eLayerType::Tile, KMath::Vector2(posX, posY));
+				TileMapRenderer* tmr = tile->AddComponent<TileMapRenderer>();
+				tmr->SetTexture(Resources::Find<Texture>(L"SpringFloor"));
+				tmr->SetIndex(KMath::Vector2(idxX, idxY));
+
+				//mTiles.push_back(tile);
+			}
+
+			fclose(pFile);
+		}
 
 		// Player
 		{
@@ -150,6 +184,7 @@ namespace KEngine
 	{
 		Scene::OnEnter();
 
+		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
 	}
 
 	void PlayScene::OnExit()

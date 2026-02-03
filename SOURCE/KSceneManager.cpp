@@ -22,6 +22,28 @@ namespace KEngine
 		return mActiveScene;
 	}
 
+	std::vector<GameObject*> SceneManager::GetGameObjects(eLayerType layer)
+	{
+		std::vector<GameObject*> gameObjects;
+	    
+	    const auto& activeObjects = mActiveScene->GetLayer(layer)->GetGameObjects();
+	    const auto& dontDestroyOnLoadObjects = mDontDestroyOnLoad->GetLayer(layer)->GetGameObjects();
+
+	    gameObjects.reserve(activeObjects.size() + dontDestroyOnLoadObjects.size());
+
+	    for (const auto& obj : activeObjects)
+	    {
+	        gameObjects.push_back(obj.get());
+	    }
+
+	    for (const auto& obj : dontDestroyOnLoadObjects)
+	    {
+	        gameObjects.push_back(obj.get());
+	    }
+
+	    return gameObjects;
+	}
+
 	void SceneManager::Initialize()
 	{
 		mDontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");

@@ -95,8 +95,19 @@ namespace KEngine
 		GetCursorPos(&mousePos);
 		ScreenToClient(application.GetHwnd(), &mousePos);
 
-		mMousePosition.x = mousePos.x;
-		mMousePosition.y = mousePos.y;
+		UINT width = application.GetViewSize().width;
+		UINT height = application.GetViewSize().height;
+
+		mMousePosition.x = -1.f;
+		mMousePosition.y = -1.f;
+
+		if (mousePos.x < width && mousePos.x >= 0 && mousePos.y < width && mousePos.y >= 0)
+		{
+			mMousePosition.x = mousePos.x;
+			mMousePosition.y = mousePos.y;
+		}
+
+
 	}
 
 	void Input::ClearKeys()

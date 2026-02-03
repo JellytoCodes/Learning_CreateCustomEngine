@@ -7,18 +7,23 @@
 
 namespace KEngine
 {
+	KMath::Vector2 TileMapRenderer::TileSize = KMath::Vector2::One;
+	KMath::Vector2 TileMapRenderer::OriginTileSize = KMath::Vector2::One;
+	KMath::Vector2 TileMapRenderer::SelectedIndex = KMath::Vector2::One;
+
 	TileMapRenderer::TileMapRenderer()
 		: Component(eComponentType::SpriteRenderer)
-		, mTexture(nullptr), mSize(3.0f, 3.0f)
-		, mIndex(6, 6)
-		, mTileSize(16.0f, 16.0f)
+		, mTexture(nullptr),
+		mSize(3.f, 3.f), mIndex(0, 0), mTileSize(16.f, 16.f)
 	{
-
+		// 타일의 총 개수
+		TileSize = mTileSize * mSize;
+		OriginTileSize = mTileSize;
 	}
 
 	TileMapRenderer::~TileMapRenderer()
 	{
-
+		
 	}
 
 	void TileMapRenderer::Initialize()

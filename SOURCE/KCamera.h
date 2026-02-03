@@ -9,7 +9,7 @@ namespace KEngine
 
 	public :
 		KMath::Vector2	CalculatePosition(KMath::Vector2 pos)		{ return pos - mDistance; }
-
+		KMath::Vector2	CalculateTilePosition(KMath::Vector2 pos)		{ return pos + mDistance; };
 		Camera();
 		~Camera();
 

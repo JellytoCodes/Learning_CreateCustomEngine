@@ -23,7 +23,6 @@ WCHAR               szWindowClass[MAX_LOADSTRING];
 ATOM                MyRegisterClass(HINSTANCE hInstance, const wchar_t* name, WNDPROC proc);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
-LRESULT CALLBACK    WndTileProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR    lpCmdLine, _In_ int       nCmdShow)
@@ -109,7 +108,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
-	HWND toolhWnd = CreateWindowW(szWindowClass, L"TileWindow", WS_OVERLAPPEDWINDOW,
+	HWND toolhWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
 
 	if (!hWnd)   return FALSE;
@@ -118,9 +117,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
-
-	ShowWindow(toolhWnd, nCmdShow);
-	UpdateWindow(toolhWnd);
 
     Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
 
@@ -132,6 +128,20 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
     int a = 0;
     srand((UINT)&a);
+
+    // Tile 윈도우 크기 조정
+	KEngine::Texture* texture = KEngine::Resources::Find<KEngine::Texture>(L"SpringFloor");
+
+	RECT rect = {0, 0, (LONG)texture->GetWidth(), (LONG)texture->GetHeight()};
+
+	UINT toolWidth = rect.right - rect.left;
+	UINT toolHeight = rect.bottom - rect.top;
+
+	AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
+
+	SetWindowPos(toolhWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
+	ShowWindow(toolhWnd, true);
+    UpdateWindow(toolhWnd);
 
 	return TRUE;
 }
@@ -165,49 +175,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 			// 가지는 데이터 구조체이며 GDI모듈에 의해 관리된다.
 			// 화면 출력에 필요한 모든 경우는 WINAPI에서는 DC를 통해서 작업을 진행할 수 있다.
             HDC hdc = BeginPaint(hWnd, &ps);
-            
-            EndPaint(hWnd, &ps);
-        }
-        break;
-    case WM_DESTROY:
-        PostQuitMessage(0);
-        break;
-    default:
-        return DefWindowProc(hWnd, message, wParam, lParam);
-    }
-    return 0;
-}
 
-LRESULT CALLBACK WndTileProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    switch (message)
-    {
-    case WM_COMMAND:
-        {
-            int wmId = LOWORD(wParam);
-            // 메뉴 선택을 구문 분석합니다:
-            switch (wmId)
-            {
-            case IDM_ABOUT:
-                DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-                break;
-            case IDM_EXIT:
-                DestroyWindow(hWnd);
-                break;
-            default:
-                return DefWindowProc(hWnd, message, wParam, lParam);
-            }
-        }
-        break;
-    case WM_PAINT:
-        {
-            PAINTSTRUCT ps;
-
-    		// DC(Device Context)란 화면에 출력에 필요한 모든 정보(폰트, 선의 굵기, 색상 등을 어떻게 그려줄 것인지)를 
-			// 가지는 데이터 구조체이며 GDI모듈에 의해 관리된다.
-			// 화면 출력에 필요한 모든 경우는 WINAPI에서는 DC를 통해서 작업을 진행할 수 있다.
-            HDC hdc = BeginPaint(hWnd, &ps);
-            
             EndPaint(hWnd, &ps);
         }
         break;

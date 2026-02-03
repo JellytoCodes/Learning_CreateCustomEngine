@@ -40,6 +40,12 @@ namespace KEngine
 		
 	}
 
+	void CollisionManager::Clear()
+	{
+		mCollisionMap.clear();
+		mCollisionLayerMatrix->reset();
+	}
+
 	void CollisionManager::CollisionLayerCheck(eLayerType left, eLayerType right, bool enable)
 	{
 		int row = 0;
@@ -61,8 +67,8 @@ namespace KEngine
 
 	void CollisionManager::LayerCollision(Scene* scene, eLayerType left, eLayerType right)
 	{
-		const std::vector<std::unique_ptr<GameObject>>& lefts = scene->GetLayer(left)->GetGameObjects();
-		const std::vector<std::unique_ptr<GameObject>>& rights = scene->GetLayer(right)->GetGameObjects();
+		std::vector<GameObject*> lefts = SceneManager::GetGameObjects(left);
+		std::vector<GameObject*> rights = SceneManager::GetGameObjects(right);
 
 		for (auto& leftObject : lefts)
 		{

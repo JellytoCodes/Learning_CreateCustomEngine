@@ -13,6 +13,7 @@ namespace KEngine
 		static Scene*	LoadScene(const std::wstring& name);
 		static Scene*	GetActiveScene()							{ return mActiveScene; }
 		static Scene*	GetDontDestroyOnLoad()						{ return mDontDestroyOnLoad; }
+		static std::vector<GameObject*> GetGameObjects(eLayerType layer);
 
 		static void		Initialize();
 		static void		Update();
@@ -26,6 +27,7 @@ namespace KEngine
 
 		// 관찰자(Observer) 역할만 수행하므로 소유권이 없는 Raw Pointer를 사용한다.
 		static Scene*													mActiveScene;
+
 		static Scene*													mDontDestroyOnLoad;
 	};
 

@@ -4,6 +4,7 @@
 
 #include "GameObject.h"
 #include "algorithm"
+#include "KCollisionManager.h"
 
 namespace KEngine
 {
@@ -82,7 +83,7 @@ namespace KEngine
 
 	void Scene::OnExit()
 	{
-
+		CollisionManager::Clear();
 	}
 
 	void Scene::AddGameObject(std::unique_ptr<GameObject> gameObject, const eLayerType type)
@@ -93,7 +94,7 @@ namespace KEngine
 	std::unique_ptr<GameObject> Scene::RemoveGameObject(GameObject* obj)
 	{
 		eLayerType layerType = obj->GetLayerType();
-	    return mLayers[(UINT)layerType]->RemoveGameObject(obj);	
+	    return mLayers[(UINT)layerType]->RemoveGameObject(obj);
 	}
 
 	void Scene::EraseGameObject(GameObject* obj)

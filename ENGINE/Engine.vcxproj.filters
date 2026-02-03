@@ -39,6 +39,9 @@
     <ClInclude Include="KLoadResources.h">
       <Filter>Contents</Filter>
     </ClInclude>
+    <ClInclude Include="KCameraScript.h">
+      <Filter>Contents</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayScene.cpp">
@@ -63,6 +66,9 @@
       <Filter>Contents</Filter>
     </ClCompile>
     <ClCompile Include="KPlayerScript.cpp">
+      <Filter>Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="KCameraScript.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
   </ItemGroup>
