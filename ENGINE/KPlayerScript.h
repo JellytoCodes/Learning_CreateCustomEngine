@@ -1,5 +1,6 @@
 #pragma once
 #include "KScript.h"
+#include "KTexture.h"
 
 namespace KEngine
 {
@@ -32,7 +33,7 @@ namespace KEngine
 		void	OnCollisionExit(Collider* other) override;
 
 		void	AttackEffect();
-
+		void	SetPixelMapTexture(Texture* texture) { mPixelMap = texture; }
 	private:
 		void	Idle();
 		void	Move();
@@ -40,6 +41,7 @@ namespace KEngine
 
 		eState		mState;
 		Animator*	mAnimator;
+		Texture*	mPixelMap;
 	};	
 }
 

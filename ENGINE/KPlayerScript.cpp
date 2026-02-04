@@ -11,11 +11,12 @@
 #include "KObject.h"
 #include "KResources.h"
 #include "KRigidBody.h"
+#include "KUIManager.h"
 
 namespace KEngine
 {
 	PlayerScript::PlayerScript()
-		: mState(eState::Idle), mAnimator(nullptr)
+		: mState(eState::Idle), mAnimator(nullptr), mPixelMap(nullptr)
 	{
 
 	}
@@ -48,6 +49,23 @@ namespace KEngine
 			break;
 		case eState::Attack :
 			break;
+		}
+
+		Transform* tr = GetOwner()->GetComponent<Transform>();
+		KMath::Vector2 pos = tr->GetPosition();
+		COLORREF color = mPixelMap->GetPixel(pos.x, pos.y + 50);
+
+		RigidBody* playerRb = GetOwner()->GetComponent<RigidBody>();
+		if (color == RGB(255, 0, 0))
+		{
+			playerRb->SetGround(true);
+
+			pos.y -= 1;
+			tr->SetPosition(pos);
+		}
+		else
+		{
+			playerRb->SetGround(false);
 		}
 	}
 
@@ -136,6 +154,19 @@ namespace KEngine
 		|| Input::GetKeyPressed(eKeyCode::Left)
 		|| Input::GetKeyPressed(eKeyCode::Up) 
 		|| Input::GetKeyPressed(eKeyCode::Down))	mState = eState::Walk;
+
+		if (Input::GetKeyDown(eKeyCode::I))
+		{
+			UIManager::Push(eUIType::HpBar);
+			//UIManager::Push(eUIType::Button);
+
+		}
+
+		if (Input::GetKeyDown(eKeyCode::O))
+		{
+			UIManager::Pop(eUIType::HpBar);
+
+		}
 	}
 
 	void PlayerScript::Move()

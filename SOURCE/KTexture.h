@@ -16,11 +16,14 @@ namespace KEngine
 		};
 
 		static Texture*		Create(const std::wstring& name, UINT width, UINT height);
+		
 
 		Texture();
 		virtual ~Texture();
 
 		HRESULT				Load(const std::wstring& path) override;
+
+		COLORREF			GetPixel(int x, int y);
 		void				Release() override;
 
 		UINT				GetWidth()							{ return mWidth; }

@@ -1,0 +1,79 @@
+#include "KUIButton.h"
+
+#include "KInput.h"
+
+namespace KEngine
+{
+	UIButton::UIButton()
+		: Super(eUIType::Button),
+		mTexture(nullptr)
+	{
+
+	}
+
+	UIButton::~UIButton()
+	{
+
+	}
+
+	void UIButton::OnInit()
+	{
+		SetPos(KMath::Vector2(200.0f, 200.0f));
+		SetSize(KMath::Vector2(200.0f, 200.0f));
+
+		mOnClick = std::bind(&UIButton::ButtonClick, this);
+	}
+
+	void UIButton::OnActive()
+	{
+		
+	}
+
+	void UIButton::OnInActive()
+	{
+		
+	}
+
+	void UIButton::OnUpdate()
+	{
+		KMath::Vector2 mousePos = Input::GetMousePosition();
+		
+		if (mPosition.x <= mousePos.x && mousePos.x <= mPosition.x + mSize.x
+			&& mPosition.y <= mousePos.y && mousePos.y <= mPosition.y + mSize.y)
+		{
+			mbMouseOn = true;
+		}
+		else
+		{
+			mbMouseOn = false;
+		}
+
+		if (Input::GetKeyDown(eKeyCode::LButton))
+		{
+			if (mbMouseOn)
+			{
+				mOnClick();
+			}
+		}
+	}
+
+	void UIButton::OnLateUpdate()
+	{
+		
+	}
+
+	void UIButton::OnRender(HDC hdc)
+	{
+		Rectangle(hdc ,(int)mPosition.x, (int)mPosition.y, mPosition.x + mSize.x, mPosition.y + mSize.y);
+	}
+
+	void UIButton::OnClear()
+	{
+		
+	}
+
+	void UIButton::ButtonClick()
+	{
+
+	}
+}

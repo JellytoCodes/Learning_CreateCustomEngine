@@ -3,6 +3,7 @@
 #include "KTransform.h"
 #include "KRigidBody.h"
 #include "GameObject.h"
+#include "KAudioSource.h"
 #include "KCollider.h"
 
 namespace KEngine
@@ -60,7 +61,11 @@ namespace KEngine
 
 			playerTr->SetPosition(playerPos);
 		}
-		
+
+		AudioSource* as = GetOwner()->GetComponent<AudioSource>();
+		as->SetLoop(true);
+		as->Play();
+
 		playerRb->SetGround(true);
 	}
 

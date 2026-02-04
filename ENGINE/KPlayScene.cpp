@@ -20,6 +20,11 @@
 #include "KRigidBody.h"
 #include "KTile.h"
 #include "KTileMapRenderer.h"
+#include "KUIManager.h"
+#include "KAudioClip.h"
+#include "KAudioListener.h"
+#include "KAudioSource.h"
+#include "KSpriteRenderer.h"
 
 namespace KEngine
 {
@@ -74,43 +79,54 @@ namespace KEngine
 			fclose(pFile);
 		}*/
 
+		AudioClip* ac = Resources::Load<AudioClip>(L"BGSound", L"..\\Resources\\Sound\\smw_bonus_game_end.wav");
+
 		// Player
-		{
-			player = KObject::Instantiate<Player>(eLayerType::Player, KMath::Vector2(400.f, 200.f));
+		
+		player = KObject::Instantiate<Player>(eLayerType::Player, KMath::Vector2(400.f, 200.f));
 
-			KObject::DontDestroyOnLoad(player);
+		KObject::DontDestroyOnLoad(player);
 
-			PlayerScript* playerScript = player->AddComponent<PlayerScript>();
+		PlayerScript* playerScript = player->AddComponent<PlayerScript>();
+		playerScript->SetPixelMapTexture(Resources::Find<Texture>(L"PixelMap"));
 
-			BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
-			boxCollider->SetSize(KMath::Vector2(1.f, 1.f));
-			boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
+		BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
+		boxCollider->SetSize(KMath::Vector2(1.f, 1.f));
+		boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
-			//CircleCollider2D* circleCollider = player->AddComponent<CircleCollider2D>();
-			//circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
+		//CircleCollider2D* circleCollider = player->AddComponent<CircleCollider2D>();
+		//circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
 
-			Texture* texture = Resources::Find<Texture>(L"Player");
-			Animator* animator = player->AddComponent<Animator>();
+		player->AddComponent<AudioListener>();
 
-			// Create Animation By Player
-			animator->CreateAnimation(L"Idle", texture, 
-			KMath::Vector2(2000.f, 250.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 1, 0.2f);
-			animator->CreateAnimation(L"GiveWater", texture, 
-			KMath::Vector2(0.f, 2000.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 12, 0.2f);
+		Texture* texture = Resources::Find<Texture>(L"Player");
+		Animator* animator = player->AddComponent<Animator>();
 
-			animator->PlayAnimation(L"Idle", false);
+		// Create Animation By Player
+		animator->CreateAnimation(L"Idle", texture, 
+		KMath::Vector2(2000.f, 250.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 1, 0.2f);
+		animator->CreateAnimation(L"GiveWater", texture, 
+		KMath::Vector2(0.f, 2000.f), KMath::Vector2(250.f, 250.f), KMath::Vector2::Zero, 12, 0.2f);
 
-			animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript);
-			player->AddComponent<RigidBody>();
-		}
+		animator->PlayAnimation(L"Idle", false);
+
+		animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript);
+		player->AddComponent<RigidBody>();
+		
 
 		// Floor
 		{
-			Floor* floor = KObject::Instantiate<Floor>(eLayerType::Floor, KMath::Vector2(0.f, 400.f));
+			Floor* floor = KObject::Instantiate<Floor>(eLayerType::Floor, KMath::Vector2(0.f, 0.f));
 			floor->SetName(L"Floor");
-			BoxCollider2D* boxCollider = floor->AddComponent<BoxCollider2D>();
-			boxCollider->SetSize(KMath::Vector2(10.f, 0.5f));
-			FloorScript* floorScript = floor->AddComponent<FloorScript>();
+			AudioSource* as = floor->AddComponent<AudioSource>();
+			SpriteRenderer* sr = floor->AddComponent<SpriteRenderer>();
+			sr->SetTexture(Resources::Find<Texture>(L"PixelMap"));
+			//BoxCollider2D* boxCollider = floor->AddComponent<BoxCollider2D>();
+			//boxCollider->SetSize(KMath::Vector2(10.f, 0.5f));
+			//FloorScript* floorScript = floor->AddComponent<FloorScript>();
+
+			as->SetClip(ac);
+
 		}
 
 		// Cat
@@ -198,10 +214,14 @@ namespace KEngine
 
 		CollisionManager::CollisionLayerCheck(eLayerType::Player, eLayerType::Animal, true);
 		CollisionManager::CollisionLayerCheck(eLayerType::Floor, eLayerType::Player, true);
+
+		UIManager::Push(eUIType::Button);
 	}
 
 	void PlayScene::OnExit()
 	{
+		UIManager::Pop(eUIType::Button);
+
 		Scene::OnExit();
 	}
 }

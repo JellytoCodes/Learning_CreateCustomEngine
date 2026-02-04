@@ -4,6 +4,9 @@
 #include "KTime.h"
 #include "KSceneManager.h"
 #include "KCollisionManager.h"
+#include "KUIManager.h"
+#include "KFmod.h"
+
 namespace KEngine
 {
 	Application::Application()
@@ -44,8 +47,11 @@ namespace KEngine
 
 	void Application::Initialize()
 	{
+		Fmod::Initialize();
 		CollisionManager::Initialize();
+		UIManager::Initialize();
 		SceneManager::Initialize();
+
 		Input::Initialize();
 		Time::Initialize();
 	}
@@ -55,7 +61,7 @@ namespace KEngine
 		Update();
 		LateUpdate();
 		Render();
-
+		
 		Destroy();
 	}
 
@@ -65,12 +71,14 @@ namespace KEngine
 		Time::Update();
 
 		CollisionManager::Update();
+		UIManager::Update();
 		SceneManager::Update();
 	}
 
 	void Application::LateUpdate()
 	{
 		CollisionManager::LateUpdate();
+		UIManager::LateUpdate();
 		SceneManager::LateUpdate();
 	}
 
@@ -80,6 +88,7 @@ namespace KEngine
 
 		Time::Render(mBackHdc);
 		CollisionManager::Render(mBackHdc);
+		UIManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 
 		CopyRenderTarget();
@@ -87,8 +96,9 @@ namespace KEngine
 
 	void Application::Release()
 	{
-		Resources::Release();
+		UIManager::Release();
 		SceneManager::Release();
+		Resources::Release();
 	}
 
 	void Application::Destroy()

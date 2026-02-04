@@ -91,6 +91,24 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KUIBase.cpp">
       <Filter>UI</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KFmod.cpp">
+      <Filter>Fmod</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KUIButton.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KUIHUD.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KAudioListener.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KAudioClip.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KAudioSource.cpp">
+      <Filter>Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -189,6 +207,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KUIBase.h">
       <Filter>UI</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KFmod.h">
+      <Filter>Fmod</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KUIHUD.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KUIButton.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KAudioListener.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KAudioSource.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KAudioClip.h">
+      <Filter>Audio</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -235,6 +271,12 @@
     </Filter>
     <Filter Include="UI">
       <UniqueIdentifier>{e4031990-9dc7-484b-bcf8-d91f8174473a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fmod">
+      <UniqueIdentifier>{1d2a676b-4cc4-47ca-b87a-992a8089e8ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Audio">
+      <UniqueIdentifier>{f134b761-014f-456e-b645-e3048485956b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

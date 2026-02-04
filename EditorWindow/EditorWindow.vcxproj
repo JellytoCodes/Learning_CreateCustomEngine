@@ -112,6 +112,10 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PostBuildEvent>
+      <Command>copy /Y "$(SolutionDir)External\Library\Fmod\$(Configuration)\fmodL.dll" "$(OutDir)fmodL.dll"
+copy /Y "$(SolutionDir)External\Library\Fmod\$(Configuration)\fmodstudioL.dll" "$(OutDir)fmodstudioL.dll"</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -142,6 +146,11 @@
   <ItemGroup>
     <Image Include="EditorWindow.ico" />
     <Image Include="small.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ENGINE\Engine.vcxproj">
+      <Project>{486ea32d-f010-4200-8cf0-a4c291b62d24}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,4 +1,6 @@
 #include "KUIManager.h"
+#include "KUIButton.h"
+#include "KUIHUD.h"
 
 namespace KEngine
 {
@@ -9,7 +11,11 @@ namespace KEngine
 
 	void UIManager::Initialize()
 	{
+		std::unique_ptr<UIHUD> hud = std::make_unique<UIHUD>();
+		mUIs.insert(std::make_pair(eUIType::HpBar, std::move(hud)));
 
+		std::unique_ptr<UIButton> button = std::make_unique<UIButton>();
+		mUIs.insert(std::make_pair(eUIType::Button, std::move(button)));
 	}
 
 	void UIManager::Update()
@@ -56,6 +62,11 @@ namespace KEngine
 				uiBases.pop();
 			}
 		}
+	}
+
+	void UIManager::Release()
+	{
+		mUIs.clear();
 	}
 
 	void UIManager::OnLoad(eUIType type)
@@ -113,13 +124,43 @@ namespace KEngine
 	{
 		if (mUIBases.size() <= 0)	return;
 
-		UIBase* uibase = nullptr;
+		std::stack<UIBase*> tempStack;
+
+		UIBase* uiBase = nullptr;
 		while (mUIBases.size() > 0)
 		{
-			uibase = mUIBases.top();
+			uiBase = mUIBases.top();
 			mUIBases.pop();
 
+			if (uiBase->GetUIType() != type)
+			{
+				tempStack.push(uiBase);
+				continue;
+			}
 
+			if (uiBase->IsFullScreen())
+			{
+				std::stack<UIBase*> uiBases = mUIBases;
+				while (!uiBases.empty())
+				{
+					UIBase* uiBase = uiBases.top();
+					uiBases.pop();
+					if (uiBase)
+					{
+						uiBase->Active();
+						break;
+					}
+				}
+			}
+
+			uiBase->UIClear();
+		}
+
+		while (tempStack.size() > 0)
+		{
+			uiBase = tempStack.top();
+			tempStack.pop();
+			mUIBases.push(uiBase);
 		}
 	}
 }

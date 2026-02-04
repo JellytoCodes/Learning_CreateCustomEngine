@@ -11,6 +11,8 @@ namespace KEngine
 		SpriteRenderer,
 		Animator,
 		Camera,
+		AudioListener,
+		AudioSource,
 
 		End
 	};
@@ -25,7 +27,7 @@ namespace KEngine
 		Floor,
 		Particle,
 
-		Max = 16,
+		Max = 16
 	};
 
 	enum class eResourceType
@@ -48,7 +50,8 @@ namespace KEngine
 
 	enum class eUIType
 	{
-		
+		HpBar,
+		Button,
 
 		End
 	};
