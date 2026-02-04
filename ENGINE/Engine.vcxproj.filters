@@ -48,7 +48,9 @@
     <ClInclude Include="KPlayerScript.h">
       <Filter>Script</Filter>
     </ClInclude>
-    <ClInclude Include="KFloorScript.h" />
+    <ClInclude Include="KFloorScript.h">
+      <Filter>Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayScene.cpp">
@@ -81,6 +83,8 @@
     <ClCompile Include="KPlayerScript.cpp">
       <Filter>Script</Filter>
     </ClCompile>
-    <ClCompile Include="KFloorScript.cpp" />
+    <ClCompile Include="KFloorScript.cpp">
+      <Filter>Script</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

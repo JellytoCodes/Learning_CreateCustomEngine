@@ -44,6 +44,8 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KTileMapRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTime.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTransform.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KUIBase.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KUIManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)KCircleCollider2D.cpp" />
@@ -74,5 +76,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KTileMapRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTime.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTransform.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KUIBase.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KUIManager.cpp" />
   </ItemGroup>
 </Project>

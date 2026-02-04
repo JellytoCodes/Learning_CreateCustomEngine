@@ -11,6 +11,8 @@
 #include <filesystem>
 #include <cmath>
 #include <bitset>
+#include <stack>
+#include <queue>
 
 #include <mmsystem.h>
 #include <dinput.h>

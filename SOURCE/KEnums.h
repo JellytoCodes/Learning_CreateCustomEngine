@@ -12,7 +12,7 @@ namespace KEngine
 		Animator,
 		Camera,
 
-		End,
+		End
 	};
 
 	enum class eLayerType
@@ -35,13 +35,20 @@ namespace KEngine
 		Animation,
 		Prefab,
 
-		End,
+		End
 	};
 
 	enum class eColliderType
 	{
 		Circle2D,
 		Rect2D,
+
+		End
+	};
+
+	enum class eUIType
+	{
+		
 
 		End
 	};

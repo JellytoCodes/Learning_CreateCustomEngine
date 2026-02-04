@@ -85,6 +85,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KRigidBody.cpp">
       <Filter>Components\RigidBody</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KUIManager.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KUIBase.cpp">
+      <Filter>UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -177,6 +183,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KRigidBody.h">
       <Filter>Components\RigidBody</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KUIManager.h">
+      <Filter>UI</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KUIBase.h">
+      <Filter>UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -220,6 +232,9 @@
     </Filter>
     <Filter Include="Components\RigidBody">
       <UniqueIdentifier>{de901f78-86d5-4b02-b739-91fdba86951a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UI">
+      <UniqueIdentifier>{e4031990-9dc7-484b-bcf8-d91f8174473a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
