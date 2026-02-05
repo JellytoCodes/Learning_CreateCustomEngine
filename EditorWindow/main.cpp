@@ -3,7 +3,6 @@
 #include "EditorWindow.h"
 
 #include "../SOURCE/KApplication.h"
-#include "../Engine/KLoadResources.h"
 #include "../ENGINE/KLoadScenes.h"
 #include "../SOURCE/KCollisionManager.h"
 
@@ -36,7 +35,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_EDITORWINDOW, szWindowClass, MAX_LOADSTRING);
     MyRegisterClass(hInstance, szWindowClass, WndProc);
-    MyRegisterClass(hInstance, L"TILEWINDOW", WndTileProc);
+    //MyRegisterClass(hInstance, L"TILEWINDOW", WndTileProc);
 
     if (!InitInstance (hInstance, nCmdShow))
     {
@@ -120,7 +119,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	application.Initialize();
 
 	// load Scenes
-    KEngine::LoadResources();
+    //KEngine::LoadResources();
     KEngine::LoadScenes();
 
 	int a = 0;
@@ -129,7 +128,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
     std::wstring name = activeScene->GetName();
 
-	if (name == L"ToolScene")
+	/*if (name == L"ToolScene")
 	{
 		HWND toolhWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
 		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
@@ -146,7 +145,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 		SetWindowPos(toolhWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
 		ShowWindow(toolhWnd, true);
 	    UpdateWindow(toolhWnd);	
-	}
+	}*/
 
 	return TRUE;
 }

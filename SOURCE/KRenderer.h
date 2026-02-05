@@ -12,13 +12,22 @@ namespace KRenderer
 		KMath::Vector4 color;
 	};
 
-	extern Vertex vertexes[3];
-	extern ID3D11Buffer* vertexBuffer;
+	extern Vertex											vertexes[3];
+	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				vertexBuffer;
 
-	extern ID3DBlob* vsBlob;
-	extern ID3D11VertexShader* vsShader;
+	extern std::vector<UINT>								indices;
+	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				indexBuffer;
 
-	extern ID3DBlob* psBlob;
-	extern ID3D11PixelShader* psShader;
-	extern ID3D11InputLayout* inputLayouts;
+	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				constantBuffer;
+
+	extern Microsoft::WRL::ComPtr<ID3DBlob>					vsBlob;
+	extern Microsoft::WRL::ComPtr<ID3D11VertexShader>		vsShader;
+
+	extern Microsoft::WRL::ComPtr<ID3DBlob>					psBlob;
+	extern Microsoft::WRL::ComPtr<ID3D11PixelShader>		psShader;
+
+	extern Microsoft::WRL::ComPtr<ID3D11InputLayout>		inputLayouts;
+
+	void Initialize();
+	void Release();
 }

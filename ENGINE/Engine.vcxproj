@@ -25,7 +25,6 @@
     <ClInclude Include="KCatScript.h" />
     <ClInclude Include="KFloor.h" />
     <ClInclude Include="KFloorScript.h" />
-    <ClInclude Include="KLoadResources.h" />
     <ClInclude Include="KLoadScenes.h" />
     <ClInclude Include="KPlayer.h" />
     <ClInclude Include="KPlayerScript.h" />
@@ -181,6 +180,11 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <None Update="D:\Dev\Programming_Study\Learning_CreateCustomEngine\Shader\ConstantBuffers.hlsli">
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <Text Update="C:\Users\taegu\OneDrive\Desktop\Learning_CreateCustomEngine\Shader\Triangle_PS.hlsl">
       <FileType>Document</FileType>

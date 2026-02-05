@@ -19,7 +19,11 @@ namespace KEngine
 		void OnEnter() override;
 		void OnExit() override;
 
-	private :
+	private:
+		void resourcesLoad(std::mutex& m);
 
+		std::atomic<bool> mbLoadCompleted;
+		std::thread* mResourcesLoad;
+		std::mutex mMutex;
 	};	
 }

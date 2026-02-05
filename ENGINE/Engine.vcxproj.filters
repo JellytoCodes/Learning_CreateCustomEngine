@@ -33,9 +33,6 @@
     <ClInclude Include="KTile.h">
       <Filter>Contents</Filter>
     </ClInclude>
-    <ClInclude Include="KLoadResources.h">
-      <Filter>Contents</Filter>
-    </ClInclude>
     <ClInclude Include="KFloor.h">
       <Filter>Contents</Filter>
     </ClInclude>

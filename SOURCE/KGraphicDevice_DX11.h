@@ -20,6 +20,20 @@ namespace KEngine
 
 		void Draw();
 
+		void CreateDevice();
+		void CreateSwapChain();
+		void GetBuffer(UINT Buffer, REFIID riid, void** ppSurface);
+		void CreateRenderTargetView();
+		void CreateDepthStencilView();
+		void CreateVertexShader(const std::wstring& fileName);
+		void CreatePixelShader(const std::wstring& fileName);
+		void CreateInputLayout();
+		void CreateVertexBuffer();
+		void CreateIndexBuffer();
+		void CreateConstantBuffer();
+
+		void BindConstantBuffer(KGraphics::eShaderStage stage, KGraphics::eCBType type, ID3D11Buffer* buffer);
+
 	private :
 		Microsoft::WRL::ComPtr<ID3D11Device>				mDevice;
 		Microsoft::WRL::ComPtr<ID3D11DeviceContext>			mDeviceContext;

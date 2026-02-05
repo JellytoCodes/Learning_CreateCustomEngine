@@ -33,6 +33,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KGraphics.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />

@@ -13,6 +13,8 @@
 #include <bitset>
 #include <stack>
 #include <queue>
+#include <mutex>
+#include <thread>
 
 #include <mmsystem.h>
 #include <dinput.h>
@@ -27,3 +29,5 @@
 
 // D3D11
 #include <wrl.h>
+
+#include "KGraphics.h"

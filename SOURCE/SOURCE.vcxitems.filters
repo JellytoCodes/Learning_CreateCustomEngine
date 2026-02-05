@@ -231,6 +231,9 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
       <Filter>GraphicDevice</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KGraphics.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
