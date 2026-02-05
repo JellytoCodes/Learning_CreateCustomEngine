@@ -51,6 +51,9 @@
     <ClInclude Include="KFloorScript.h">
       <Filter>Script</Filter>
     </ClInclude>
+    <ClInclude Include="KD3D11Scene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KPlayScene.cpp">
@@ -85,6 +88,9 @@
     </ClCompile>
     <ClCompile Include="KFloorScript.cpp">
       <Filter>Script</Filter>
+    </ClCompile>
+    <ClCompile Include="KD3D11Scene.cpp">
+      <Filter>Scenes</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

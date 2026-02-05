@@ -6,6 +6,7 @@
 #include "KCollisionManager.h"
 #include "KUIManager.h"
 #include "KFmod.h"
+#include "KGraphicDevice_DX11.h"
 
 namespace KEngine
 {
@@ -47,6 +48,9 @@ namespace KEngine
 
 	void Application::Initialize()
 	{
+		mGraphicDevice = std::make_unique<GraphicDevice_DX11>();
+		mGraphicDevice->Initialize();
+
 		Fmod::Initialize();
 		CollisionManager::Initialize();
 		UIManager::Initialize();
@@ -84,14 +88,16 @@ namespace KEngine
 
 	void Application::Render()
 	{
-		ClearRenderTarget();
+		// ClearRenderTarget();
+
+		mGraphicDevice->Draw();
 
 		Time::Render(mBackHdc);
 		CollisionManager::Render(mBackHdc);
 		UIManager::Render(mBackHdc);
 		SceneManager::Render(mBackHdc);
 
-		CopyRenderTarget();
+		// CopyRenderTarget();
 	}
 
 	void Application::Release()
@@ -111,7 +117,7 @@ namespace KEngine
 		HBRUSH grayBrush = CreateSolidBrush(RGB(128, 128, 128));
 		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
 
-		Rectangle(mBackHdc, -1, -1, mViewSize.width + 1, mViewSize.height + 1);
+		::Rectangle(mBackHdc, -1, -1, mViewSize.width + 1, mViewSize.height + 1);
 
 		SelectObject(mBackHdc, oldBrush);
 		DeleteObject(grayBrush);

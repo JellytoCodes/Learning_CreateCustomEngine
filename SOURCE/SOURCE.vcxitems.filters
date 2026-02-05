@@ -28,9 +28,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)GameObject.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp">
-      <Filter>Objects</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp">
       <Filter>Objects</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KAnimation.cpp">
       <Filter>Resources</Filter>
-    </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
-      <Filter>Utils</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollider.cpp">
       <Filter>Components\Collider</Filter>
@@ -109,6 +103,15 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KAudioSource.cpp">
       <Filter>Audio</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp">
+      <Filter>HighLevel_Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
+      <Filter>GraphicDevice</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -144,9 +147,6 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h">
       <Filter>Objects</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h">
-      <Filter>Objects</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KObject.h">
       <Filter>Objects</Filter>
     </ClInclude>
@@ -161,9 +161,6 @@
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KAnimation.h">
       <Filter>Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
-      <Filter>Utils</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollider.h">
       <Filter>Components\Collider</Filter>
@@ -225,6 +222,15 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KAudioClip.h">
       <Filter>Audio</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h">
+      <Filter>HighLevel_Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
+      <Filter>GraphicDevice</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -277,6 +283,12 @@
     </Filter>
     <Filter Include="Audio">
       <UniqueIdentifier>{f134b761-014f-456e-b645-e3048485956b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GraphicDevice">
+      <UniqueIdentifier>{1c05c66f-8741-4c0d-b69c-e167d45991fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="HighLevel_Interface">
+      <UniqueIdentifier>{b4b1b0be-1727-4a2b-8e42-a5def2e1117e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

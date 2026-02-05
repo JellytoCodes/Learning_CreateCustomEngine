@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="KD3D11Scene.h" />
     <ClInclude Include="KCameraScript.h" />
     <ClInclude Include="KCat.h" />
     <ClInclude Include="KCatScript.h" />
@@ -34,6 +35,7 @@
     <ClInclude Include="KToolScene.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="KD3D11Scene.cpp" />
     <ClCompile Include="KCameraScript.cpp" />
     <ClCompile Include="KCat.cpp" />
     <ClCompile Include="KCatScript.cpp" />
@@ -86,6 +88,7 @@
   </ImportGroup>
   <ImportGroup Label="Shared">
     <Import Project="..\SOURCE\SOURCE.vcxitems" Label="Shared" />
+    <Import Project="..\Shader\Shader.vcxitems" Label="Shared" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -178,4 +181,12 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
+  <ItemGroup>
+    <Text Update="C:\Users\taegu\OneDrive\Desktop\Learning_CreateCustomEngine\Shader\Triangle_PS.hlsl">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Update="C:\Users\taegu\OneDrive\Desktop\Learning_CreateCustomEngine\Shader\Triangle_VS.hlsl">
+      <FileType>Document</FileType>
+    </Text>
+  </ItemGroup>
 </Project>

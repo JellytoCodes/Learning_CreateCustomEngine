@@ -1,6 +1,11 @@
 #pragma once
 #include "CommonInclude.h"
 
+namespace KEngine
+{
+	class GraphicDevice_DX11;
+}
+
 struct ViewSize
 {
 	LONG width;
@@ -43,8 +48,7 @@ namespace KEngine
 
 		ViewSize								mViewSize;
 
-		std::vector<std::shared_ptr<Scene>>		mScenes;
-		
+		std::unique_ptr<GraphicDevice_DX11>		mGraphicDevice;
 	};	
 }
 

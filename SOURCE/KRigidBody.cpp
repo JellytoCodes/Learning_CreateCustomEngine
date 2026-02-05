@@ -41,7 +41,7 @@ namespace KEngine
 			KMath::Vector2 gravity = mGravity;
 			gravity.Normalize();
 
-			float dot = KMath::Vector2::Dot(mVelocity, gravity);
+			float dot = mVelocity.Dot(gravity);
 			mVelocity -= gravity * dot;
 		}
 		else
@@ -53,7 +53,7 @@ namespace KEngine
 		// 최대 속도 제한
 		KMath::Vector2 gravity = mGravity;
 		gravity.Normalize();
-		float dot = KMath::Vector2::Dot(mVelocity, gravity);
+		float dot = mVelocity.Dot(gravity);
 		gravity = gravity * dot;
 
 		KMath::Vector2 sideVelocity = mVelocity - gravity;
@@ -74,7 +74,8 @@ namespace KEngine
 		{
 			// 속도에 반대방향으로 마찰력 작용
 			KMath::Vector2 friction = -mVelocity;
-			friction = friction.Normalize() * mFriction * mMass * Time::DeltaTime();
+			friction.Normalize();
+			friction = friction * (mFriction * mMass * Time::DeltaTime());
 
 			// 마찰력으로 인한 속도 감소량이 현재 속도보다 큰 경우
 			if (mVelocity.Length() <= friction.Length())	
@@ -92,7 +93,7 @@ namespace KEngine
 		pos = pos + mVelocity * Time::DeltaTime();
 		tr->SetPosition(pos);
 
-		mForce.Clear();
+		mForce = KMath::Vector2::One;
 	}
 
 	void RigidBody::LateUpdate()

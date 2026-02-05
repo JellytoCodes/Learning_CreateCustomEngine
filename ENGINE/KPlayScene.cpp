@@ -85,7 +85,7 @@ namespace KEngine
 		
 		player = KObject::Instantiate<Player>(eLayerType::Player, KMath::Vector2(400.f, 200.f));
 
-		KObject::DontDestroyOnLoad(player);
+		//KObject::DontDestroyOnLoad(player);
 
 		PlayerScript* playerScript = player->AddComponent<PlayerScript>();
 		playerScript->SetPixelMapTexture(Resources::Find<Texture>(L"PixelMap"));

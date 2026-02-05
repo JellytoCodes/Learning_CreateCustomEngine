@@ -24,3 +24,6 @@
 
 #include "KMath.h"
 #include "KEnums.h"
+
+// D3D11
+#include <wrl.h>

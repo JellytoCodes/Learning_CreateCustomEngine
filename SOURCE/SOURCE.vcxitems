@@ -32,6 +32,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KFmod.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />
@@ -70,6 +71,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KFmod.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp" />

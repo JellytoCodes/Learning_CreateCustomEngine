@@ -148,7 +148,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 	    UpdateWindow(toolhWnd);	
 	}
 
-
 	return TRUE;
 }
 
