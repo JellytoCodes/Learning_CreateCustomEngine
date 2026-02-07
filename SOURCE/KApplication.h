@@ -48,7 +48,7 @@ namespace KEngine
 
 		ViewSize								mViewSize;
 
-		std::unique_ptr<GraphicDevice_DX11>		mGraphicDevice;
+		//std::unique_ptr<GraphicDevice_DX11>		mGraphicDevice;
 	};	
 }
 

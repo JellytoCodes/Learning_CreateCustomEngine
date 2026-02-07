@@ -112,6 +112,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
       <Filter>GraphicDevice</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KShader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -234,6 +235,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphics.h">
       <Filter>GraphicDevice</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KShader.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">

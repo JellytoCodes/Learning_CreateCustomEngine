@@ -1,5 +1,8 @@
 #include "KRenderer.h"
 
+#include "KResources.h"
+#include "KShader.h"
+
 namespace KRenderer
 {
     KEngine::Camera* KRenderer::mainCamera = nullptr;
@@ -11,12 +14,6 @@ namespace KRenderer
 	Microsoft::WRL::ComPtr<ID3D11Buffer>			KRenderer::indexBuffer;
 
 	Microsoft::WRL::ComPtr<ID3D11Buffer>			KRenderer::constantBuffer;
-
-	Microsoft::WRL::ComPtr<ID3DBlob>				KRenderer::vsBlob;
-	Microsoft::WRL::ComPtr<ID3D11VertexShader>		KRenderer::vsShader;
-
-	Microsoft::WRL::ComPtr<ID3DBlob>				KRenderer::psBlob;
-	Microsoft::WRL::ComPtr<ID3D11PixelShader>		KRenderer::psShader;
 
 	Microsoft::WRL::ComPtr<ID3D11InputLayout>		KRenderer::inputLayouts;
 
@@ -41,9 +38,15 @@ namespace KRenderer
 		LoadTriangleMesh();
 	}
 
+	void LoadShaders()
+	{
+		KEngine::Resources::Load<KEngine::Shader>(L"TriangleShader", L"..\\SHADER\\Triangle");
+	}
+
 	void Initialize()
 	{
 		LoadMeshes();
+		LoadShaders();
 	}
 
 	void Release()

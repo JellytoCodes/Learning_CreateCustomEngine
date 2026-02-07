@@ -20,12 +20,6 @@ namespace KRenderer
 
 	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				constantBuffer;
 
-	extern Microsoft::WRL::ComPtr<ID3DBlob>					vsBlob;
-	extern Microsoft::WRL::ComPtr<ID3D11VertexShader>		vsShader;
-
-	extern Microsoft::WRL::ComPtr<ID3DBlob>					psBlob;
-	extern Microsoft::WRL::ComPtr<ID3D11PixelShader>		psShader;
-
 	extern Microsoft::WRL::ComPtr<ID3D11InputLayout>		inputLayouts;
 
 	void Initialize();

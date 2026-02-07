@@ -35,6 +35,7 @@ namespace KEngine
 		Texture,
 		AudioClip,
 		Animation,
+		Shader,
 		Prefab,
 
 		End

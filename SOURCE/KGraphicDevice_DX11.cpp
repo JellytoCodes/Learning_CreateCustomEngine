@@ -1,6 +1,8 @@
 #include "KGraphicDevice_DX11.h"
 #include "KApplication.h"
 #include "KRenderer.h"
+#include "KResources.h"
+#include "KShader.h"
 
 extern KEngine::Application application;
 
@@ -53,10 +55,9 @@ namespace KEngine
 	*/
 	void GraphicDevice_DX11::Initialize()
 	{
-		KRenderer::Initialize();
-
 		// [Init] D3D11 Device + Immediate Context 생성
 		CreateDevice();
+		KRenderer::Initialize();
 
 		// [Init] SwapChain 생성(백버퍼 포함)
 		CreateSwapChain();
@@ -68,8 +69,6 @@ namespace KEngine
 		CreateRenderTargetView();
 
 		// [Init] 셰이더 컴파일 + 생성(VS/PS)
-		CreateVertexShader(L"Triangle_VS.hlsl");
-		CreatePixelShader(L"Triangle_PS.hlsl");
 
 		// [Init] 입력 레이아웃(IA 단계: 정점 포맷 해석 규칙)
 		CreateInputLayout();
@@ -144,8 +143,9 @@ namespace KEngine
 		mDeviceContext->IASetIndexBuffer(KRenderer::indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 
 		// [Frame] VS/PS 단계: 셰이더 바인딩
-		mDeviceContext->VSSetShader(KRenderer::vsShader.Get(), 0, 0);
-		mDeviceContext->PSSetShader(KRenderer::psShader.Get(), 0, 0);
+		Shader* shader = Resources::Find<Shader>(L"TriangleShader");
+		mDeviceContext->VSSetShader(shader->GetVertexShader(), 0, 0);
+		mDeviceContext->PSSetShader(shader->GetPixelShader(), 0, 0);
 
 		// [Frame] Draw 실행: Index Buffer 기준으로 기하를 조립해서 렌더링 수행
 		mDeviceContext->DrawIndexed(KRenderer::indices.size(),0, 0);
@@ -325,108 +325,6 @@ namespace KEngine
 	}
 
 	/*
-	[Init: Vertex Shader(VS) 컴파일 + 생성]
-	목적:
-	- HLSL 파일을 컴파일해서 VS 바이트코드(Blob)를 만들고,
-	  그 바이트코드로 ID3D11VertexShader 객체를 생성한다.
-
-	왜 Blob(vsBlob)을 저장하나:
-	- InputLayout 생성 시 VS의 입력 시그니처(semantic/format)를 기준으로
-	  앱이 지정한 InputElementDesc가 호환되는지 검증해야 한다.
-	- 그래서 CreateInputLayout에서 vsBlob가 필수로 사용된다.
-
-	compile 설정:
-	- vs_5_0 : Shader Model 5.0 Vertex Shader
-	- DEBUG/SKIP_OPTIMIZATION: 디버깅 편의(성능 희생)
-	*/
-	void GraphicDevice_DX11::CreateVertexShader(const std::wstring& fileName)
-	{
-		DWORD shaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
-		shaderFlags |= D3DCOMPILE_DEBUG;
-		shaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
-
-		ID3DBlob* errorBlob = nullptr;
-		const std::wstring shaderFilePath = L"..\\SHADER\\";
-		HRESULT hr = D3DCompileFromFile(
-		(shaderFilePath + fileName).c_str(), 
-		nullptr, 
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		"main",
-		"vs_5_0",
-		shaderFlags,
-		0,
-		KRenderer::vsBlob.GetAddressOf(),
-		&errorBlob);
-
-		if (FAILED(hr))
-		{
-			if (errorBlob)
-			{
-				OutputDebugStringA((char*)errorBlob->GetBufferPointer());
-				errorBlob->Release();
-			}
-			assert(NULL && "hlsl file have problem check message!");
-		}
-		assert(SUCCEEDED(
-			mDevice->CreateVertexShader(
-			(KRenderer::vsBlob)->GetBufferPointer(), 
-			(KRenderer::vsBlob)->GetBufferSize(), 
-			nullptr, 
-			KRenderer::vsShader.GetAddressOf())
-		));
-	}
-
-	/*
-	[Init: Pixel Shader(PS) 컴파일 + 생성]
-	목적:
-	- HLSL 파일을 컴파일해서 PS 바이트코드(Blob)를 만들고,
-	  그 바이트코드로 ID3D11PixelShader 객체를 생성한다.
-
-	PS 역할:
-	- 래스터라이즈된 픽셀(프래그먼트)마다 최종 색/출력 값을 계산한다.
-	- 결과는 OM 단계에서 RTV에 기록된다.
-
-	compile 설정:
-	- ps_5_0 : Shader Model 5.0 Pixel Shader
-	*/
-	void GraphicDevice_DX11::CreatePixelShader(const std::wstring& fileName)
-	{
-		DWORD shaderFlags = D3DCOMPILE_ENABLE_STRICTNESS;
-		shaderFlags |= D3DCOMPILE_DEBUG;
-		shaderFlags |= D3DCOMPILE_SKIP_OPTIMIZATION;
-
-		ID3DBlob* errorBlob = nullptr;
-		const std::wstring shaderFilePath = L"..\\SHADER\\";
-		HRESULT hr = D3DCompileFromFile(
-		(shaderFilePath + fileName).c_str(), 
-		nullptr, 
-		D3D_COMPILE_STANDARD_FILE_INCLUDE,
-		"main",
-		"ps_5_0",
-		shaderFlags,
-		0,
-		KRenderer::psBlob.GetAddressOf(),
-		&errorBlob);
-
-		if (FAILED(hr))
-		{
-			if (errorBlob)
-			{
-				OutputDebugStringA((char*)errorBlob->GetBufferPointer());
-				errorBlob->Release();
-			}
-			assert(NULL && "hlsl file have problem check message!");
-		}
-		assert(SUCCEEDED(
-			mDevice->CreatePixelShader(
-			KRenderer::psBlob->GetBufferPointer(), 
-			KRenderer::psBlob->GetBufferSize(),
-			nullptr,
-			KRenderer::psShader.GetAddressOf())
-		));
-	}
-
-	/*
 	[Init: Input Layout 생성(IA 단계 규칙)]
 	목적:
 	- VertexBuffer의 메모리 레이아웃을 HLSL 입력 시맨틱(POSITION/COLOR 등)과 매핑한다.
@@ -462,11 +360,13 @@ namespace KEngine
 		inputLayoutDesces[1].SemanticName = "COLOR";
 		inputLayoutDesces[1].SemanticIndex = 0;
 
+		Shader* shader = Resources::Find<Shader>(L"TriangleShader");
+
 		mDevice->CreateInputLayout(
 		inputLayoutDesces, 
 		2,
-		KRenderer::vsBlob->GetBufferPointer(),
-		KRenderer::vsBlob->GetBufferSize(),
+		shader->GetVSBlob()->GetBufferPointer(),
+		shader->GetVSBlob()->GetBufferSize(),
 		KRenderer::inputLayouts.GetAddressOf());
 	}
 

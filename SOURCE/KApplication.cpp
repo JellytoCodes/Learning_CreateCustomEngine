@@ -48,8 +48,7 @@ namespace KEngine
 
 	void Application::Initialize()
 	{
-		mGraphicDevice = std::make_unique<GraphicDevice_DX11>();
-		mGraphicDevice->Initialize();
+		GraphicDevice_DX11::getInstance().Initialize();
 
 		Fmod::Initialize();
 		CollisionManager::Initialize();
@@ -90,7 +89,7 @@ namespace KEngine
 	{
 		// ClearRenderTarget();
 
-		mGraphicDevice->Draw();
+		GraphicDevice_DX11::getInstance().Draw();
 
 		Time::Render(mBackHdc);
 		CollisionManager::Render(mBackHdc);

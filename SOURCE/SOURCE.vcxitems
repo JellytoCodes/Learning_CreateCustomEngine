@@ -45,6 +45,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KScene.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KSceneManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KScript.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KShader.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KSpriteRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTexture.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KTileMapRenderer.h" />
@@ -84,6 +85,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KScene.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KSceneManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KScript.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KShader.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KSpriteRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTexture.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KTileMapRenderer.cpp" />
