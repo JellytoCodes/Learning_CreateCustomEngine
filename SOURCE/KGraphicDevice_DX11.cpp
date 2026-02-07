@@ -3,6 +3,7 @@
 #include "KRenderer.h"
 #include "KResources.h"
 #include "KShader.h"
+#include "KVertexBuffer.h"
 
 extern KEngine::Application application;
 
@@ -18,41 +19,6 @@ namespace KEngine
 		
 	}
 
-	/*
-	[Init: 렌더 시스템 부팅(1회)]
-	목적:
-	- 한 프레임을 그리기 위해 필요한 "고정 리소스(디바이스/스왑체인/뷰/셰이더/버퍼)"를 생성한다.
-	- D3D11은 상태 기반(Stateful) 파이프라인이므로, Draw에서 쓰일 대부분의 리소스는 여기서 준비해둔다.
-
-	생성/설정 순서(의존성 때문에 중요):
-	1) KRenderer::Initialize()
-	   - 렌더러 레벨 전역/공용 리소스 초기화(정점/인덱스/상수버퍼 등 보관 영역 포함 가능)
-
-	2) CreateDevice()
-	   - ID3D11Device: GPU 리소스 생성 공장
-	   - ID3D11DeviceContext: 파이프라인 상태 설정 + Draw 호출(커맨드 발행자)
-
-	3) CreateSwapChain()
-	   - DXGI SwapChain: 백버퍼(프레젠테이션용 텍스처들) + Present 메커니즘
-
-	4) GetBuffer(BackBuffer) -> CreateRenderTargetView()
-	   - SwapChain의 0번 백버퍼(Texture2D) 획득
-	   - RTV(Render Target View) 생성: OM 단계에 “색 출력 대상”으로 연결하는 View
-
-	5) CreateVertexShader / CreatePixelShader
-	   - HLSL 컴파일(Blob) -> 셰이더 객체 생성
-	   - VS Blob은 InputLayout 생성 시 입력 시그니처 검증에 필요
-
-	6) CreateInputLayout()
-	   - IA 단계에서 VertexBuffer의 raw bytes를 POSITION/COLOR 같은 시맨틱으로 해석하는 규칙 정의
-
-	7) CreateDepthStencilView()
-	   - 깊이/스텐실용 텍스처 생성 + DSV 생성
-	   - OM 단계에서 깊이 테스트/기록 대상
-
-	8) CreateVertexBuffer / CreateIndexBuffer / CreateConstantBuffer
-	   - IA가 읽을 VB/IB, 셰이더가 읽을 CB 준비
-	*/
 	void GraphicDevice_DX11::Initialize()
 	{
 		// [Init] D3D11 Device + Immediate Context 생성
@@ -77,9 +43,8 @@ namespace KEngine
 		CreateDepthStencilView();
 
 		// [Init] 기하 데이터(VB/IB) + 셰이더 상수(CB)
-		CreateVertexBuffer();
-		CreateIndexBuffer();
-		CreateConstantBuffer();
+		KRenderer::vertexBuffer.Create(KRenderer::vertexes);
+		KRenderer::indexBuffer.Create(KRenderer::indices);
 	}
 
 	/*
@@ -94,14 +59,6 @@ namespace KEngine
 	PS(Pixel Shader)    : 픽셀 단위 색/라이팅 계산
 	OM(Output Merger)   : Depth/Stencil 테스트 + RTV에 최종 색 기록
 	Present(DXGI)       : 백버퍼를 화면으로 표시
-
-	프레임 내부 순서:
-	1) Clear (RTV/DSV)
-	2) Viewport 설정(RS)
-	3) OMSetRenderTargets (OM)
-	4) 리소스 바인딩(CB/VB/IB/InputLayout/Shader)
-	5) DrawIndexed
-	6) Present
 	*/
 	void GraphicDevice_DX11::Draw()
 	{
@@ -127,20 +84,21 @@ namespace KEngine
 
 		// [Frame] VS 단계: Constant Buffer 바인딩(Transform 슬롯)
 		// - HLSL의 register(b#)와 eCBType enum 값(slot)이 일치해야 함
-		BindConstantBuffer(KGraphics::eShaderStage::VS, KGraphics::eCBType::Transform, KRenderer::constantBuffer.Get());
+		//BindConstantBuffer(KGraphics::eShaderStage::VS, KGraphics::eCBType::Transform, KRenderer::constantBuffer.Get());
 
 		// [Frame] IA 단계: InputLayout + Primitive Topology 설정
 		mDeviceContext->IASetInputLayout(KRenderer::inputLayouts.Get());
 		mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
 		// [Frame] IA 단계: Vertex Buffer 바인딩(스트라이드/오프셋 중요)
-		UINT vertexSize = sizeof(KRenderer::Vertex);
-		UINT offset = 0;
-
-		mDeviceContext->IASetVertexBuffers(0, 1, KRenderer::vertexBuffer.GetAddressOf(), &vertexSize, &offset);
+		KRenderer::vertexBuffer.Bind();
 
 		// [Frame] IA 단계: Index Buffer 바인딩(여기서는 R32_UINT)
-		mDeviceContext->IASetIndexBuffer(KRenderer::indexBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+		KRenderer::indexBuffer.Bind();
+
+		KMath::Vector4 pos(-0.5f, 0.0f, 0.0f, 1.0f);
+		KRenderer::constantBuffers[(UINT)KGraphics::eCBType::Transform].SetData(&pos);
+		KRenderer::constantBuffers[(UINT)KGraphics::eCBType::Transform].BindConstantBuffer(KGraphics::eShaderStage::VS);
 
 		// [Frame] VS/PS 단계: 셰이더 바인딩
 		Shader* shader = Resources::Find<Shader>(L"TriangleShader");
@@ -368,149 +326,5 @@ namespace KEngine
 		shader->GetVSBlob()->GetBufferPointer(),
 		shader->GetVSBlob()->GetBufferSize(),
 		KRenderer::inputLayouts.GetAddressOf());
-	}
-
-	/*
-	[Init: Vertex Buffer 생성]
-	목적:
-	- 정점 데이터를 GPU 리소스로 생성하여 IA 단계 입력으로 사용할 준비를 한다.
-
-	설정 의미:
-	- BindFlags=VERTEX_BUFFER: IA가 정점 스트림으로 읽는다.
-	- Usage=DYNAMIC + CPUAccess=WRITE:
-	  CPU가 Map/Unmap으로 내용 갱신 가능한 버퍼(수시 업데이트 목적).
-
-	초기 데이터:
-	- D3D11_SUBRESOURCE_DATA로 초기 정점 데이터(KRenderer::vertexes) 업로드.
-	*/
-	void GraphicDevice_DX11::CreateVertexBuffer()
-	{
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
-
-		desc.ByteWidth = sizeof(KRenderer::Vertex) * 3;
-		desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_VERTEX_BUFFER;
-		desc.Usage = D3D11_USAGE::D3D11_USAGE_DYNAMIC;
-		desc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_WRITE;
-
-		D3D11_SUBRESOURCE_DATA data = { KRenderer::vertexes };
-
-		assert(SUCCEEDED(
-			mDevice->CreateBuffer(&desc, &data, KRenderer::vertexBuffer.GetAddressOf())
-		));
-	}
-
-	/*
-	[Init: Index Buffer 생성]
-	목적:
-	- 인덱스 데이터를 GPU 리소스로 생성하여 DrawIndexed에서 사용할 준비를 한다.
-
-	설정 의미:
-	- BindFlags=INDEX_BUFFER: IA가 인덱스 스트림으로 읽는다.
-	- Usage=DEFAULT: 보통 한 번 업로드 후 잘 안 바꾸는 정적 데이터에 적합.
-
-	파이프라인 소비:
-	- IASetIndexBuffer로 바인딩
-	- DrawIndexed의 indexCount만큼 이 버퍼를 읽어 정점 조립을 수행
-	*/
-	void GraphicDevice_DX11::CreateIndexBuffer()
-	{
-		D3D11_BUFFER_DESC desc;
-		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
-
-		desc.ByteWidth = sizeof(UINT) * KRenderer::indices.size();
-		desc.BindFlags = D3D11_BIND_FLAG::D3D11_BIND_INDEX_BUFFER;
-		desc.Usage = D3D11_USAGE_DEFAULT;
-		desc.CPUAccessFlags = 0;
-
-		D3D11_SUBRESOURCE_DATA data;
-		ZeroMemory(&data, sizeof(D3D11_SUBRESOURCE_DATA));
-
-		data.pSysMem = KRenderer::indices.data();
-
-		assert(SUCCEEDED(
-			mDevice->CreateBuffer(&desc, &data, KRenderer::indexBuffer.GetAddressOf())
-		));
-	}
-
-	/*
-	[Init: Constant Buffer 생성]
-	목적:
-	- 셰이더에서 참조하는 작은 상수 데이터 묶음을 담는 버퍼 생성.
-	- 일반적으로 Transform(행렬), 오브젝트/카메라 파라미터, 시간값 등을 넣는다.
-
-	설정 의미:
-	- BindFlags=CONSTANT_BUFFER: b# 슬롯에 바인딩 가능
-	- Usage=DYNAMIC + CPUAccess=WRITE: CPU가 Map으로 값 갱신 가능
-	- ByteWidth: 16바이트 배수 권장(정렬 규칙). Vector4는 16B.
-
-	현재 데이터 의도:
-	- pos(Vector4)를 넣어 VS에서 위치 오프셋/변환 등에 사용하려는 형태.
-	*/
-	void GraphicDevice_DX11::CreateConstantBuffer()
-	{
-		D3D11_BUFFER_DESC desc = {};
-		desc.ByteWidth = sizeof(KMath::Vector4); // constant buffer 
-		desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-		desc.Usage = D3D11_USAGE_DYNAMIC;
-		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
-		KMath::Vector4 pos(-0.5f, 0.0f, 0.0f, 1.0f);
-		D3D11_SUBRESOURCE_DATA data = {};
-		data.pSysMem = &pos;
-
-		assert(SUCCEEDED(
-			mDevice->CreateBuffer(&desc, &data, KRenderer::constantBuffer.GetAddressOf())
-		));
-	}
-
-	/*
-	[Frame/Init 공용: Constant Buffer 바인딩 유틸]
-	목적:
-	- 특정 셰이더 스테이지(VS/PS/...)의 constant buffer 슬롯(b#)에 버퍼를 연결한다.
-
-	핵심 규칙:
-	- slot = (UINT)type
-	  => eCBType enum 값이 HLSL의 register(b#) 인덱스와 1:1로 대응되어야 한다.
-	     (예: Transform = 0이면 HLSL은 register(b0))
-
-	stage 의미:
-	- VS/PS/... 별로 각 단계에만 바인딩 가능
-	- All은 모든 단계에 같은 CB를 동시에 바인딩(공용 파라미터용)
-	*/
-	void GraphicDevice_DX11::BindConstantBuffer(KGraphics::eShaderStage stage, KGraphics::eCBType type, ID3D11Buffer* buffer)
-	{
-		UINT slot = (UINT)type;
-		switch (stage)
-		{
-		case KGraphics::eShaderStage::VS:
-			mDeviceContext->VSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		case KGraphics::eShaderStage::HS:
-			mDeviceContext->HSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		case KGraphics::eShaderStage::DS:
-			mDeviceContext->DSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		case KGraphics::eShaderStage::GS:
-			mDeviceContext->GSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		case KGraphics::eShaderStage::PS:
-			mDeviceContext->PSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		case KGraphics::eShaderStage::CS:
-			mDeviceContext->CSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		case KGraphics::eShaderStage::All:
-			mDeviceContext->VSSetConstantBuffers(slot, 1, &buffer);
-			mDeviceContext->HSSetConstantBuffers(slot, 1, &buffer);
-			mDeviceContext->DSSetConstantBuffers(slot, 1, &buffer);
-			mDeviceContext->GSSetConstantBuffers(slot, 1, &buffer);
-			mDeviceContext->PSSetConstantBuffers(slot, 1, &buffer);
-			mDeviceContext->CSSetConstantBuffers(slot, 1, &buffer);
-			break;
-		default:
-			break;
-		}
 	}
 }

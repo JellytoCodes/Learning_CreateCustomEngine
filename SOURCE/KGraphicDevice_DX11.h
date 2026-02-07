@@ -1,11 +1,4 @@
 #pragma once
-
-#include <d3d11.h>
-#include <d3dcompiler.h>
-
-#pragma comment(lib, "d3d11.lib")
-#pragma comment(lib, "d3dcompiler.lib")
-
 #include "CommonInclude.h"
 
 namespace KEngine
@@ -29,11 +22,6 @@ namespace KEngine
 		void CreateRenderTargetView();
 		void CreateDepthStencilView();
 		void CreateInputLayout();
-		void CreateVertexBuffer();
-		void CreateIndexBuffer();
-		void CreateConstantBuffer();
-
-		void BindConstantBuffer(KGraphics::eShaderStage stage, KGraphics::eCBType type, ID3D11Buffer* buffer);
 
 		ID3D11Device* GetDevice() const					{ return mDevice.Get(); }
 		ID3D11DeviceContext* GetDeviceContext() const		{ return mDeviceContext.Get(); }

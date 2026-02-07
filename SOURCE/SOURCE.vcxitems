@@ -28,12 +28,14 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollider.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KCollisionManager.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KComponent.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KConstantBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEntity.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KEnums.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KFmod.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphics.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KIndexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />
@@ -55,6 +57,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KUIButton.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KUIHUD.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KUIManager.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KVertexBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="$(MSBuildThisFileDirectory)KAudioClip.cpp" />
@@ -70,10 +73,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollider.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KCollisionManager.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KComponent.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KConstantBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KDontDestroyOnLoad.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KEntity.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KFmod.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KIndexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp" />
@@ -95,5 +100,6 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KUIButton.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KUIHUD.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KUIManager.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KVertexBuffer.cpp" />
   </ItemGroup>
 </Project>

@@ -1,24 +1,21 @@
 #pragma once
+
 #include "KCamera.h"
+#include "KConstantBuffer.h"
 #include "KGraphicDevice_DX11.h"
+#include "KIndexBuffer.h"
+#include "KVertexBuffer.h"
 
 namespace KRenderer
 {
 	extern KEngine::Camera* mainCamera;
 
-	struct Vertex
-	{
-		KMath::Vector3 pos;
-		KMath::Vector4 color;
-	};
+	extern std::vector<KGraphics::Vertex>	vertexes;
+	extern KEngine::VertexBuffer			vertexBuffer;
 
-	extern Vertex											vertexes[3];
-	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				vertexBuffer;
-
-	extern std::vector<UINT>								indices;
-	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				indexBuffer;
-
-	extern Microsoft::WRL::ComPtr<ID3D11Buffer>				constantBuffer;
+	extern std::vector<UINT>				indices;
+	extern KEngine::IndexBuffer				indexBuffer;
+	extern KEngine::ConstantBuffer			constantBuffers[(UINT)KGraphics::eCBType::End];
 
 	extern Microsoft::WRL::ComPtr<ID3D11InputLayout>		inputLayouts;
 

@@ -104,15 +104,20 @@
       <Filter>Audio</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.cpp">
-      <Filter>GraphicDevice</Filter>
+      <Filter>Graphics</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp">
       <Filter>HighLevel_Interface</Filter>
     </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
-      <Filter>GraphicDevice</Filter>
+      <Filter>Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KShader.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KShader.cpp">
+      <Filter>Graphics\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KVertexBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KIndexBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KConstantBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -224,18 +229,23 @@
       <Filter>Audio</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphicDevice_DX11.h">
-      <Filter>GraphicDevice</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h">
       <Filter>HighLevel_Interface</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
-      <Filter>GraphicDevice</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphics.h">
-      <Filter>GraphicDevice</Filter>
+      <Filter>Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KShader.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KShader.h">
+      <Filter>Graphics\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KVertexBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KIndexBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KConstantBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -289,11 +299,17 @@
     <Filter Include="Audio">
       <UniqueIdentifier>{f134b761-014f-456e-b645-e3048485956b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GraphicDevice">
-      <UniqueIdentifier>{1c05c66f-8741-4c0d-b69c-e167d45991fa}</UniqueIdentifier>
-    </Filter>
     <Filter Include="HighLevel_Interface">
       <UniqueIdentifier>{b4b1b0be-1727-4a2b-8e42-a5def2e1117e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{1c05c66f-8741-4c0d-b69c-e167d45991fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Shader">
+      <UniqueIdentifier>{52409d2a-a510-40d5-8ece-0945f652081f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Buffer">
+      <UniqueIdentifier>{842fd8e1-65a7-4834-a084-5730709f63c8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
