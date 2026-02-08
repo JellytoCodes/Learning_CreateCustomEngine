@@ -16,7 +16,7 @@
 namespace KEngine
 {
 	PlayerScript::PlayerScript()
-		: mState(eState::Idle), mAnimator(nullptr), mPixelMap(nullptr)
+		: mState(eState::Idle), mAnimator(nullptr)
 	{
 
 	}
@@ -50,23 +50,6 @@ namespace KEngine
 		case eState::Attack :
 			break;
 		}
-
-		Transform* tr = GetOwner()->GetComponent<Transform>();
-		KMath::Vector2 pos = tr->GetPosition();
-		COLORREF color = mPixelMap->GetPixel(pos.x, pos.y + 50);
-
-		RigidBody* playerRb = GetOwner()->GetComponent<RigidBody>();
-		if (color == RGB(255, 0, 0))
-		{
-			playerRb->SetGround(true);
-
-			pos.y -= 1;
-			tr->SetPosition(pos);
-		}
-		else
-		{
-			playerRb->SetGround(false);
-		}
 	}
 
 	void PlayerScript::LateUpdate()
@@ -74,7 +57,7 @@ namespace KEngine
 		
 	}
 
-	void PlayerScript::Render(HDC hdc)
+	void PlayerScript::Render()
 	{
 		
 	}
@@ -102,71 +85,12 @@ namespace KEngine
 
 	void PlayerScript::AttackEffect()
 	{
-		// Cat
-		{
-			Cat* cat = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
-			CatScript* catSrc = cat->AddComponent<CatScript>();
 
-			catSrc->SetPlayer(GetOwner());
-
-			Texture* texture = Resources::Find<KEngine::Texture>(L"Cat");
-			Animator* animator = cat->AddComponent<Animator>();
-
-			// Create Animation By Cat
-			animator->CreateAnimation(L"DownWalk", texture, 
-			KMath::Vector2(0.f, 0.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"RightWalk", texture, 
-			KMath::Vector2(0.f, 32.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"UpWalk", texture, 
-			KMath::Vector2(0.f, 64.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"LeftWalk", texture, 
-			KMath::Vector2(0.f, 96.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"SitDown", texture, 
-			KMath::Vector2(0.f, 128.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"Grooming", texture, 
-			KMath::Vector2(0.f, 160.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"LayDown", texture, 
-			KMath::Vector2(0.f, 192.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-
-			animator->PlayAnimation(L"SitDown", false);
-
-			Transform* tr = GetOwner()->GetComponent<Transform>();
-
-			cat->GetComponent<Transform>()->SetPosition(tr->GetPosition());
-			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
-
-			KMath::Vector2 mousePosition = Input::GetMousePosition();
-			catSrc->SetDest(mousePosition);
-		}
 	}
 
 	void PlayerScript::Idle()
 	{
-		if (Input::GetKeyPressed(eKeyCode::LButton))
-		{
-			mState = eState::GiveWater;
-			mAnimator->PlayAnimation(L"GiveWater", false);
 
-			KMath::Vector2 Pos = Input::GetMousePosition();
-		}
-
-		if (Input::GetKeyPressed(eKeyCode::Right) 
-		|| Input::GetKeyPressed(eKeyCode::Left)
-		|| Input::GetKeyPressed(eKeyCode::Up) 
-		|| Input::GetKeyPressed(eKeyCode::Down))	mState = eState::Walk;
-
-		if (Input::GetKeyDown(eKeyCode::I))
-		{
-			UIManager::Push(eUIType::HpBar);
-			//UIManager::Push(eUIType::Button);
-
-		}
-
-		if (Input::GetKeyDown(eKeyCode::O))
-		{
-			UIManager::Pop(eUIType::HpBar);
-
-		}
 	}
 
 	void PlayerScript::Move()

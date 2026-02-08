@@ -32,9 +32,9 @@ namespace KEngine
 		void		Release();
 		void		Destroy();
 
-		HWND		GetHwnd()			{ return mHwnd; }
-		HDC			GetHdc()			{ return mHdc; }
-		ViewSize	GetViewSize()		{ return mViewSize; }
+		HWND		GetHwnd() const			{ return mHwnd; }
+		HDC			GetHdc() const			{ return mHdc; }
+		ViewSize	GetViewSize() const		{ return mViewSize; }
 
 	private :
 		void		ClearRenderTarget();

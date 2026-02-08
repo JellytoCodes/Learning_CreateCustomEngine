@@ -10,7 +10,7 @@ namespace KEngine
 		static void		Initialize();
 		static void		Update();
 		static void		LateUpdate();
-		static void		Render(HDC hdc);
+		static void		Render();
 		static void		Release();
 
 		static void		OnLoad(eUIType type);

@@ -16,7 +16,7 @@ namespace KEngine
 
 		void Play();
 		void Stop();
-		void Set3DAttributes(const KMath::Vector2 pos);
+		void Set3DAttributes(const KMath::Vector3 pos);
 		void SetLoop(bool loop) {mbLoop = loop; }
 
 	private:

@@ -122,8 +122,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     //KEngine::LoadResources();
     KEngine::LoadScenes();
 
+    /* hdc를 활용한 렌더링
 	int a = 0;
     srand((UINT)&a);
+	*/
 
     KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
     std::wstring name = activeScene->GetName();

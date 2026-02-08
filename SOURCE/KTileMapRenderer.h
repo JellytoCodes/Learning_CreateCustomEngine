@@ -16,14 +16,14 @@ namespace KEngine
 		void				Initialize() override;
 		void				Update()  override;
 		void				LateUpdate()  override;
-		void				Render(HDC hdc)  override;
+		void				Render()  override;
 		void				Release() override;
 
 		void				SetTexture(Texture* texture)		{ mTexture = texture; }
 		void				SetSize(KMath::Vector2 size)		{ mSize = size; }
 
 		void				SetIndex(KMath::Vector2 index)		{ mIndex = index; }
-		KMath::Vector2		GetIndex()							{ return mIndex; }
+		KMath::Vector2		GetIndex() const					{ return mIndex; }
 
 		static KMath::Vector2	TileSize;
 		static KMath::Vector2	OriginTileSize;

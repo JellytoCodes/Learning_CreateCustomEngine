@@ -9,32 +9,32 @@ namespace KEngine
 		Collider(eColliderType colliderType);
 		~Collider();
 
-		void Initialize() override;
-		void Update() override;
-		void LateUpdate() override;
-		void Render(HDC hdc) override;
-		void Release() override;
+		void				Initialize() override;
+		void				Update() override;
+		void				LateUpdate() override;
+		void				Render() override;
+		void				Release() override;
 
-		virtual void OnCollisionEnter(Collider* other);
-		virtual void OnCollisionStay(Collider* other);
-		virtual void OnCollisionExit(Collider* other);
+		virtual void		OnCollisionEnter(Collider* other);
+		virtual void		OnCollisionStay(Collider* other);
+		virtual void		OnCollisionExit(Collider* other);
 
-		KMath::Vector2 GetOffset() const { return mOffset; }
-		void SetOffset(const KMath::Vector2 offset) { mOffset = offset; }
+		KMath::Vector2		GetOffset() const						{ return mOffset; }
+		void				SetOffset(const KMath::Vector2 offset)	{ mOffset = offset; }
 
-		KMath::Vector2 GetSize() { return mSize; }
-		void SetSize(KMath::Vector2 size) { mSize = size; }
+		KMath::Vector2		GetSize() const							{ return mSize; }
+		void				SetSize(KMath::Vector2 size)			{ mSize = size; }
 
-		eColliderType GetColliderType() { return mColliderType; }
+		eColliderType		GetColliderType() const					{ return mColliderType; }
 
-		UINT32 GetID() { return mID; }
+		UINT32				GetID() const							{ return mID; }
 
 	protected :
-		eColliderType mColliderType;
+		eColliderType		mColliderType;
 
-		static UINT32 mCollisionID;
-		UINT32 mID;
-		KMath::Vector2 mOffset;
-		KMath::Vector2 mSize;
+		static UINT32		mCollisionID;
+		UINT32				mID;
+		KMath::Vector2		mOffset;
+		KMath::Vector2		mSize;
 	};
 }

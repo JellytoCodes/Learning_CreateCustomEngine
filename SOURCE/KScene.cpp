@@ -49,12 +49,12 @@ namespace KEngine
 		}
 	}
 
-	void Scene::Render(HDC hdc)
+	void Scene::Render()
 	{
 		for (auto& layer : mLayers)
 		{
 			if (layer == nullptr) continue;
-			layer->Render(hdc);
+			layer->Render();
 		}
 	}
 

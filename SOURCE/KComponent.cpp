@@ -28,10 +28,16 @@ namespace KEngine
 
 	}
 
-	void Component::Render(HDC hdc)
+	void Component::Render()
 	{
 
 	}
+
+	/* WINAPI를 활용한 렌더링
+	void Component::Render(HDC hdc)
+	{
+
+	}*/
 
 	void Component::Release()
 	{

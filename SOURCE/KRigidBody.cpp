@@ -101,7 +101,7 @@ namespace KEngine
 		
 	}
 
-	void RigidBody::Render(HDC hdc)
+	void RigidBody::Render()
 	{
 		
 	}

@@ -26,7 +26,7 @@ namespace KEngine
 		
 	}
 
-	void Script::Render(HDC hdc)
+	void Script::Render()
 	{
 		
 	}

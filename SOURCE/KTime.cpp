@@ -1,5 +1,6 @@
 #include "KTime.h"
 #include "string"
+
 namespace KEngine
 {
 	LARGE_INTEGER Time::mCpuFrequency		= {};
@@ -28,17 +29,8 @@ namespace KEngine
 		mPrevFrequency.QuadPart = mCurrentFrequency.QuadPart;
 	}
 
-	void Time::Render(HDC hdc)
+	void Time::Render()
 	{
-		static float time = 0.f;
-		time += deltaTime;
 
-		float fps = 1.f / deltaTime;
-
-		std::wstring fpsStr = L"FPS : " + std::to_wstring((UINT)fps);
-		std::wstring timeStr = L"Time : " + std::to_wstring((UINT)time);
-
-		TextOut(hdc, 0, 0, fpsStr.c_str(), (int)fpsStr.length());
-		TextOut(hdc, 0, 20, timeStr.c_str(), (int)timeStr.length());
 	}
 }

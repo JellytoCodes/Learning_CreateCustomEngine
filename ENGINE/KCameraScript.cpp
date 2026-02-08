@@ -50,7 +50,7 @@ namespace KEngine
 		
 	}
 
-	void CameraScript::Render(HDC hdc)
+	void CameraScript::Render()
 	{
 		
 	}

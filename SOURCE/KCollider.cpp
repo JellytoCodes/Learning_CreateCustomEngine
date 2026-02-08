@@ -9,10 +9,12 @@ namespace KEngine
 		: Super(eComponentType::Collider),
 		mColliderType(colliderType), mID(mCollisionID++), mSize(KMath::Vector2::One)
 	{
+
 	}
 
 	Collider::~Collider()
 	{
+
 	}
 
 	void Collider::Initialize()
@@ -30,9 +32,9 @@ namespace KEngine
 		Component::LateUpdate();
 	}
 
-	void Collider::Render(HDC hdc)
+	void Collider::Render()
 	{
-		Component::Render(hdc);
+		Component::Render();
 	}
 
 	void Collider::Release()

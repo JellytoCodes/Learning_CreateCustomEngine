@@ -12,23 +12,23 @@ namespace KEngine
 		Scene();
 		virtual ~Scene();
 
-		virtual void Initialize();
-		virtual void Update();
-		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
-		virtual void Release();
-		virtual void Destroy();
+		virtual void					Initialize();
+		virtual void					Update();
+		virtual void					LateUpdate();
+		virtual void					Render();
+		virtual void					Release();
+		virtual void					Destroy();
 
-		virtual void OnEnter();
-		virtual void OnExit();
+		virtual void					OnEnter();
+		virtual void					OnExit();
 
-		void AddGameObject(std::unique_ptr<GameObject> gameObject, const eLayerType type);
-		std::unique_ptr<GameObject> RemoveGameObject(GameObject* obj);
-		void EraseGameObject(GameObject* obj);
+		void							AddGameObject(std::unique_ptr<GameObject> gameObject, const eLayerType type);
+		std::unique_ptr<GameObject>		RemoveGameObject(GameObject* obj);
+		void							EraseGameObject(GameObject* obj);
 
-		Layer* GetLayer(const eLayerType type) { return mLayers[(UINT)type].get(); }
+		Layer*							GetLayer(const eLayerType type) const		{ return mLayers[(UINT)type].get(); }
 
 	private :
-		std::vector<std::unique_ptr<Layer>> mLayers;
+		std::vector<std::unique_ptr<Layer>>		mLayers;
 	};	
 }

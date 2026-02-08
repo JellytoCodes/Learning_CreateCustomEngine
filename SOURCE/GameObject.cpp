@@ -41,12 +41,12 @@ namespace KEngine
 		}
 	}
 
-	void GameObject::Render(HDC hdc)
+	void GameObject::Render()
 	{
 		for (auto& comp : mComponents)
 		{
 			if (comp == nullptr) continue;
-			comp->Render(hdc);
+			comp->Render();
 		}
 	}
 

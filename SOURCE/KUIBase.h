@@ -27,7 +27,7 @@ namespace KEngine
 		void			Initialize();			// UI가 로드 되었을 때 초기화 해주는 함수
 		void			Update();
 		void			LateUpdate();
-		void			Render(HDC hdc);
+		void			Render();
 
 		void			Active();				// UI가 활성화되면 호출되는 함수
 		void			InActive();				// UI가 비활성화되면 호출되는 함수
@@ -39,16 +39,19 @@ namespace KEngine
 		virtual void	OnInActive();
 		virtual void	OnUpdate();
 		virtual void	OnLateUpdate();
-		virtual void	OnRender(HDC hdc);
+		virtual void	OnRender();
 		virtual void	OnClear();
 
-		eUIType			GetUIType()							{ return mUIType; }
+		eUIType			GetUIType() const					{ return mUIType; }
 		void			SetUIType(eUIType type)				{ mUIType = type; }
+
+		bool			IsFullScreen() const				{ return mbFullScreen; }
 		void			SetFullScreen(bool enable)			{ mbFullScreen = enable; }
-		bool			IsFullScreen()						{ return mbFullScreen; };
-		KMath::Vector2	GetPos()							{ return mPosition; }
+
+		KMath::Vector2	GetPos() const						{ return mPosition; }
 		void			SetPos(KMath::Vector2 position)		{ mPosition = position; }
-		KMath::Vector2	GetSize()							{ return mSize; }
+
+		KMath::Vector2	GetSize() const						{ return mSize; }
 		void			SetSize(KMath::Vector2 size)		{ mSize = size; }
 
 	protected :

@@ -22,8 +22,8 @@ namespace KEngine
 
 	void Camera::Initialize()
 	{
-		mResolution.x = application.GetViewSize().width;
-		mResolution.y = application.GetViewSize().height;
+		mResolution.x = (float)application.GetViewSize().width;
+		mResolution.y = (float)application.GetViewSize().height;
 	}
 
 	void Camera::Update()
@@ -47,7 +47,7 @@ namespace KEngine
 		
 	}
 
-	void Camera::Render(HDC hdc)
+	void Camera::Render()
 	{
 		
 	}

@@ -51,14 +51,14 @@ namespace KEngine
 		}
 	}
 
-	void UIManager::Render(HDC hdc)
+	void UIManager::Render()
 	{
 		std::stack<UIBase*> uiBases = mUIBases;
 		while (!uiBases.empty())
 		{
 			if (UIBase* uiBase = uiBases.top())
 			{
-				uiBase->Render(hdc);
+				uiBase->Render();
 				uiBases.pop();
 			}
 		}

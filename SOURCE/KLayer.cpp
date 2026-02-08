@@ -47,7 +47,7 @@ namespace KEngine
 		}
 	}
 
-	void Layer::Render(HDC hdc)
+	void Layer::Render()
 	{
 		for (auto& gameObject : mGameObjects)
 		{
@@ -56,7 +56,7 @@ namespace KEngine
 			GameObject::eState state = gameObject->GetActive();
 			if (state == GameObject::eState::Paused || state == GameObject::eState::Dead) continue;
 
-			gameObject->Render(hdc);
+			gameObject->Render();
 		}
 	}
 

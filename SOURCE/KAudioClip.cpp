@@ -39,9 +39,9 @@ namespace KEngine
 		mChannel->stop();
 	}
 
-	void AudioClip::Set3DAttributes(const KMath::Vector2 pos)
+	void AudioClip::Set3DAttributes(const KMath::Vector3 pos)
 	{
-		FMOD_VECTOR fmodPos(0.f, 0.f, 0.f);
+		FMOD_VECTOR fmodPos(pos.x, pos.y, pos.z);
 		FMOD_VECTOR fmodVel(0.f, 0.f, 0.f);
 
 		mChannel->set3DAttributes(&fmodPos, &fmodVel);

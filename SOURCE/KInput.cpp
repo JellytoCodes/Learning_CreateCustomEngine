@@ -101,10 +101,10 @@ namespace KEngine
 		mMousePosition.x = -1.f;
 		mMousePosition.y = -1.f;
 
-		if (mousePos.x < width && mousePos.x >= 0 && mousePos.y < width && mousePos.y >= 0)
+		if (mousePos.x < width && mousePos.x >= 0 && mousePos.y < height && mousePos.y >= 0)
 		{
-			mMousePosition.x = mousePos.x;
-			mMousePosition.y = mousePos.y;
+			mMousePosition.x = (float)mousePos.x;
+			mMousePosition.y = (float)mousePos.y;
 		}
 
 

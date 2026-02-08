@@ -109,15 +109,21 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KApplication.cpp">
       <Filter>HighLevel_Interface</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
-      <Filter>Graphics</Filter>
-    </ClCompile>
     <ClCompile Include="$(MSBuildThisFileDirectory)KShader.cpp">
       <Filter>Graphics\Shader</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KVertexBuffer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)KIndexBuffer.cpp" />
-    <ClCompile Include="$(MSBuildThisFileDirectory)KConstantBuffer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KConstantBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KIndexBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KVertexBuffer.cpp">
+      <Filter>Graphics\Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
+      <Filter>Graphics\Renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -234,18 +240,24 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KApplication.h">
       <Filter>HighLevel_Interface</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
-      <Filter>Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KGraphics.h">
       <Filter>Graphics</Filter>
     </ClInclude>
     <ClInclude Include="$(MSBuildThisFileDirectory)KShader.h">
       <Filter>Graphics\Shader</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KVertexBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)KIndexBuffer.h" />
-    <ClInclude Include="$(MSBuildThisFileDirectory)KConstantBuffer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KConstantBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KIndexBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KVertexBuffer.h">
+      <Filter>Graphics\Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
+      <Filter>Graphics\Renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -310,6 +322,9 @@
     </Filter>
     <Filter Include="Graphics\Buffer">
       <UniqueIdentifier>{842fd8e1-65a7-4834-a084-5730709f63c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics\Renderer">
+      <UniqueIdentifier>{00b754b5-b1df-4cc9-ad1b-dc5680818952}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

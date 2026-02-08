@@ -14,7 +14,7 @@ namespace KEngine
 		virtual void Initialize();
 		virtual void Update();
 		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
+		virtual void Render();
 		virtual void Release();
 		virtual void Destroy();
 
@@ -26,7 +26,7 @@ namespace KEngine
 
 	private :
 
-		eLayerType mType;
-		std::vector<std::unique_ptr<GameObject>> mGameObjects;
+		eLayerType									mType;
+		std::vector<std::unique_ptr<GameObject>>	mGameObjects;
 	};
 }

@@ -91,10 +91,10 @@ namespace KEngine
 
 		GraphicDevice_DX11::getInstance().Draw();
 
-		Time::Render(mBackHdc);
-		CollisionManager::Render(mBackHdc);
-		UIManager::Render(mBackHdc);
-		SceneManager::Render(mBackHdc);
+		Time::Render();
+		CollisionManager::Render();
+		UIManager::Render();
+		SceneManager::Render();
 
 		// CopyRenderTarget();
 	}

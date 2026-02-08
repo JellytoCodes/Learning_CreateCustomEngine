@@ -53,9 +53,9 @@ namespace KEngine
 		Scene::LateUpdate();
 	}
 
-	void D3D11Scene::Render(HDC hdc)
+	void D3D11Scene::Render()
 	{
-		Scene::Render(hdc);
+		Scene::Render();
 	}
 
 	void D3D11Scene::OnEnter()

@@ -24,7 +24,7 @@ namespace KEngine
 			{
 				if (mCollisionLayerMatrix[row][col] == true)
 				{
-					LayerCollision(scene, (eLayerType)row, (eLayerType)col);
+					LayerCollision((eLayerType)row, (eLayerType)col);
 				}
 			}
 		}
@@ -35,7 +35,7 @@ namespace KEngine
 		
 	}
 
-	void CollisionManager::Render(HDC hdc)
+	void CollisionManager::Render()
 	{
 		
 	}
@@ -65,7 +65,7 @@ namespace KEngine
 		mCollisionLayerMatrix[row][col] = enable;
 	}
 
-	void CollisionManager::LayerCollision(Scene* scene, eLayerType left, eLayerType right)
+	void CollisionManager::LayerCollision(eLayerType left, eLayerType right)
 	{
 		std::vector<GameObject*> lefts = SceneManager::GetGameObjects(left);
 		std::vector<GameObject*> rights = SceneManager::GetGameObjects(right);

@@ -23,7 +23,7 @@ namespace KEngine
 		static bool CreateSound(const std::string& path, FMOD::Sound** sound);
 		static void SoundPlay(FMOD::Sound* sound, FMOD::Channel** channel);
 		static void Release();
-		static void Set3DListenerAttributes(const KMath::Vector2* pos);
+		static void Set3DListenerAttributes(const KMath::Vector3& pos);
 	private :
 		static FMOD::Studio::System* mSystem;
 		static FMOD::System* mCoreSystem;

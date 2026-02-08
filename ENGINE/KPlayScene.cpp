@@ -46,49 +46,14 @@ namespace KEngine
 		Camera* cameraComp = camera->AddComponent<Camera>();
 		KRenderer::mainCamera = cameraComp;
 
-		// Tile Map
-		/*{
-			FILE* pFile = nullptr;
-			_wfopen_s(&pFile, L"..\\Resources\\Home", L"rb");
-			
-			while (true)
-			{
-				int idxX = 0;
-				int idxY = 0;
-
-				int posX = 0;
-				int posY = 0;
-
-
-				if (fread(&idxX, sizeof(int), 1, pFile) == NULL)
-					break;
-				if (fread(&idxY, sizeof(int), 1, pFile) == NULL)
-					break;
-				if (fread(&posX, sizeof(int), 1, pFile) == NULL)
-					break;
-				if (fread(&posY, sizeof(int), 1, pFile) == NULL)
-					break;
-
-				Tile* tile = KObject::Instantiate<Tile>(eLayerType::Tile, KMath::Vector2(posX, posY));
-				TileMapRenderer* tmr = tile->AddComponent<TileMapRenderer>();
-				tmr->SetTexture(Resources::Find<Texture>(L"SpringFloor"));
-				tmr->SetIndex(KMath::Vector2(idxX, idxY));
-
-				//mTiles.push_back(tile);
-			}
-			fclose(pFile);
-		}*/
-
 		AudioClip* ac = Resources::Load<AudioClip>(L"BGSound", L"..\\Resources\\Sound\\smw_bonus_game_end.wav");
 
 		// Player
 		
 		player = KObject::Instantiate<Player>(eLayerType::Player, KMath::Vector2(400.f, 200.f));
-
-		//KObject::DontDestroyOnLoad(player);
+		KObject::DontDestroyOnLoad(player);
 
 		PlayerScript* playerScript = player->AddComponent<PlayerScript>();
-		playerScript->SetPixelMapTexture(Resources::Find<Texture>(L"PixelMap"));
 
 		BoxCollider2D* boxCollider = player->AddComponent<BoxCollider2D>();
 		boxCollider->SetSize(KMath::Vector2(1.f, 1.f));
@@ -112,75 +77,6 @@ namespace KEngine
 
 		animator->GetCompleteEvent(L"GiveWater") = std::bind(&PlayerScript::AttackEffect, playerScript);
 		player->AddComponent<RigidBody>();
-		
-
-		// Floor
-		{
-			Floor* floor = KObject::Instantiate<Floor>(eLayerType::Floor, KMath::Vector2(0.f, 0.f));
-			floor->SetName(L"Floor");
-			AudioSource* as = floor->AddComponent<AudioSource>();
-			SpriteRenderer* sr = floor->AddComponent<SpriteRenderer>();
-			sr->SetTexture(Resources::Find<Texture>(L"PixelMap"));
-			//BoxCollider2D* boxCollider = floor->AddComponent<BoxCollider2D>();
-			//boxCollider->SetSize(KMath::Vector2(10.f, 0.5f));
-			//FloorScript* floorScript = floor->AddComponent<FloorScript>();
-
-			as->SetClip(ac);
-
-		}
-
-		// Cat
-		/*{
-			Cat* cat = KObject::Instantiate<Cat>(eLayerType::Animal);
-			CatScript* catSrc = cat->AddComponent<CatScript>();
-
-			Texture* texture = Resources::Find<Texture>(L"Cat");
-			Animator* animator = cat->AddComponent<Animator>();
-
-			// Create Animation By Cat
-			animator->CreateAnimation(L"DownWalk", texture, 
-			KMath::Vector2(0.f, 0.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"RightWalk", texture, 
-			KMath::Vector2(0.f, 32.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"UpWalk", texture, 
-			KMath::Vector2(0.f, 64.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"LeftWalk", texture, 
-			KMath::Vector2(0.f, 96.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"SitDown", texture, 
-			KMath::Vector2(0.f, 128.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"Grooming", texture, 
-			KMath::Vector2(0.f, 160.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-			animator->CreateAnimation(L"LayDown", texture, 
-			KMath::Vector2(0.f, 192.f), KMath::Vector2(32.f, 32.f), KMath::Vector2::Zero, 4, 0.2f);
-
-			animator->PlayAnimation(L"SitDown", false);
-
-			cat->GetComponent<Transform>()->SetPosition(KMath::Vector2(100.f, 100.f));
-			cat->GetComponent<Transform>()->SetScale(KMath::Vector2(2.f, 2.f));
-
-			KMath::Vector2 mousePosition = Input::GetMousePosition();
-			catSrc->SetDest(mousePosition);
-		}*/
-
-		// Mushroom
-		{
-			Cat* mushroom = KObject::Instantiate<Cat>(KEngine::eLayerType::Animal);
-			mushroom->AddComponent<CatScript>();
-			BoxCollider2D* boxCollider = mushroom->AddComponent<BoxCollider2D>();
-			boxCollider->SetSize(KMath::Vector2(1.f, 1.f));
-			boxCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
-
-			//CircleCollider2D* circleCollider = mushroom->AddComponent<CircleCollider2D>();
-			//circleCollider->SetOffset(KMath::Vector2(-50.f, -50.f));
-
-			Animator* animator = mushroom->AddComponent<Animator>();
-
-			animator->CreateAnimationByFolder(L"MushroomIdle", L"..\\Resources\\Mushroom", KMath::Vector2::Zero, 0.1f);
-			animator->PlayAnimation(L"MushroomIdle");
-
-			mushroom->GetComponent<Transform>()->SetPosition(KMath::Vector2(200.f, 200.f));
-			mushroom->GetComponent<Transform>()->SetScale(KMath::Vector2(1.f, 1.f));
-		}
 
 		Scene::Initialize();
 	}
@@ -200,12 +96,9 @@ namespace KEngine
 		}
 	}
 
-	void PlayScene::Render(HDC hdc)
+	void PlayScene::Render()
 	{
-		Scene::Render(hdc);
-
-		std::wstring str = L"Play Scene";
-		TextOut(hdc, 0, 0, str.c_str(), (int)str.length());
+		Scene::Render();
 	}
 
 	void PlayScene::OnEnter()

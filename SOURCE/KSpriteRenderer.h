@@ -16,7 +16,7 @@ namespace KEngine
 		void Initialize() override;
 		void Update()  override;
 		void LateUpdate()  override;
-		void Render(HDC hdc)  override;
+		void Render()  override;
 		void Release() override;
 
 		void SetTexture(Texture* texture) { mTexture = texture; }

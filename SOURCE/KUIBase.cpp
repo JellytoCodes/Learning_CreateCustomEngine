@@ -28,9 +28,9 @@ namespace KEngine
 		if (mbEnabled) OnLateUpdate();
 	}
 
-	void UIBase::Render(HDC hdc)
+	void UIBase::Render()
 	{
-		if (mbEnabled) OnRender(hdc);
+		if (mbEnabled) OnRender();
 	}
 
 	void UIBase::Active()
@@ -75,7 +75,7 @@ namespace KEngine
 
 	}
 
-	void UIBase::OnRender(HDC hdc)
+	void UIBase::OnRender()
 	{
 
 	}

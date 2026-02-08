@@ -7,7 +7,8 @@
 namespace KEngine
 {
 	AudioSource::AudioSource()
-		: Super(eComponentType::AudioSource)
+		: Super(eComponentType::AudioSource),
+		mAudioClip(nullptr)
 	{
 	}
 
@@ -28,12 +29,13 @@ namespace KEngine
 	void AudioSource::LateUpdate()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		KMath::Vector2 pos = tr->GetPosition();
+
+		KMath::Vector3 pos;
 
 		mAudioClip->Set3DAttributes(pos);
 	}
 
-	void AudioSource::Render(HDC hdc)
+	void AudioSource::Render()
 	{
 		
 	}

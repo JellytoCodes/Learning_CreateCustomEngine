@@ -17,14 +17,9 @@ namespace KEngine
 			Dead,
 			End
 		};
+
 		GameObject();
 		~GameObject();
-
-		virtual void Initialize();
-		virtual void Update();
-		virtual void LateUpdate();
-		virtual void Render(HDC hdc);
-		virtual void Release();
 
 		template<typename T>
 		T* AddComponent();
@@ -32,24 +27,26 @@ namespace KEngine
 		template<typename T>
 		T* GetComponent();
 
-		bool IsActive() const { return mState == eState::Active; }
-		bool IsDead() const { return mState == eState::Dead; }
+		virtual void		Initialize();
+		virtual void		Update();
+		virtual void		LateUpdate();
+		virtual void		Render();
+		virtual void		Release();
 
-		eLayerType GetLayerType() const { return mLayerType; }
-		void SetLayerType(eLayerType layerType) { mLayerType = layerType; }
+		bool				IsActive() const						{ return mState == eState::Active; }
+		bool				IsDead() const							{ return mState == eState::Dead; }
 
-		eState GetActive() { return mState; }
-		void SetActive(bool power)
-		{
-			if (power == true)	mState = eState::Active; 
-			if (power == false) mState = eState::Paused;
-		}
-		void Death() { mState = eState::Dead; }
+		eLayerType			GetLayerType() const					{ return mLayerType; }
+		void				SetLayerType(eLayerType layerType)		{ mLayerType = layerType; }
+
+		eState				GetActive() const						{ return mState; }
+		void				SetActive(bool power)					{ mState = power ? eState::Active : eState::Paused; }
+		void				Death()									{ mState = eState::Dead; }
 
 	private :
-		eState mState;
-		std::vector<std::unique_ptr<Component>> mComponents;
-		eLayerType mLayerType;
+		eState										mState;
+		std::vector<std::unique_ptr<Component>>		mComponents;
+		eLayerType									mLayerType;
 	};
 
 	template <typename T>

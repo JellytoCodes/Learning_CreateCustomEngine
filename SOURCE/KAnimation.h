@@ -26,7 +26,8 @@ namespace KEngine
 		HRESULT Load(const std::wstring& path) override;
 
 		void Update();
-		void Render(HDC hdc);
+
+		void Render();
 
 		void CreateAnimation(
 		const std::wstring& name,			// 애니메이션 이름

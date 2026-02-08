@@ -33,11 +33,9 @@ namespace KEngine
 		}
 	}
 
-	void TitleScene::Render(HDC hdc)
+	void TitleScene::Render()
 	{
-		Scene::Render(hdc);
+		Scene::Render();
 
-		std::wstring str = L"Title Scene ";
-		TextOut(hdc, 0, 0, str.c_str(), (int)str.length());
 	}
 }

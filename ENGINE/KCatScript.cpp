@@ -60,7 +60,7 @@ namespace KEngine
 		
 	}
 
-	void CatScript::Render(HDC hdc)
+	void CatScript::Render()
 	{
 		
 	}

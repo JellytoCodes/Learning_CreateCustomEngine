@@ -28,12 +28,11 @@ namespace KEngine
 	void AudioListener::LateUpdate()
 	{
 		Transform* tr = GetOwner()->GetComponent<Transform>();
-		KMath::Vector2 pos = tr->GetPosition();
 
-		Fmod::Set3DListenerAttributes(&pos);
+		//Fmod::Set3DListenerAttributes(pos);
 	}
 
-	void AudioListener::Render(HDC hdc)
+	void AudioListener::Render()
 	{
 		
 	}
