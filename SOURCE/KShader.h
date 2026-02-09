@@ -12,6 +12,7 @@ namespace KEngine
 		Shader();
 		virtual ~Shader();
 
+		HRESULT Save(const std::wstring& path) override;
 		HRESULT Load(const std::wstring& path) override;
 
 		/*

@@ -16,11 +16,11 @@ namespace KEngine
 		};
 
 		static Texture*		Create(const std::wstring& name, UINT width, UINT height);
-		
 
 		Texture();
 		virtual ~Texture();
 
+		HRESULT				Save(const std::wstring& path) override;
 		HRESULT				Load(const std::wstring& path) override;
 
 		void				Release() override;

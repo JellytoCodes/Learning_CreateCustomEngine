@@ -12,6 +12,7 @@ namespace KEngine
 		AudioClip();
 		virtual ~AudioClip();
 
+		HRESULT Save(const std::wstring& path) override;
 		HRESULT Load(const std::wstring& path) override;
 
 		void Play();

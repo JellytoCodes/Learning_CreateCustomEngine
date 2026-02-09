@@ -39,6 +39,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KObject.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KResource.h" />
@@ -82,6 +83,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KObject.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KResource.cpp" />

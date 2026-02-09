@@ -8,17 +8,16 @@ namespace KRenderer
     KEngine::Camera* KRenderer::mainCamera = nullptr;
 
 	std::vector<KGraphics::Vertex>		KRenderer::vertexes;
-	KEngine::VertexBuffer				KRenderer::vertexBuffer;
-
 	std::vector<UINT>					KRenderer::indices;
-	KEngine::IndexBuffer				KRenderer::indexBuffer;
-
+	std::unique_ptr<KEngine::Mesh>		KRenderer::mesh;
 	KEngine::ConstantBuffer				KRenderer::constantBuffers[(UINT)KGraphics::eCBType::End] = {};
 
 	Microsoft::WRL::ComPtr<ID3D11InputLayout>		KRenderer::inputLayouts;
 
 	void LoadTriangleMesh()
 	{
+		mesh = std::make_unique<KEngine::Mesh>();
+
 		vertexes.resize(3);
 		vertexes[0].pos = KMath::Vector3(0.f, 0.5f, 0.0f);
 		vertexes[0].color = KMath::Vector4(0.0f, 1.0f, 0.0f, 1.0f);
@@ -32,6 +31,9 @@ namespace KRenderer
 		indices.push_back(0);
 		indices.push_back(1);
 		indices.push_back(2);
+
+		mesh->CreateVB(vertexes);
+		mesh->CreateIB(indices);
 	}
 
 	void LoadMeshes()

@@ -124,6 +124,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
       <Filter>Graphics\Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KMesh.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -258,6 +259,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
       <Filter>Graphics\Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KMesh.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">

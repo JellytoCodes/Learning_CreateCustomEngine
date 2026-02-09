@@ -33,6 +33,7 @@ namespace KEngine
 	enum class eResourceType
 	{
 		Texture,
+		Mesh,
 		AudioClip,
 		Animation,
 		Shader,

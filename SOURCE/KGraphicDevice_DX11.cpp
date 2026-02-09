@@ -41,10 +41,6 @@ namespace KEngine
 
 		// [Init] 깊이/스텐실 버퍼 + DSV(OM 단계 depth/stencil 타겟)
 		CreateDepthStencilView();
-
-		// [Init] 기하 데이터(VB/IB) + 셰이더 상수(CB)
-		KRenderer::vertexBuffer.Create(KRenderer::vertexes);
-		KRenderer::indexBuffer.Create(KRenderer::indices);
 	}
 
 	/*
@@ -88,13 +84,8 @@ namespace KEngine
 
 		// [Frame] IA 단계: InputLayout + Primitive Topology 설정
 		mDeviceContext->IASetInputLayout(KRenderer::inputLayouts.Get());
-		mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 
-		// [Frame] IA 단계: Vertex Buffer 바인딩(스트라이드/오프셋 중요)
-		KRenderer::vertexBuffer.Bind();
-
-		// [Frame] IA 단계: Index Buffer 바인딩(여기서는 R32_UINT)
-		KRenderer::indexBuffer.Bind();
+		KRenderer::mesh->Bind();
 
 		KMath::Vector4 pos(-0.5f, 0.0f, 0.0f, 1.0f);
 		KRenderer::constantBuffers[(UINT)KGraphics::eCBType::Transform].SetData(&pos);

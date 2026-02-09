@@ -10,6 +10,7 @@ namespace KEngine
 		Resource(KEngine::eResourceType type);
 		virtual ~Resource();
 
+		virtual HRESULT Save(const std::wstring& path) = 0;
 		virtual HRESULT Load(const std::wstring& path) = 0;
 
 		virtual void Release();
