@@ -1,5 +1,7 @@
 #pragma once
 #include "KComponent.h"
+#include "KMaterial.h"
+#include "KMesh.h"
 
 namespace KEngine
 {
@@ -19,12 +21,12 @@ namespace KEngine
 		void Render()  override;
 		void Release() override;
 
-		void SetTexture(Texture* texture) { mTexture = texture; }
-		void SetSize(KMath::Vector2 size) { mSize = size; }
-
+		void SetSprite(Texture* sprite)			{ mSprite = sprite; }
+		void SetMaterial(Material* material)	{ mMaterial = material; }
 	private:
-		Texture* mTexture;
-		KMath::Vector2 mSize;
+		Texture* mSprite;
+		Material* mMaterial;
+		Mesh* mMesh;
 	};
 }
 

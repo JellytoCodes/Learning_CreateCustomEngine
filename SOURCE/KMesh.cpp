@@ -37,10 +37,7 @@ namespace KEngine
 
 	void Mesh::Bind()
 	{
-		// [Frame] IA 단계: Vertex Buffer 바인딩(스트라이드/오프셋 중요)
 		mVertexBuffer.Bind();
-
-		// [Frame] IA 단계: Index Buffer 바인딩(여기서는 R32_UINT)
 		mIndexBuffer.Bind();
 
 		GraphicDevice_DX11::getInstance().GetDeviceContext()->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY::D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

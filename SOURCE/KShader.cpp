@@ -103,4 +103,10 @@ namespace KEngine
 			mPS.GetAddressOf())
 		));
 	}
+
+	void Shader::Bind()
+	{
+		GraphicDevice_DX11::getInstance().GetDeviceContext()->VSSetShader(GetVertexShader(), 0, 0);
+		GraphicDevice_DX11::getInstance().GetDeviceContext()->PSSetShader(GetPixelShader(), 0, 0);
+	}
 }

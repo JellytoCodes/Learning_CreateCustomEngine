@@ -46,6 +46,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
 
     MSG msg;
 
+    KEngine::LoadScenes();
+
     // GetMessage()
     // 프로세스에서 발생한 메시지를 메세지 큐에서 가져오는 함수
     // 메세지큐에 아무것도 없다면 아무 메세지도 가져오지 않게된다.
@@ -70,8 +72,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         }
     }
     application.Release();
-
-    Gdiplus::GdiplusShutdown(gpToken);
 
     return (int) msg.wParam;
 }
@@ -109,45 +109,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 	if (!hWnd)   return FALSE;
 
-    application.CreateApplication(hWnd, width, height);
-
 	ShowWindow(hWnd, nCmdShow);
 	UpdateWindow(hWnd);
 
-    Gdiplus::GdiplusStartup(&gpToken, &gpsi, NULL);
-
-	application.Initialize();
-
-	// load Scenes
-    //KEngine::LoadResources();
-    KEngine::LoadScenes();
-
-    /* hdc를 활용한 렌더링
-	int a = 0;
-    srand((UINT)&a);
-	*/
-
-    KEngine::Scene* activeScene = KEngine::SceneManager::GetActiveScene();
-    std::wstring name = activeScene->GetName();
-
-	/*if (name == L"ToolScene")
-	{
-		HWND toolhWnd = CreateWindowW(L"TILEWINDOW", L"TileWindow", WS_OVERLAPPEDWINDOW,
-		CW_USEDEFAULT, 0, width, height, nullptr, nullptr, hInstance, nullptr);
-
-		KEngine::Texture* texture = KEngine::Resources::Find<KEngine::Texture>(L"SpringFloor");
-
-		RECT rect = {0, 0, (LONG)texture->GetWidth(), (LONG)texture->GetHeight()};
-
-		UINT toolWidth = rect.right - rect.left;
-		UINT toolHeight = rect.bottom - rect.top;
-
-		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
-
-		SetWindowPos(toolhWnd, nullptr, width, 0, toolWidth, toolHeight, 0);
-		ShowWindow(toolhWnd, true);
-	    UpdateWindow(toolhWnd);	
-	}*/
+    application.CreateApplication(hWnd, width, height);
+    application.Initialize();
 
 	return TRUE;
 }

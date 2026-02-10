@@ -192,6 +192,12 @@
     <Text Update="C:\Users\taegu\OneDrive\Desktop\Learning_CreateCustomEngine\Shader\Triangle_VS.hlsl">
       <FileType>Document</FileType>
     </Text>
+    <Text Update="D:\Dev\Programming_Study\Learning_CreateCustomEngine\Shader\SpritePS.hlsl">
+      <FileType>Document</FileType>
+    </Text>
+    <Text Update="D:\Dev\Programming_Study\Learning_CreateCustomEngine\Shader\SpriteVS.hlsl">
+      <FileType>Document</FileType>
+    </Text>
     <Text Update="D:\Dev\Programming_Study\Learning_CreateCustomEngine\Shader\TrianglePS.hlsl">
       <FileType>Document</FileType>
     </Text>

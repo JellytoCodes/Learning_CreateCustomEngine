@@ -14,8 +14,6 @@ namespace KEngine
 
 		void Initialize();
 
-		void Draw();
-
 		void CreateDevice();
 		void CreateSwapChain();
 		void GetBuffer(UINT Buffer, REFIID riid, void** ppSurface);
@@ -26,6 +24,19 @@ namespace KEngine
 		ID3D11Device* GetDevice() const					{ return mDevice.Get(); }
 		ID3D11DeviceContext* GetDeviceContext() const		{ return mDeviceContext.Get(); }
 
+		void BindSampler(KGraphics::eShaderStage stage, UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* const* ppSamplers);
+		void BindSamplers(UINT StartSlot, UINT NumSamplers, ID3D11SamplerState* const* ppSamplers);
+
+		void BindViewPort();
+		void BindRenderTargets(UINT NumViews = 1, ID3D11RenderTargetView* const* ppRenderTargetViews = nullptr, ID3D11DepthStencilView* pDepthStencilView = nullptr);
+		void BindDefaultRenderTarget();
+
+		void ClearRenderTargetView();
+		void ClearDepthStencilView();
+
+		void Draw();
+		void DrawIndexed(UINT IndexCount, UINT StartIndexLocation, INT BaseVertexLocation);
+		void Present();
 	private :
 		GraphicDevice_DX11();
 		~GraphicDevice_DX11();

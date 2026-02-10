@@ -38,6 +38,8 @@ namespace KEngine
 		void CreateIB(const std::vector<UINT>& indices);
 		void Bind();
 
+		UINT GetIndexCount() const { return mIndexBuffer.GetIndexCount(); }
+
 	private :
 		VertexBuffer	mVertexBuffer;
 		IndexBuffer		mIndexBuffer;

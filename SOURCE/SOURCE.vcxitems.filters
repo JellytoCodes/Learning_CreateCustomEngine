@@ -124,7 +124,12 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KRenderer.cpp">
       <Filter>Graphics\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="$(MSBuildThisFileDirectory)KMesh.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KMaterial.cpp">
+      <Filter>Resources\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="$(MSBuildThisFileDirectory)KMesh.cpp">
+      <Filter>Resources\Mesh</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="$(MSBuildThisFileDirectory)KResources.h">
@@ -259,7 +264,12 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KRenderer.h">
       <Filter>Graphics\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="$(MSBuildThisFileDirectory)KMesh.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KMaterial.h">
+      <Filter>Resources\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)KMesh.h">
+      <Filter>Resources\Mesh</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Utils">
@@ -327,6 +337,12 @@
     </Filter>
     <Filter Include="Graphics\Renderer">
       <UniqueIdentifier>{00b754b5-b1df-4cc9-ad1b-dc5680818952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Material">
+      <UniqueIdentifier>{65d30a3e-c6a3-4101-a433-6cc35f31f49c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\Mesh">
+      <UniqueIdentifier>{4a2fb481-3278-41e6-b910-755c2121d812}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

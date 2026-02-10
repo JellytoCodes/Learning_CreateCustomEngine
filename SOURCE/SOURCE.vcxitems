@@ -38,6 +38,7 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)KIndexBuffer.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KInput.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KLayer.h" />
+    <ClInclude Include="$(MSBuildThisFileDirectory)KMaterial.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMath.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KMesh.h" />
     <ClInclude Include="$(MSBuildThisFileDirectory)KObject.h" />
@@ -82,6 +83,7 @@
     <ClCompile Include="$(MSBuildThisFileDirectory)KIndexBuffer.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KInput.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KLayer.cpp" />
+    <ClCompile Include="$(MSBuildThisFileDirectory)KMaterial.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMath.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KMesh.cpp" />
     <ClCompile Include="$(MSBuildThisFileDirectory)KObject.cpp" />

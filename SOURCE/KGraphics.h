@@ -7,6 +7,7 @@ namespace KGraphics
 	{
 		KMath::Vector3 pos;
 		KMath::Vector4 color;
+		KMath::Vector2 uv;
 	};
 	enum class eShaderStage
 	{
@@ -17,13 +18,46 @@ namespace KGraphics
 		PS,		// Pixel Shader
 		CS,		// Compute Shader
 		All,
-		End,
+
+		End
 	};
 
 	enum class eCBType
 	{
 		Transform,
-		End,
+
+		End
+	};
+
+	enum class eSamplerType
+	{
+		Point,
+		Linear,
+		Anisotropic,
+		PostProcess,
+
+		End
+	};
+
+	enum class eRenderingMode
+	{
+		Opaque,
+		CutOut,
+		Transparent,
+		PostProcess,
+
+		End
+	};
+
+	enum class eTextureType
+	{
+		Albedo,
+		Normal,
+		Specular,
+		Smoothness,
+		Metallic,
+
+		End
 	};
 
 	struct GPUBuffer

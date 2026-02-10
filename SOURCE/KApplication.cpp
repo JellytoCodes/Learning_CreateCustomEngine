@@ -11,7 +11,7 @@
 namespace KEngine
 {
 	Application::Application()
-		: mHwnd(nullptr), mHdc(nullptr), mBackHdc(nullptr), mBackBuffer(nullptr), mViewSize(0, 0)
+		: mHwnd(nullptr), mHdc(nullptr), mBackHdc(nullptr), mBackBuffer(nullptr), mViewSize(0, 0), mbLoaded(false)
 	{
 		
 	}
@@ -26,24 +26,14 @@ namespace KEngine
 		mHwnd = hwnd;
 		mHdc = GetDC(hwnd);
 
-		RECT rect = {0, 0, width, height};
+		RECT rect = { 0, 0, (LONG)width, (LONG)height };
+		::AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
 
 		mViewSize.width = rect.right - rect.left;
 		mViewSize.height = rect.bottom - rect.top;
 
-		AdjustWindowRect(&rect, WS_OVERLAPPEDWINDOW, false);
-
-		SetWindowPos(mHwnd, nullptr, 0, 0, mViewSize.width, mViewSize.height, 0);
-		ShowWindow(mHwnd, true);
-
-		// 윈도우 해상도에 맞는 백버퍼 생성
-		mBackBuffer = CreateCompatibleBitmap(mHdc, width, height);
-
-		// 백버퍼를 가르킬 DC 생성
-		mBackHdc = CreateCompatibleDC(mHdc);
-
-		HBITMAP oldBitmap = (HBITMAP)SelectObject(mBackHdc, mBackBuffer);
-		DeleteObject(oldBitmap);
+		SetWindowPos(hwnd, nullptr, 0, 0, mViewSize.width, mViewSize.height, 0);
+		ShowWindow(hwnd, true);
 	}
 
 	void Application::Initialize()
@@ -61,6 +51,8 @@ namespace KEngine
 
 	void Application::Run()
 	{
+		if (mbLoaded == false) mbLoaded = true;
+
 		Update();
 		LateUpdate();
 		Render();
@@ -87,16 +79,17 @@ namespace KEngine
 
 	void Application::Render()
 	{
-		// ClearRenderTarget();
-
-		GraphicDevice_DX11::getInstance().Draw();
+		GraphicDevice_DX11::getInstance().ClearRenderTargetView();
+		GraphicDevice_DX11::getInstance().ClearDepthStencilView();
+		GraphicDevice_DX11::getInstance().BindViewPort();
+		GraphicDevice_DX11::getInstance().BindDefaultRenderTarget();
 
 		Time::Render();
 		CollisionManager::Render();
 		UIManager::Render();
 		SceneManager::Render();
 
-		// CopyRenderTarget();
+		GraphicDevice_DX11::getInstance().Present();
 	}
 
 	void Application::Release()
@@ -109,23 +102,6 @@ namespace KEngine
 	void Application::Destroy()
 	{
 		SceneManager::Destroy();
-	}
-
-	void Application::ClearRenderTarget()
-	{
-		HBRUSH grayBrush = CreateSolidBrush(RGB(128, 128, 128));
-		HBRUSH oldBrush = (HBRUSH)SelectObject(mBackHdc, grayBrush);
-
-		::Rectangle(mBackHdc, -1, -1, mViewSize.width + 1, mViewSize.height + 1);
-
-		SelectObject(mBackHdc, oldBrush);
-		DeleteObject(grayBrush);
-	}
-
-	void Application::CopyRenderTarget()
-	{
-		// BackBuffer에 있는걸 원본 Buffer에 복사
-		BitBlt(mHdc, 0, 0, mViewSize.width, mViewSize.height, mBackHdc, 0, 0, SRCCOPY);
 	}
 }
 

@@ -34,6 +34,7 @@ namespace KEngine
 	{
 		Texture,
 		Mesh,
+		Material,
 		AudioClip,
 		Animation,
 		Shader,

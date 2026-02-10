@@ -47,24 +47,24 @@ namespace KEngine
 	void SceneManager::Initialize()
 	{
 		mDontDestroyOnLoad = CreateScene<DontDestroyOnLoad>(L"DontDestroyOnLoad");
-		mActiveScene->Initialize();
+		//mActiveScene->Initialize();
 	}
 
 	void SceneManager::Update()
 	{
-		mActiveScene->Update();
+		//mActiveScene->Update();
 		mDontDestroyOnLoad->Update();
 	}
 
 	void SceneManager::LateUpdate()
 	{
-		mActiveScene->LateUpdate();
+		//mActiveScene->LateUpdate();
 		mDontDestroyOnLoad->LateUpdate();
 	}
 
 	void SceneManager::Render()
 	{
-		mActiveScene->Render();
+		//mActiveScene->Render();
 		mDontDestroyOnLoad->Render();
 	}
 
@@ -79,7 +79,7 @@ namespace KEngine
 
 	void SceneManager::Destroy()
 	{
-		mActiveScene->Destroy();
+		//mActiveScene->Destroy();
 		mDontDestroyOnLoad->Destroy();
 	}
 }

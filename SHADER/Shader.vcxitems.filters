@@ -7,12 +7,35 @@
     <Filter Include="PS">
       <UniqueIdentifier>{c474cc67-3e55-49f9-aea1-f16f53758d02}</UniqueIdentifier>
     </Filter>
+    <Filter Include="HLSLI">
+      <UniqueIdentifier>{d961d78d-0cd2-4564-b028-536cc46ff096}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="$(MSBuildThisFileDirectory)TrianglePS.hlsl" />
-    <Text Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl" />
+    <Text Include="$(MSBuildThisFileDirectory)TrianglePS.hlsl">
+      <Filter>PS</Filter>
+    </Text>
+    <Text Include="$(MSBuildThisFileDirectory)TriangleVS.hlsl">
+      <Filter>VS</Filter>
+    </Text>
   </ItemGroup>
   <ItemGroup>
-    <None Include="$(MSBuildThisFileDirectory)ConstantBuffers.hlsli" />
+    <None Include="$(MSBuildThisFileDirectory)Textures.hlsli">
+      <Filter>HLSLI</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)ConstantBuffers.hlsli">
+      <Filter>HLSLI</Filter>
+    </None>
+    <None Include="$(MSBuildThisFileDirectory)Samplers.hlsli">
+      <Filter>HLSLI</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="$(MSBuildThisFileDirectory)SpritePS.hlsl">
+      <Filter>PS</Filter>
+    </FxCompile>
+    <FxCompile Include="$(MSBuildThisFileDirectory)SpriteVS.hlsl">
+      <Filter>VS</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

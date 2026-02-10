@@ -1,7 +1,12 @@
 #include "KD3D11Scene.h"
 
+#include "KApplication.h"
 #include "KResources.h"
 #include "KSceneManager.h"
+#include "KPlayScene.h"
+#include "KTitleScene.h"
+
+extern KEngine::Application application;
 
 namespace KEngine
 {
@@ -70,13 +75,17 @@ namespace KEngine
 
 	void D3D11Scene::resourcesLoad(std::mutex& m)
 	{
+		while (true)
+		{
+			if (application.IsLoaded()) break;
+		}
+
 		m.lock();
 		{
-			Resources::Load<Texture>(L"Cat", L"..\\Resources\\ChickenAlpha.bmp");
-			Resources::Load<Texture>(L"Player", L"..\\Resources\\Player.bmp");
-			Resources::Load<Texture>(L"SpringFloor", L"..\\Resources\\SpringFloor.bmp");
-			Resources::Load<Texture>(L"HPBAR", L"..\\Resources\\HPBAR.bmp");
-			Resources::Load<Texture>(L"PixelMap", L"..\\Resources\\pixelMap.bmp");
+			Resources::Load<Texture>(L"Player", L"..\\Resources\\Map.png");
+
+			SceneManager::CreateScene<TitleScene>(L"TitleScene");
+			SceneManager::CreateScene<PlayScene>(L"PlayScene");
 		}
 		m.unlock();
 

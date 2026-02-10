@@ -36,7 +36,6 @@ namespace KEngine
 	{
 		std::unique_ptr<T> scene = std::make_unique<T>();
 		scene->SetName(name);
-		mActiveScene = scene.get();
 		scene->Initialize();
 
 		Scene* rawScene = scene.get();

@@ -14,6 +14,8 @@ namespace KEngine
 
 	void IndexBuffer::Create(const std::vector<UINT>& indices)
 	{
+		mIndexCount = indices.size();
+
 		ZeroMemory(&desc, sizeof(D3D11_BUFFER_DESC));
 
 		desc.ByteWidth = sizeof(UINT) * indices.size();

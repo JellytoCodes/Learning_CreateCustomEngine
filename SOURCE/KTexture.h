@@ -1,5 +1,12 @@
 #pragma once
 #include "KResource.h"
+#include "KResource.h"
+#include "KGraphicDevice_DX11.h"
+
+#include <DirectXTex.h>
+#include <DirectXTex.inl>
+#include <DirectXTexEXR.h>
+
 
 namespace KEngine
 {
@@ -15,8 +22,6 @@ namespace KEngine
 			None,
 		};
 
-		static Texture*		Create(const std::wstring& name, UINT width, UINT height);
-
 		Texture();
 		virtual ~Texture();
 
@@ -25,18 +30,16 @@ namespace KEngine
 
 		void				Release() override;
 
-		UINT				GetWidth() const					{ return mWidth; }
-		void				SetWidth(UINT width)				{ mWidth = width; }
-
-		UINT				GetHeight() const					{ return mHeight; }
-		void				SetHeight(UINT height)				{ mHeight = height; }
+		void Bind(KGraphics::eShaderStage stage, UINT startSlot);
 
 	private :
-		eTextureType						mTextureType;
+		ScratchImage										mImage;
 
-		bool								mbAlpha;
-		UINT								mWidth;
-		UINT								mHeight;
+		D3D11_TEXTURE2D_DESC								mDesc;
+		Microsoft::WRL::ComPtr<ID3D11Texture2D>				mTexture;
+
+		Microsoft::WRL::ComPtr<ID3D11ShaderResourceView>	mSRV;
+		Microsoft::WRL::ComPtr<ID3D11RenderTargetView>		mRTV;
 	};	
 }
 

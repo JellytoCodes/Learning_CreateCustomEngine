@@ -25,6 +25,11 @@ namespace KEngine
 		void Create(const std::vector<UINT>& indices);
 
 		void Bind();
+
+		UINT GetIndexCount() const { return mIndexCount; }
+
 	private :
+		UINT mIndexCount;
+
 	};
 }
